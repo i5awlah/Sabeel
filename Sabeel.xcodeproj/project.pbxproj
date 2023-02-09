@@ -11,11 +11,12 @@
 		900DDC0D29939AE9005A471F /* NotificationList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900DDC0C29939AE9005A471F /* NotificationList.swift */; };
 		900DDC0F29939AF2005A471F /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900DDC0E29939AF2005A471F /* NotificationCell.swift */; };
 		900DDC1129941EA5005A471F /* CloudNotAvailableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900DDC1029941EA5005A471F /* CloudNotAvailableView.swift */; };
+		900DDC162994E782005A471F /* SingleOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900DDC152994E782005A471F /* SingleOnboardingView.swift */; };
 		90118270298D0EAA0024ABC1 /* SabeelApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9011826F298D0EAA0024ABC1 /* SabeelApp.swift */; };
 		90118274298D0EAC0024ABC1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 90118273298D0EAC0024ABC1 /* Assets.xcassets */; };
 		90118277298D0EAC0024ABC1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 90118276298D0EAC0024ABC1 /* Preview Assets.xcassets */; };
 		90118282299157100024ABC1 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90118281299157100024ABC1 /* SplashScreen.swift */; };
-		9011828429915C910024ABC1 /* OnboradingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9011828329915C910024ABC1 /* OnboradingView.swift */; };
+		9011828429915C910024ABC1 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9011828329915C910024ABC1 /* OnboardingView.swift */; };
 		9011828629915CAB0024ABC1 /* ChooseUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9011828529915CAB0024ABC1 /* ChooseUserView.swift */; };
 		9011828929915CDC0024ABC1 /* PecsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9011828829915CDC0024ABC1 /* PecsView.swift */; };
 		9011828C29915D060024ABC1 /* AddPecsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9011828B29915D060024ABC1 /* AddPecsView.swift */; };
@@ -34,12 +35,13 @@
 		900DDC0C29939AE9005A471F /* NotificationList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationList.swift; sourceTree = "<group>"; };
 		900DDC0E29939AF2005A471F /* NotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
 		900DDC1029941EA5005A471F /* CloudNotAvailableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudNotAvailableView.swift; sourceTree = "<group>"; };
+		900DDC152994E782005A471F /* SingleOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleOnboardingView.swift; sourceTree = "<group>"; };
 		9011826C298D0EAA0024ABC1 /* Sabeel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sabeel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9011826F298D0EAA0024ABC1 /* SabeelApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SabeelApp.swift; sourceTree = "<group>"; };
 		90118273298D0EAC0024ABC1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		90118276298D0EAC0024ABC1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		90118281299157100024ABC1 /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
-		9011828329915C910024ABC1 /* OnboradingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboradingView.swift; sourceTree = "<group>"; };
+		9011828329915C910024ABC1 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		9011828529915CAB0024ABC1 /* ChooseUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseUserView.swift; sourceTree = "<group>"; };
 		9011828829915CDC0024ABC1 /* PecsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PecsView.swift; sourceTree = "<group>"; };
 		9011828B29915D060024ABC1 /* AddPecsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPecsView.swift; sourceTree = "<group>"; };
@@ -153,7 +155,8 @@
 				9011826F298D0EAA0024ABC1 /* SabeelApp.swift */,
 				90118281299157100024ABC1 /* SplashScreen.swift */,
 				900DDC1029941EA5005A471F /* CloudNotAvailableView.swift */,
-				9011828329915C910024ABC1 /* OnboradingView.swift */,
+				9011828329915C910024ABC1 /* OnboardingView.swift */,
+				900DDC152994E782005A471F /* SingleOnboardingView.swift */,
 				9011828529915CAB0024ABC1 /* ChooseUserView.swift */,
 			);
 			path = Start;
@@ -265,7 +268,8 @@
 				9011829F29915E0A0024ABC1 /* NotificationsView.swift in Sources */,
 				9011828629915CAB0024ABC1 /* ChooseUserView.swift in Sources */,
 				900DDC0A29939AA6005A471F /* SchedulePecsView.swift in Sources */,
-				9011828429915C910024ABC1 /* OnboradingView.swift in Sources */,
+				900DDC162994E782005A471F /* SingleOnboardingView.swift in Sources */,
+				9011828429915C910024ABC1 /* OnboardingView.swift in Sources */,
 				900DDC0F29939AF2005A471F /* NotificationCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

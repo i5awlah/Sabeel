@@ -9,7 +9,11 @@ import SwiftUI
 
 struct CloudNotAvailableView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        SingleOnboardingView(
+            image: "connectiCloud",
+            title: "Can’t connect to iCloud!",
+            description: "Please make sure that your apple ID is existing in your device settings.",
+            isLastOnbording: false)
     }
 }
 

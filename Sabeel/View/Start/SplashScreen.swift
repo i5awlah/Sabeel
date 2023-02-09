@@ -8,8 +8,29 @@
 import SwiftUI
 
 struct SplashScreen: View {
+    
+    @AppStorage("isUserOnboarded") var isUserOnboarded: Bool = false
+    @State var isEnded : Bool = false
+    @State var isAvailableiCloud : Bool = false // should be check from iCloud
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        if isEnded {
+            if isAvailableiCloud {
+                CloudNotAvailableView()
+            } else {
+                if !isUserOnboarded {
+                    OnboardingView()
+                } else {
+                    PecsView()
+                }
+            }
+        } else {
+            // video, if finish set isEnded to true
+            Text("End")
+                .onTapGesture {
+                    isEnded.toggle()
+                }
+        }
     }
 }
 
