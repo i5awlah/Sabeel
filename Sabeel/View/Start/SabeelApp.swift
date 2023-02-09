@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct SabeelApp: App {
+    
+    @StateObject var cloudViewModel = CloudViewModel()
+    
     var body: some Scene {
         WindowGroup {
             SplashScreen()
+                .environmentObject(cloudViewModel)
         }
     }
 }

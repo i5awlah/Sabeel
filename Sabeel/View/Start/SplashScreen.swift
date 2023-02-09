@@ -9,20 +9,20 @@ import SwiftUI
 
 struct SplashScreen: View {
     
+    @EnvironmentObject var cloudViewModel: CloudViewModel
     @AppStorage("isUserOnboarded") var isUserOnboarded: Bool = false
     @State var isEnded : Bool = false
-    @State var isAvailableiCloud : Bool = false // should be check from iCloud
     
     var body: some View {
         if isEnded {
-            if isAvailableiCloud {
-                CloudNotAvailableView()
-            } else {
+            if cloudViewModel.iCloudAvailable {
                 if !isUserOnboarded {
                     OnboardingView()
                 } else {
                     PecsView()
                 }
+            } else {
+                CloudNotAvailableView()
             }
         } else {
             // video, if finish set isEnded to true
@@ -37,5 +37,6 @@ struct SplashScreen: View {
 struct SplashScreen_Previews: PreviewProvider {
     static var previews: some View {
         SplashScreen()
+            .environmentObject(CloudViewModel())
     }
 }
