@@ -7,18 +7,50 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		900DDC0A29939AA6005A471F /* SchedulePecsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900DDC0929939AA6005A471F /* SchedulePecsView.swift */; };
+		900DDC0D29939AE9005A471F /* NotificationList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900DDC0C29939AE9005A471F /* NotificationList.swift */; };
+		900DDC0F29939AF2005A471F /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900DDC0E29939AF2005A471F /* NotificationCell.swift */; };
+		900DDC1129941EA5005A471F /* CloudNotAvailableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900DDC1029941EA5005A471F /* CloudNotAvailableView.swift */; };
 		90118270298D0EAA0024ABC1 /* SabeelApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9011826F298D0EAA0024ABC1 /* SabeelApp.swift */; };
-		90118272298D0EAA0024ABC1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90118271298D0EAA0024ABC1 /* ContentView.swift */; };
 		90118274298D0EAC0024ABC1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 90118273298D0EAC0024ABC1 /* Assets.xcassets */; };
 		90118277298D0EAC0024ABC1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 90118276298D0EAC0024ABC1 /* Preview Assets.xcassets */; };
+		90118282299157100024ABC1 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90118281299157100024ABC1 /* SplashScreen.swift */; };
+		9011828429915C910024ABC1 /* OnboradingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9011828329915C910024ABC1 /* OnboradingView.swift */; };
+		9011828629915CAB0024ABC1 /* ChooseUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9011828529915CAB0024ABC1 /* ChooseUserView.swift */; };
+		9011828929915CDC0024ABC1 /* PecsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9011828829915CDC0024ABC1 /* PecsView.swift */; };
+		9011828C29915D060024ABC1 /* AddPecsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9011828B29915D060024ABC1 /* AddPecsView.swift */; };
+		9011828E29915D140024ABC1 /* EditPecsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9011828D29915D140024ABC1 /* EditPecsView.swift */; };
+		9011829629915DAF0024ABC1 /* PicList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9011829529915DAF0024ABC1 /* PicList.swift */; };
+		9011829829915DBA0024ABC1 /* PicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9011829729915DBA0024ABC1 /* PicCell.swift */; };
+		9011829D29915DF50024ABC1 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9011829C29915DF50024ABC1 /* SettingsView.swift */; };
+		9011829F29915E0A0024ABC1 /* NotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9011829E29915E0A0024ABC1 /* NotificationsView.swift */; };
+		901182A529915E9D0024ABC1 /* PecsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901182A429915E9D0024ABC1 /* PecsModel.swift */; };
+		901182A729915EC50024ABC1 /* PecsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901182A629915EC50024ABC1 /* PecsViewModel.swift */; };
+		901182AC29916C3C0024ABC1 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901182AB29916C3C0024ABC1 /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		900DDC0929939AA6005A471F /* SchedulePecsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulePecsView.swift; sourceTree = "<group>"; };
+		900DDC0C29939AE9005A471F /* NotificationList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationList.swift; sourceTree = "<group>"; };
+		900DDC0E29939AF2005A471F /* NotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
+		900DDC1029941EA5005A471F /* CloudNotAvailableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudNotAvailableView.swift; sourceTree = "<group>"; };
 		9011826C298D0EAA0024ABC1 /* Sabeel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sabeel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9011826F298D0EAA0024ABC1 /* SabeelApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SabeelApp.swift; sourceTree = "<group>"; };
-		90118271298D0EAA0024ABC1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		90118273298D0EAC0024ABC1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		90118276298D0EAC0024ABC1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		90118281299157100024ABC1 /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
+		9011828329915C910024ABC1 /* OnboradingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboradingView.swift; sourceTree = "<group>"; };
+		9011828529915CAB0024ABC1 /* ChooseUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseUserView.swift; sourceTree = "<group>"; };
+		9011828829915CDC0024ABC1 /* PecsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PecsView.swift; sourceTree = "<group>"; };
+		9011828B29915D060024ABC1 /* AddPecsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPecsView.swift; sourceTree = "<group>"; };
+		9011828D29915D140024ABC1 /* EditPecsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPecsView.swift; sourceTree = "<group>"; };
+		9011829529915DAF0024ABC1 /* PicList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicList.swift; sourceTree = "<group>"; };
+		9011829729915DBA0024ABC1 /* PicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicCell.swift; sourceTree = "<group>"; };
+		9011829C29915DF50024ABC1 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		9011829E29915E0A0024ABC1 /* NotificationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsView.swift; sourceTree = "<group>"; };
+		901182A429915E9D0024ABC1 /* PecsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PecsModel.swift; sourceTree = "<group>"; };
+		901182A629915EC50024ABC1 /* PecsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PecsViewModel.swift; sourceTree = "<group>"; };
+		901182AB29916C3C0024ABC1 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +64,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		900DDC0829939A5B005A471F /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				9011829C29915DF50024ABC1 /* SettingsView.swift */,
+				900DDC0929939AA6005A471F /* SchedulePecsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		900DDC0B29939ACC005A471F /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				9011829E29915E0A0024ABC1 /* NotificationsView.swift */,
+				900DDC0C29939AE9005A471F /* NotificationList.swift */,
+				900DDC0E29939AF2005A471F /* NotificationCell.swift */,
+			);
+			path = Notifications;
+			sourceTree = "<group>";
+		};
 		90118263298D0EAA0024ABC1 = {
 			isa = PBXGroup;
 			children = (
@@ -51,8 +102,10 @@
 		9011826E298D0EAA0024ABC1 /* Sabeel */ = {
 			isa = PBXGroup;
 			children = (
-				9011826F298D0EAA0024ABC1 /* SabeelApp.swift */,
-				90118271298D0EAA0024ABC1 /* ContentView.swift */,
+				9011827E299156890024ABC1 /* Model */,
+				9011827F299156920024ABC1 /* View */,
+				90118280299156990024ABC1 /* View Model */,
+				901182AD29923C520024ABC1 /* Helper */,
 				90118273298D0EAC0024ABC1 /* Assets.xcassets */,
 				90118275298D0EAC0024ABC1 /* Preview Content */,
 			);
@@ -65,6 +118,65 @@
 				90118276298D0EAC0024ABC1 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		9011827E299156890024ABC1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				901182A429915E9D0024ABC1 /* PecsModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		9011827F299156920024ABC1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9011828729915CBA0024ABC1 /* Start */,
+				9011828A29915CF00024ABC1 /* PECS */,
+				900DDC0829939A5B005A471F /* Settings */,
+				900DDC0B29939ACC005A471F /* Notifications */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		90118280299156990024ABC1 /* View Model */ = {
+			isa = PBXGroup;
+			children = (
+				901182A629915EC50024ABC1 /* PecsViewModel.swift */,
+			);
+			path = "View Model";
+			sourceTree = "<group>";
+		};
+		9011828729915CBA0024ABC1 /* Start */ = {
+			isa = PBXGroup;
+			children = (
+				9011826F298D0EAA0024ABC1 /* SabeelApp.swift */,
+				90118281299157100024ABC1 /* SplashScreen.swift */,
+				900DDC1029941EA5005A471F /* CloudNotAvailableView.swift */,
+				9011828329915C910024ABC1 /* OnboradingView.swift */,
+				9011828529915CAB0024ABC1 /* ChooseUserView.swift */,
+			);
+			path = Start;
+			sourceTree = "<group>";
+		};
+		9011828A29915CF00024ABC1 /* PECS */ = {
+			isa = PBXGroup;
+			children = (
+				9011828829915CDC0024ABC1 /* PecsView.swift */,
+				9011829529915DAF0024ABC1 /* PicList.swift */,
+				9011829729915DBA0024ABC1 /* PicCell.swift */,
+				9011828B29915D060024ABC1 /* AddPecsView.swift */,
+				9011828D29915D140024ABC1 /* EditPecsView.swift */,
+			);
+			path = PECS;
+			sourceTree = "<group>";
+		};
+		901182AD29923C520024ABC1 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				901182AB29916C3C0024ABC1 /* Extensions.swift */,
+			);
+			path = Helper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,8 +249,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				90118272298D0EAA0024ABC1 /* ContentView.swift in Sources */,
+				90118282299157100024ABC1 /* SplashScreen.swift in Sources */,
+				9011829629915DAF0024ABC1 /* PicList.swift in Sources */,
+				900DDC1129941EA5005A471F /* CloudNotAvailableView.swift in Sources */,
+				901182A729915EC50024ABC1 /* PecsViewModel.swift in Sources */,
 				90118270298D0EAA0024ABC1 /* SabeelApp.swift in Sources */,
+				900DDC0D29939AE9005A471F /* NotificationList.swift in Sources */,
+				9011828E29915D140024ABC1 /* EditPecsView.swift in Sources */,
+				9011828929915CDC0024ABC1 /* PecsView.swift in Sources */,
+				9011829D29915DF50024ABC1 /* SettingsView.swift in Sources */,
+				901182AC29916C3C0024ABC1 /* Extensions.swift in Sources */,
+				9011829829915DBA0024ABC1 /* PicCell.swift in Sources */,
+				901182A529915E9D0024ABC1 /* PecsModel.swift in Sources */,
+				9011828C29915D060024ABC1 /* AddPecsView.swift in Sources */,
+				9011829F29915E0A0024ABC1 /* NotificationsView.swift in Sources */,
+				9011828629915CAB0024ABC1 /* ChooseUserView.swift in Sources */,
+				900DDC0A29939AA6005A471F /* SchedulePecsView.swift in Sources */,
+				9011828429915C910024ABC1 /* OnboradingView.swift in Sources */,
+				900DDC0F29939AF2005A471F /* NotificationCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,6 +403,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -304,6 +433,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

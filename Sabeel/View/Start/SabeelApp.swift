@@ -11,7 +11,7 @@ import SwiftUI
 struct SabeelApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            SplashScreen()
         }
     }
 }
