@@ -14,7 +14,21 @@ struct SingleOnboardingView: View {
     let image: String
     let title: String
     let description: String
-    let isLastOnbording: Bool
+    let isLastOnboarding: Bool
+    
+    init(onboarding: OnboardingType) {
+        self.image = onboarding.image
+        self.title = onboarding.title
+        self.description = onboarding.description
+        self.isLastOnboarding = onboarding == .settings
+    }
+    
+    init(image: String, title: String, description: String) {
+        self.image = image
+        self.title = title
+        self.description = description
+        self.isLastOnboarding = false
+    }
     
     var body: some View {
         VStack(spacing:20) {
@@ -33,7 +47,7 @@ struct SingleOnboardingView: View {
                 .foregroundColor(.darkGray)
                 .multilineTextAlignment(.center)
             
-            if isLastOnbording {
+            if isLastOnboarding {
                 Button {
                     withAnimation(.spring()) {
                         isUserOnboarded = true
@@ -59,10 +73,6 @@ struct SingleOnboardingView: View {
 
 struct SingleOnbordingView_Previews: PreviewProvider {
     static var previews: some View {
-        SingleOnboardingView(
-            image: OnbordingType.alwayConnected.image,
-            title: OnbordingType.alwayConnected.title,
-            description: OnbordingType.alwayConnected.description,
-            isLastOnbording: false)
+        SingleOnboardingView(onboarding: .alwayConnected)
     }
 }

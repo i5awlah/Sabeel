@@ -10,30 +10,25 @@ import SwiftUI
 struct OnboardingView: View {
     
     @AppStorage("isUserOnboarded") var isUserOnboarded: Bool = false
-    @State var selectedOnbordingType: OnbordingType = .alwayConnected
+    @State var selectedOnboardingType: OnboardingType = .alwayConnected
     
     var body: some View {
         ZStack {
             
-            TabView(selection: $selectedOnbordingType) {
+            TabView(selection: $selectedOnboardingType) {
                 
-                ForEach(OnbordingType.allCases, id: \.title) { onbording in
-                    SingleOnboardingView(
-                        image: onbording.image,
-                        title: onbording.title,
-                        description: onbording.description,
-                        isLastOnbording: onbording == .settings
-                    )
-                    .tag(onbording)
-                    .onChange(of: selectedOnbordingType, perform: { newValue in
-                        selectedOnbordingType = newValue
+                ForEach(OnboardingType.allCases, id: \.title) { onboarding in
+                    SingleOnboardingView(onboarding: onboarding)
+                    .tag(onboarding)
+                    .onChange(of: selectedOnboardingType, perform: { newValue in
+                        selectedOnboardingType = newValue
                     })
                 }
             }
             .tabViewStyle(.page(indexDisplayMode: .always))
             .indexViewStyle(.page(backgroundDisplayMode: .always))
             
-            if selectedOnbordingType != .settings {
+            if selectedOnboardingType != .settings {
                 skipButton
             }
         }
@@ -76,7 +71,7 @@ extension OnboardingView {
     }
 }
 
-enum OnbordingType: CaseIterable {
+enum OnboardingType: CaseIterable {
     case alwayConnected
     case getNotification
     case customizePECS
