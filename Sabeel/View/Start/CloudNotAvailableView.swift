@@ -8,12 +8,17 @@
 import SwiftUI
 
 struct CloudNotAvailableView: View {
+    
+    let image = "connectiCloud"
+    let title = "Can’t connect to iCloud!"
+    let description = "Please make sure that your apple ID is existing in your device settings."
+    
     var body: some View {
         SingleOnboardingView(
-            image: "connectiCloud",
-            title: "Can’t connect to iCloud!",
-            description: "Please make sure that your apple ID is existing in your device settings.",
-            isLastOnbording: false)
+            image: image,
+            title: title,
+            description: description
+        )
     }
 }
 
