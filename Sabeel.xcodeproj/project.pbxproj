@@ -13,6 +13,7 @@
 		900DDC1129941EA5005A471F /* CloudNotAvailableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900DDC1029941EA5005A471F /* CloudNotAvailableView.swift */; };
 		900DDC162994E782005A471F /* SingleOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900DDC152994E782005A471F /* SingleOnboardingView.swift */; };
 		900DDC182994F771005A471F /* CloudViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900DDC172994F771005A471F /* CloudViewModel.swift */; };
+		900DDC22299658AE005A471F /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900DDC21299658AE005A471F /* UserModel.swift */; };
 		90118270298D0EAA0024ABC1 /* SabeelApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9011826F298D0EAA0024ABC1 /* SabeelApp.swift */; };
 		90118274298D0EAC0024ABC1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 90118273298D0EAC0024ABC1 /* Assets.xcassets */; };
 		90118277298D0EAC0024ABC1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 90118276298D0EAC0024ABC1 /* Preview Assets.xcassets */; };
@@ -40,6 +41,7 @@
 		900DDC172994F771005A471F /* CloudViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudViewModel.swift; sourceTree = "<group>"; };
 		900DDC192994F795005A471F /* Sabeel.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Sabeel.entitlements; sourceTree = "<group>"; };
 		900DDC1A2994F9E1005A471F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		900DDC21299658AE005A471F /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		9011826C298D0EAA0024ABC1 /* Sabeel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sabeel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9011826F298D0EAA0024ABC1 /* SabeelApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SabeelApp.swift; sourceTree = "<group>"; };
 		90118273298D0EAC0024ABC1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 			isa = PBXGroup;
 			children = (
 				901182A429915E9D0024ABC1 /* PecsModel.swift */,
+				900DDC21299658AE005A471F /* UserModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -260,6 +263,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				90118282299157100024ABC1 /* SplashScreen.swift in Sources */,
+				900DDC22299658AE005A471F /* UserModel.swift in Sources */,
 				9011829629915DAF0024ABC1 /* PicList.swift in Sources */,
 				900DDC1129941EA5005A471F /* CloudNotAvailableView.swift in Sources */,
 				901182A729915EC50024ABC1 /* PecsViewModel.swift in Sources */,
@@ -405,6 +409,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Sabeel/Sabeel.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Sabeel/Preview Content\"";
@@ -424,6 +429,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.TechLab.Sabeel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -436,6 +442,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Sabeel/Sabeel.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Sabeel/Preview Content\"";
@@ -455,6 +462,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.TechLab.Sabeel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

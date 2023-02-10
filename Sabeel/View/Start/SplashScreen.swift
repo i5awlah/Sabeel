@@ -19,7 +19,11 @@ struct SplashScreen: View {
                 if !isUserOnboarded {
                     OnboardingView()
                 } else {
-                    PecsView()
+                    if (cloudViewModel.currentUser != nil) {
+                        PecsView()
+                    } else {
+                        ChooseUserView()
+                    }
                 }
             } else {
                 CloudNotAvailableView()
