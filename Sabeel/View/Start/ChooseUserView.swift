@@ -32,22 +32,29 @@ extension ChooseUserView {
             .resizable()
             .scaledToFit()
             .frame(maxHeight: .infinity, alignment: .bottom)
+            .ignoresSafeArea()
     }
     
     var userType: some View {
         VStack {
             Spacer().frame(height: UIScreen.main.bounds.height * 0.19)
             Button {
-                let child = ChildModel()
-                cloudViewModel.addUser(user: child)
+                Task {
+                    let id = await cloudViewModel.fetchiCloudUserRecordId()
+                    let child = ChildModel(id: id)
+                    cloudViewModel.addUser(user: child)
+                }
             } label: {
                 Image("Autistic")
             }
 
             Spacer().frame(height: UIScreen.main.bounds.height * 0.11)
             Button {
-                let parent = ParentModel()
-                cloudViewModel.addUser(user: parent)
+                Task {
+                    let id = await cloudViewModel.fetchiCloudUserRecordId()
+                    let parent = ParentModel(id: id)
+                    cloudViewModel.addUser(user: parent)
+                }
             } label: {
                 Image("Parents")
             }

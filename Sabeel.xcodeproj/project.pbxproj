@@ -14,6 +14,11 @@
 		900DDC162994E782005A471F /* SingleOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900DDC152994E782005A471F /* SingleOnboardingView.swift */; };
 		900DDC182994F771005A471F /* CloudViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900DDC172994F771005A471F /* CloudViewModel.swift */; };
 		900DDC22299658AE005A471F /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900DDC21299658AE005A471F /* UserModel.swift */; };
+		900DDC282998CA3C005A471F /* DataScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900DDC272998CA3C005A471F /* DataScannerView.swift */; };
+		900DDC2A2998CA88005A471F /* ScanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900DDC292998CA88005A471F /* ScanViewModel.swift */; };
+		900DDC2C2998D1BF005A471F /* ScanQRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900DDC2B2998D1BF005A471F /* ScanQRView.swift */; };
+		900DDC2E2998EE0E005A471F /* AddChildView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900DDC2D2998EE0E005A471F /* AddChildView.swift */; };
+		900DDC302998EFB5005A471F /* ChildQRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900DDC2F2998EFB5005A471F /* ChildQRView.swift */; };
 		90118270298D0EAA0024ABC1 /* SabeelApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9011826F298D0EAA0024ABC1 /* SabeelApp.swift */; };
 		90118274298D0EAC0024ABC1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 90118273298D0EAC0024ABC1 /* Assets.xcassets */; };
 		90118277298D0EAC0024ABC1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 90118276298D0EAC0024ABC1 /* Preview Assets.xcassets */; };
@@ -42,6 +47,11 @@
 		900DDC192994F795005A471F /* Sabeel.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Sabeel.entitlements; sourceTree = "<group>"; };
 		900DDC1A2994F9E1005A471F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		900DDC21299658AE005A471F /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		900DDC272998CA3C005A471F /* DataScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataScannerView.swift; sourceTree = "<group>"; };
+		900DDC292998CA88005A471F /* ScanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanViewModel.swift; sourceTree = "<group>"; };
+		900DDC2B2998D1BF005A471F /* ScanQRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanQRView.swift; sourceTree = "<group>"; };
+		900DDC2D2998EE0E005A471F /* AddChildView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddChildView.swift; sourceTree = "<group>"; };
+		900DDC2F2998EFB5005A471F /* ChildQRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildQRView.swift; sourceTree = "<group>"; };
 		9011826C298D0EAA0024ABC1 /* Sabeel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sabeel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9011826F298D0EAA0024ABC1 /* SabeelApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SabeelApp.swift; sourceTree = "<group>"; };
 		90118273298D0EAC0024ABC1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -77,6 +87,10 @@
 			children = (
 				9011829C29915DF50024ABC1 /* SettingsView.swift */,
 				900DDC0929939AA6005A471F /* SchedulePecsView.swift */,
+				900DDC272998CA3C005A471F /* DataScannerView.swift */,
+				900DDC2B2998D1BF005A471F /* ScanQRView.swift */,
+				900DDC2D2998EE0E005A471F /* AddChildView.swift */,
+				900DDC2F2998EFB5005A471F /* ChildQRView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -155,6 +169,7 @@
 			children = (
 				901182A629915EC50024ABC1 /* PecsViewModel.swift */,
 				900DDC172994F771005A471F /* CloudViewModel.swift */,
+				900DDC292998CA88005A471F /* ScanViewModel.swift */,
 			);
 			path = "View Model";
 			sourceTree = "<group>";
@@ -265,7 +280,10 @@
 				90118282299157100024ABC1 /* SplashScreen.swift in Sources */,
 				900DDC22299658AE005A471F /* UserModel.swift in Sources */,
 				9011829629915DAF0024ABC1 /* PicList.swift in Sources */,
+				900DDC282998CA3C005A471F /* DataScannerView.swift in Sources */,
+				900DDC2A2998CA88005A471F /* ScanViewModel.swift in Sources */,
 				900DDC1129941EA5005A471F /* CloudNotAvailableView.swift in Sources */,
+				900DDC2C2998D1BF005A471F /* ScanQRView.swift in Sources */,
 				901182A729915EC50024ABC1 /* PecsViewModel.swift in Sources */,
 				90118270298D0EAA0024ABC1 /* SabeelApp.swift in Sources */,
 				900DDC0D29939AE9005A471F /* NotificationList.swift in Sources */,
@@ -274,12 +292,14 @@
 				9011829D29915DF50024ABC1 /* SettingsView.swift in Sources */,
 				901182AC29916C3C0024ABC1 /* Extensions.swift in Sources */,
 				9011829829915DBA0024ABC1 /* PicCell.swift in Sources */,
+				900DDC2E2998EE0E005A471F /* AddChildView.swift in Sources */,
 				901182A529915E9D0024ABC1 /* PecsModel.swift in Sources */,
 				9011828C29915D060024ABC1 /* AddPecsView.swift in Sources */,
 				9011829F29915E0A0024ABC1 /* NotificationsView.swift in Sources */,
 				900DDC182994F771005A471F /* CloudViewModel.swift in Sources */,
 				9011828629915CAB0024ABC1 /* ChooseUserView.swift in Sources */,
 				900DDC0A29939AA6005A471F /* SchedulePecsView.swift in Sources */,
+				900DDC302998EFB5005A471F /* ChildQRView.swift in Sources */,
 				900DDC162994E782005A471F /* SingleOnboardingView.swift in Sources */,
 				9011828429915C910024ABC1 /* OnboardingView.swift in Sources */,
 				900DDC0F29939AF2005A471F /* NotificationCell.swift in Sources */,
@@ -417,6 +437,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Sabeel/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "The app needs camera access to scan QR for your child";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -450,6 +471,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Sabeel/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "The app needs camera access to scan QR for your child";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
