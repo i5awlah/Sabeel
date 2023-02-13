@@ -1,5 +1,9 @@
+//
+//  PecsViewModel.swift
+//  Sabeel
+//
 // Created by Einas on 12/02/2023.
-
+//
 import Foundation
 import CloudKit
 
@@ -15,7 +19,7 @@ class PECSViewModel: ObservableObject {
         
     }
     
-    //Fetch all PECS from Home_Content for one child
+    //Fetch all PECS from Home_Content for this child
     //Home_Content fetches from PECS and Custom_PECS
     //1- Fetch PECS_ID  from Home_Content
     //2- loop each PECS_ID to retrieve their content from PECS record
@@ -35,7 +39,22 @@ class PECSViewModel: ObservableObject {
         let query = CKQuery(recordType: "Home_Content", predicate: predicate)
         let queryOperation = CKQueryOperation(query: query)
         
-        var returnedItems: [PecsModel] = []
+        var returnedItem: [PecsModel] = []
+        var returnedItems: [Home_Content] = []
+        
+        queryOperation.recordMatchedBlock = { (returnedRecordID, returnedResult) in
+            switch returnedResult{
+            case .success(let record):
+                guard let autistic_caregiver_ID = record["autistic_caregiver_ID"] as? String else {return}
+                guard let custom_Pecs_ID = record["custom_Pecs_ID"] as? String else {return}
+                guard let pecs_ID = record["pecs_ID"] as? String else {return}
+                returnedItems.append(Home_Content(id: "1", autistic_caregiver_ID: autistic_caregiver_ID, custom_Pecs_ID: custom_Pecs_ID, pecs_ID: pecs_ID, associatedRecord: record))
+                
+            case .failure(let error):
+                print("Error recordMatchBlock : \(error)")
+            }
+        }
+        
     }
     
     func fetchCustomizedPECS(){
