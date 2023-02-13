@@ -13,6 +13,8 @@ class PECSViewModel: ObservableObject {
     @Published var iCloudAvailable: Bool = false
     @Published var currentUser: UserModel?
     var userID = "1"
+    @Published var returnedContent: [Home_Content] = []
+    @Published var returnedPECS: [PecsModel] = []
     
     init() {
         self.container = CKContainer.default()
@@ -28,19 +30,11 @@ class PECSViewModel: ObservableObject {
     
  
     func fetchPECS_Content(){
-        
-//        let query = CKQuery(recordType: "Home_Content", predicate: predicate)
-//        container.privateCloudDatabase.fetch(withQuery: query) { result in
-//            switch(result) {
-    }
-    
-    func fetchPECS(){
+
         let predicate = NSPredicate(format: "autistic_caregiver_ID =%@", userID)
         let query = CKQuery(recordType: "Home_Content", predicate: predicate)
         let queryOperation = CKQueryOperation(query: query)
         
-        var returnedItem: [PecsModel] = []
-        var returnedItems: [Home_Content] = []
         
         queryOperation.recordMatchedBlock = { (returnedRecordID, returnedResult) in
             switch returnedResult{
@@ -48,7 +42,13 @@ class PECSViewModel: ObservableObject {
                 guard let autistic_caregiver_ID = record["autistic_caregiver_ID"] as? String else {return}
                 guard let custom_Pecs_ID = record["custom_Pecs_ID"] as? String else {return}
                 guard let pecs_ID = record["pecs_ID"] as? String else {return}
-                returnedItems.append(Home_Content(id: "1", autistic_caregiver_ID: autistic_caregiver_ID, custom_Pecs_ID: custom_Pecs_ID, pecs_ID: pecs_ID, associatedRecord: record))
+                returnedContent.append(Home_Content(id: "1", autistic_caregiver_ID: autistic_caregiver_ID, custom_Pecs_ID: custom_Pecs_ID, pecs_ID: pecs_ID, associatedRecord: record))
+                
+                if custom_Pecs_ID.isEmpty {
+                    self.fetchPECS(ID: pecs_ID)
+                }else {
+                    self.fetchCustomPECS(ID:custom_Pecs_ID)
+                }
                 
             case .failure(let error):
                 print("Error recordMatchBlock : \(error)")
@@ -57,11 +57,16 @@ class PECSViewModel: ObservableObject {
         
     }
     
-    func fetchCustomizedPECS(){
+    func fetchPECS(ID: String){
+        let predicate = NSPredicate(format: "PECS_id =%@", ID)
+        let query = CKQuery(recordType: "PECS", predicate: predicate)
+        let queryOperation = CKQueryOperation(query: query)
         
     }
     
-    
+    func fetchCustomPECS(ID:String){
+        
+    }
     // 1- Delete PECS form Home_Content the record that refers to it
     // 2- Check the PECS TYPE if it is PECS or Custom PECS
     //      2.1 if it's Custom PECS delete it from Home_Content and Custom_PECS
