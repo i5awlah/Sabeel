@@ -6,35 +6,50 @@
 //
 
 import SwiftUI
+import AVKit
 
 struct SplashScreen: View {
     
-    @EnvironmentObject var cloudViewModel: CloudViewModel
+    @StateObject var cloudViewModel = CloudViewModel()
     @AppStorage("isUserOnboarded") var isUserOnboarded: Bool = false
     @State var isEnded : Bool = false
     
+    let Video = AVPlayer(url: Bundle.main.url(forResource: "SplashScreen-Light", withExtension: "mp4")!)
+    
     var body: some View {
-        if isEnded {
-            if cloudViewModel.iCloudAvailable {
-                if !isUserOnboarded {
-                    OnboardingView()
-                } else {
-                    if (cloudViewModel.currentUser != nil) {
-                        PecsView()
+        Group {
+            if isEnded {
+                if cloudViewModel.iCloudAvailable {
+                    if !isUserOnboarded {
+                        OnboardingView()
                     } else {
-                        ChooseUserView()
+                        if (cloudViewModel.currentUser != nil) {
+                            PecsView()
+                        } else {
+                            ChooseUserView()
+                        }
                     }
+                } else {
+                    CloudNotAvailableView()
                 }
             } else {
-                CloudNotAvailableView()
-            }
-        } else {
-            // video, if finish set isEnded to true
-            Text("End")
-                .onTapGesture {
-                    isEnded.toggle()
+                GeometryReader{ geo in
+                    VideoPlayer(player:Video)
+                        .disabled(true)
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: geo.size.width, height: geo.size.height)
+                        .edgesIgnoringSafeArea(.all)
+                        .onAppear {
+                            Video.play()
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 2){
+                                Video.pause()
+                                isEnded = true
+                            }
+                        }
                 }
+            }
         }
+        .environmentObject(cloudViewModel)
     }
 }
 
