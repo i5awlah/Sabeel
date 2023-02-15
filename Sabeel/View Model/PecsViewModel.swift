@@ -13,8 +13,8 @@ class PECSViewModel: ObservableObject {
     @Published var iCloudAvailable: Bool = false
     @Published var currentUser: UserModel?
     var userID = "1"
-    @Published var returnedContent: [Home_Content] = []
-    @Published var returnedPECS: [PecsModel] = []
+    @Published var allPECS: [Home_Content] = []
+    
     
     init() {
         self.container = CKContainer.default()
@@ -29,88 +29,84 @@ class PECSViewModel: ObservableObject {
     //repeat the same steps 1 and 2 but for the customize_PECs
     
  
-    func fetchPECS_Content(){
+    func fetchHome_Content(){
 
         let predicate = NSPredicate(format: "autistic_caregiver_ID =%@", userID)
         let query = CKQuery(recordType: "Home_Content", predicate: predicate)
-        let queryOperation = CKQueryOperation(query: query)
-        
-        
-        queryOperation.recordMatchedBlock = { (returnedRecordID, returnedResult) in
-            switch returnedResult{
-            case .success(let record):
-                guard let autistic_caregiver_ID = record["autistic_caregiver_ID"] as? String else {return}
-                guard let custom_Pecs_ID = record["custom_Pecs_ID"] as? String else {return}
-                guard let pecs_ID = record["pecs_ID"] as? String else {return}
-                self.returnedContent.append(Home_Content(id: "1", autistic_caregiver_ID: autistic_caregiver_ID, custom_Pecs_ID: custom_Pecs_ID, pecs_ID: pecs_ID, associatedRecord: record))
+    
+     var allHomeContent : [Home_Content] = []
+       
+        container.publicCloudDatabase.fetch(withQuery: query) { result in
+            switch(result) {
+            case .success((let result)):
+                result.matchResults.compactMap { $0.1 }
+                    .forEach {
+                        switch $0 {
+                        case .success(let record):
+                            
+                            //fetch the PECS here
+                        
+                            guard let home_Content = Home_Content(record: record) else { return}
+                           
+                            allHomeContent.append(Home_Content(id: home_Content.id, autistic_caregiver_ID: home_Content.pecs_ID, custom_Pecs_ID: home_Content.custom_Pecs_ID, pecs_ID: home_Content.pecs_ID, is_showing: home_Content.is_showing, end_time: home_Content.end_time, start_time: home_Content.start_time, associatedRecord: home_Content.associatedRecord, PECS: home_Content.PECS))
+                            
+                            
+                    case .failure(let error):
+                        print("Error: \(error.localizedDescription)")
+                    }
                 
-                if custom_Pecs_ID.isEmpty {
-                    self.fetchPECS(ID: pecs_ID)
-                }else { // check if we need the autistic_caregiver_ID
-                    self.fetchCustomPECS(ID:custom_Pecs_ID )
-                }
-                
+            }
             case .failure(let error):
                 print("Error recordMatchBlock : \(error)")
             }
+            self.allPECS = allHomeContent
         }
         
     }
     
-    func fetchPECS(ID: String){
-        let predicate = NSPredicate(format: "PECS_id =%@", ID)
-        let query = CKQuery(recordType: "PECS", predicate: predicate)
-        let queryOperation = CKQueryOperation(query: query)
-        
-        queryOperation.recordMatchedBlock = { (returnedRecordID, returnedResult) in
-            switch returnedResult{
-            case .success(let record):
-                guard let PECS_id = record["PECS_id"] as? String else {return}
-                guard let category = record["category"] as? String else {return}
-                guard let name = record["name"] as? String else {return}
-                let imageAsset = record["imageURL"] as? CKAsset
-                let imageURL = imageAsset?.fileURL
-                let AudioAsset = record["audioURL"] as? CKAsset
-                let audioURL = AudioAsset?.fileURL
-                
-                self.returnedPECS.append(PecsModel(id: PECS_id, category: category, imageURL: imageURL, audioURL: audioURL, name: name, associatedRecord: record))
-                
-            case .failure(let error):
-                print("Error recordMatchBlock : \(error)")
-            }
-        }
-        
-    }
+//    func fetchPECS(ID: String, recordType: String) -> PecsModel {
+//        let predicate = NSPredicate(format: "\(recordType)_id =%@", ID)
+//        let query = CKQuery(recordType: recordType, predicate: predicate)
+//        let queryOperation = CKQueryOperation(query: query)
+//
+//        var returnedPECS : [PecsModel] = []
+//
+//        queryOperation.recordMatchedBlock = { (returnedRecordID, returnedResult) in
+//            switch returnedResult{
+//            case .success(let record):
+//                guard let PECS_id = record["PECS_id"] as? String else {return}
+//                guard let category = record["category"] as? String else {return}
+//                guard let name = record["name"] as? String else {return}
+//                let imageAsset = record["imageURL"] as? CKAsset
+//                let imageURL = imageAsset?.fileURL
+//                let AudioAsset = record["audioURL"] as? CKAsset
+//                let audioURL = AudioAsset?.fileURL
+//
+//                returnedPECS.append(PecsModel(id: PECS_id,
+//                                              category: category,
+//                                              imageURL: imageURL,
+//                                              audioURL: audioURL,
+//                                              name: name,
+//                                              associatedRecord: record))
+//
+//                return returnedPECS
+//            case .failure(let error):
+//                print("Error recordMatchBlock : \(error)")
+//            }
+//        }
+//
+//    }
     
-    func fetchCustomPECS(ID:String){
-        let predicate = NSPredicate(format: "Custom_PECS_ID =%@", ID)
-        let query = CKQuery(recordType: "Custom_PECS", predicate: predicate)
-        let queryOperation = CKQueryOperation(query: query)
-        
-        queryOperation.recordMatchedBlock = { (returnedRecordID, returnedResult) in
-            switch returnedResult{
-            case .success(let record):
-                guard let Custom_PECS_ID = record["Custom_PECS_ID"] as? String else {return}
-                guard let category = record["category"] as? String else {return}
-                guard let name = record["name"] as? String else {return}
-                let imageAsset = record["pictureURL"] as? CKAsset
-                let imageURL = imageAsset?.fileURL
-                let AudioAsset = record["audioURL"] as? CKAsset
-                let audioURL = AudioAsset?.fileURL
-                
-                self.returnedPECS.append(PecsModel(id: Custom_PECS_ID, category: category, imageURL: imageURL, audioURL: audioURL, name: name, associatedRecord: record))
-                
-            case .failure(let error):
-                print("Error recordMatchBlock : \(error)")
-            }
-        }
-        
-    }
+    
+    //Delete
+    
     // 1- Delete PECS form Home_Content the record that refers to it
+    //    NEVER DELETE FROM PECS TABLE
+    
     // 2- Check the PECS TYPE if it is PECS or Custom PECS
     //      2.1 if it's Custom PECS delete it from Home_Content and Custom_PECS
     //      2-2 if it's PECS delete the record only from Home_Content
-    //NEVER DELETE FROM PECS TABLE
+    
     func deletePECS(){
         
     }
