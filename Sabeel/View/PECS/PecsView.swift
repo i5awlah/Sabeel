@@ -8,8 +8,33 @@
 import SwiftUI
 
 struct PecsView: View {
+    @State var parent : Bool = true
+    @State var isEditing = false
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationView {
+            VStack{
+                Text("Hello")
+            }
+                .navigationTitle("PECS")
+                .foregroundColor(parent ? .darkBlue : .darkGreen)
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        if parent{
+                        Button{ isEditing.toggle() }label: {
+                                Text( isEditing ? "Close" : "Edit")}
+                            .foregroundColor(.darkBlue)
+                        }
+                        else{
+                            Button{}label: {
+                                Image(systemName: "gear")
+                                    .foregroundColor(.darkGreen)
+                            }
+                        }
+                    }
+                }
+                
+        }
     }
 }
 

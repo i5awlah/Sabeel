@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5DB4383D299AA712004F2A53 /* SplashScreenLight.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 5DB4383C299AA712004F2A53 /* SplashScreenLight.mp4 */; };
 		900DDC0A29939AA6005A471F /* SchedulePecsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900DDC0929939AA6005A471F /* SchedulePecsView.swift */; };
 		900DDC0D29939AE9005A471F /* NotificationList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900DDC0C29939AE9005A471F /* NotificationList.swift */; };
 		900DDC0F29939AF2005A471F /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900DDC0E29939AF2005A471F /* NotificationCell.swift */; };
@@ -38,6 +39,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5DB4383C299AA712004F2A53 /* SplashScreenLight.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = SplashScreenLight.mp4; sourceTree = "<group>"; };
 		900DDC0929939AA6005A471F /* SchedulePecsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulePecsView.swift; sourceTree = "<group>"; };
 		900DDC0C29939AE9005A471F /* NotificationList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationList.swift; sourceTree = "<group>"; };
 		900DDC0E29939AF2005A471F /* NotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
@@ -82,6 +84,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5D26FC01299AB15F005C5FE2 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				5DB4383B299AA6F5004F2A53 /* Videos */,
+				90118273298D0EAC0024ABC1 /* Assets.xcassets */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		5DB4383B299AA6F5004F2A53 /* Videos */ = {
+			isa = PBXGroup;
+			children = (
+				5DB4383C299AA712004F2A53 /* SplashScreenLight.mp4 */,
+			);
+			path = Videos;
+			sourceTree = "<group>";
+		};
 		900DDC0829939A5B005A471F /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -130,7 +149,7 @@
 				9011827F299156920024ABC1 /* View */,
 				90118280299156990024ABC1 /* View Model */,
 				901182AD29923C520024ABC1 /* Helper */,
-				90118273298D0EAC0024ABC1 /* Assets.xcassets */,
+				5D26FC01299AB15F005C5FE2 /* Assets */,
 				90118275298D0EAC0024ABC1 /* Preview Content */,
 			);
 			path = Sabeel;
@@ -265,6 +284,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5DB4383D299AA712004F2A53 /* SplashScreenLight.mp4 in Resources */,
 				90118277298D0EAC0024ABC1 /* Preview Assets.xcassets in Resources */,
 				90118274298D0EAC0024ABC1 /* Assets.xcassets in Resources */,
 			);
