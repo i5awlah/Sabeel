@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		5D4B3573299CDFE70089A3F9 /* Shimmer in Frameworks */ = {isa = PBXBuildFile; productRef = 5D4B3572299CDFE70089A3F9 /* Shimmer */; };
 		5D4B3575299E2E830089A3F9 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B3574299E2E830089A3F9 /* TabBar.swift */; };
+		5D4B3577299ED0E00089A3F9 /* AudioManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B3576299ED0E00089A3F9 /* AudioManger.swift */; };
 		5DB4383D299AA712004F2A53 /* SplashScreenLight.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 5DB4383C299AA712004F2A53 /* SplashScreenLight.mp4 */; };
 		900DDC0A29939AA6005A471F /* SchedulePecsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900DDC0929939AA6005A471F /* SchedulePecsView.swift */; };
 		900DDC0D29939AE9005A471F /* NotificationList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900DDC0C29939AE9005A471F /* NotificationList.swift */; };
@@ -43,6 +44,7 @@
 
 /* Begin PBXFileReference section */
 		5D4B3574299E2E830089A3F9 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
+		5D4B3576299ED0E00089A3F9 /* AudioManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioManger.swift; sourceTree = "<group>"; };
 		5DB4383C299AA712004F2A53 /* SplashScreenLight.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = SplashScreenLight.mp4; sourceTree = "<group>"; };
 		900DDC0929939AA6005A471F /* SchedulePecsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulePecsView.swift; sourceTree = "<group>"; };
 		900DDC0C29939AE9005A471F /* NotificationList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationList.swift; sourceTree = "<group>"; };
@@ -230,6 +232,7 @@
 			children = (
 				901182AB29916C3C0024ABC1 /* Extensions.swift */,
 				900DDC35299D0765005A471F /* NotificationManager.swift */,
+				5D4B3576299ED0E00089A3F9 /* AudioManger.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -325,6 +328,7 @@
 				9011828929915CDC0024ABC1 /* PecsView.swift in Sources */,
 				900DDC36299D0765005A471F /* NotificationManager.swift in Sources */,
 				9011829D29915DF50024ABC1 /* SettingsView.swift in Sources */,
+				5D4B3577299ED0E00089A3F9 /* AudioManger.swift in Sources */,
 				901182AC29916C3C0024ABC1 /* Extensions.swift in Sources */,
 				9011829829915DBA0024ABC1 /* PicCell.swift in Sources */,
 				900DDC2E2998EE0E005A471F /* AddChildView.swift in Sources */,

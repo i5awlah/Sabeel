@@ -7,10 +7,14 @@
 
 import SwiftUI
 
+
+
 struct PicList: View {
     let spacing: CGFloat = 20
     @AppStorage("number0fColumns") var number0fColumns = 2
+    @ObservedObject var audioPlayer = AudioPlayer()
     @Binding var isEditing : Bool
+    @State var isLoading : Bool = false
     
     @EnvironmentObject var cloudViewModel : CloudViewModel
     
@@ -26,19 +30,29 @@ struct PicList: View {
                     AddCell()
                 }
                 ForEach(cloudViewModel.homeContents, id: \.id) { item in
-                    Button{
-                        if cloudViewModel.isChild {
-                            // sound
+                    if cloudViewModel.isChild {
+                        Button{
+                            if audioPlayer.isPlaying == false {
+                                self.audioPlayer.startPlayback(audio: item.pecs.audioURL!)
+                            }
                             cloudViewModel.addChildRequest(homeContent: item)
+                            
+                        } label: {
+                            PicCell(isLoading: $isLoading, isEditing: $isEditing,isChild: cloudViewModel.isChild ,pecs: item.pecs)
+                                .shimmering(
+                                    active: isLoading
+                                )
                         }
-                    } label: {
-                        PicCell(isEditing: $isEditing,isChild: cloudViewModel.isChild ,pecs: item.pecs)
-//                            .shimmering(
-//                                active: parent
-//                            )
                     }
-                 
+                    else{
+                        PicCell(isLoading: $isLoading, isEditing: $isEditing,isChild: cloudViewModel.isChild ,pecs: item.pecs)
+                            .shimmering(
+                                active: isLoading
+                            )
+                    }
+
                 }
+              
             }.padding (.horizontal)
         }
        
@@ -56,3 +70,5 @@ struct PicList_Previews: PreviewProvider {
             .environmentObject(CloudViewModel())
     }
 }
+
+

@@ -8,13 +8,20 @@
 import SwiftUI
 
 struct NotificationList: View {
+    @EnvironmentObject var cloudViewModel: CloudViewModel
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+     
+        List {
+        ForEach(cloudViewModel.childRequests
+                .sorted(by: { $0.associatedRecord.creationDate ?? .now > $1.associatedRecord.creationDate ?? .now }), id: \.id) { childRequest in
+                    NotificationCell(ChildRequestVM : childRequest)      
+            }
+        }
     }
 }
 
 struct NotificationList_Previews: PreviewProvider {
     static var previews: some View {
-        NotificationList()
+        NotificationList().environmentObject(CloudViewModel())
     }
 }

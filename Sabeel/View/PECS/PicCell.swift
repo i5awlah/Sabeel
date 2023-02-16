@@ -11,14 +11,16 @@ import Shimmer
 struct PicCell: View {
    
     @State var isHidden :Bool = false
+    @Binding var isLoading : Bool
     @Binding var isEditing : Bool
     let isChild :Bool 
     let pecs: PecsModel
     
+    
     var body: some View {
         GeometryReader { geo in
             let TextSize = min(geo.size.width * 0.5, 16)
-            let imageWidth: CGFloat = min (50, geo.size.width * 0.6 )
+            let imageWidth: CGFloat = min (160, geo.size.width * 0.6 )
             VStack(spacing: 5){
                 HStack{
                     Spacer()
@@ -39,26 +41,29 @@ struct PicCell: View {
                             }
                         label: {
                             Image(systemName: isHidden ? "eye" : "eye.slash")
-                                .foregroundColor(.darkBlue)
+                                .foregroundColor(.darkGray)
                         }
                             
                             
                         }
                     }
                 }
-                Spacer()
+              
                 AsyncImage(url: pecs.imageURL) { image in
                     image.resizable()
-                    image.scaledToFit()
-                    image.frame(width: imageWidth, height: 50)
+                         .scaledToFit()
+                         .frame(width: imageWidth)
                     
                 } placeholder: {
                     Image(systemName: "photo")
                         .resizable()
                         .scaledToFit()
-                        .frame(width: imageWidth, height: 50)
+                        .frame(width: imageWidth)
                 }
-                Spacer()
+//                .onAppear(
+//                    perform: isLoading.toggle()
+//              )
+     
                 Text(pecs.name)
                     .foregroundColor(isChild ?  .darkGreen : .darkBlue)
                     .font(.system(size: TextSize))
@@ -88,7 +93,7 @@ struct AddCell: View {
             NavigationLink{
                 AddPecsView()
             }label:{
-            VStack(){
+            VStack{
                 Image(systemName: "plus")
                     .resizable()
                     .scaledToFit()
@@ -114,7 +119,7 @@ struct AddCell: View {
 
 struct PicCell_Previews: PreviewProvider {
     static var previews: some View {
-        PicCell(isEditing:Binding.constant(false), isChild: false, pecs: PecsModel(imageURL: nil, audioURL: nil, name: "qq", category: "eat"))
+        PicCell( isLoading: Binding<Bool>.constant(false), isEditing:Binding.constant(false), isChild: false, pecs: PecsModel(imageURL: nil, audioURL: nil, name: "qq", category: "eat"))
         AddCell()
     }
 }
