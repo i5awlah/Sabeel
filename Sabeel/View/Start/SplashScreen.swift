@@ -14,7 +14,7 @@ struct SplashScreen: View {
     @AppStorage("isUserOnboarded") var isUserOnboarded: Bool = false
     @State var isEnded : Bool = false
     
-    let Video = AVPlayer(url: Bundle.main.url(forResource: "SplashScreen-Light", withExtension: "mp4")!)
+    let Video = AVPlayer(url: Bundle.main.url(forResource: "SplashScreenLight", withExtension: "mp4")!)
     
     var body: some View {
         Group {
