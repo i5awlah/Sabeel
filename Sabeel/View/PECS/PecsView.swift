@@ -11,10 +11,22 @@ struct PecsView: View {
     @EnvironmentObject var cloudViewModel : CloudViewModel
     @State var isEditing = false
     
+    @State private var pecs: [PecsModel] = []
+    
     var body: some View {
         NavigationStack{
             VStack{
-                PicList(isEditing: $isEditing)
+                if (cloudViewModel.childParentModel != nil) {
+                    PicList(isEditing: $isEditing)
+                } else {
+                    PicList(pecs: pecs)
+                        .onAppear{
+                            print("fetch pecs without home content")
+                            cloudViewModel.fetchSharedPecs { pecs in
+                                self.pecs = pecs
+                            }
+                        }
+                }
             }
             .navigationTitle("PECS")
             .foregroundColor(cloudViewModel.isChild ? .darkGreen : .darkBlue )
@@ -29,9 +41,11 @@ struct PecsView: View {
                         }
                     }
                     else{
-                        Button{ isEditing.toggle() }label: {
-                            Text( isEditing ? "Close" : "Edit")}
-                        .foregroundColor(.darkBlue)
+                        if (cloudViewModel.childParentModel != nil) {
+                            Button{ isEditing.toggle() }label: {
+                                Text( isEditing ? "Close" : "Edit")}
+                            .foregroundColor(.darkBlue)
+                        }
                     }
                 }
             }

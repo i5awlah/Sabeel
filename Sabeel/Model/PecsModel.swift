@@ -15,8 +15,6 @@ class PecsModel: Identifiable {
     let category: String
     let associatedRecord: CKRecord
     
-    static var recordTypeKey: String { "Pecs" }
-    
     // For easy access to name fields
     static let keys = (
         imageURL: "imageURL",
@@ -32,7 +30,7 @@ class PecsModel: Identifiable {
         self.audioURL = audioURL
         self.name = name
         self.category = category
-        self.associatedRecord = CKRecord(recordType: PecsModel.recordTypeKey)
+        self.associatedRecord = CKRecord(recordType: "CustomPecs")
     }
     
     init?(record: CKRecord) {
@@ -51,10 +49,6 @@ class PecsModel: Identifiable {
         self.audioURL = audioAsset?.fileURL
     }
     
-}
-
-extension PecsModel {
-    
     func toDictonary() -> [String: Any] {
         
         var dictonary : [String: Any] = [
@@ -71,33 +65,5 @@ extension PecsModel {
         }
         
         return dictonary
-    }
-}
-
-class CustomPecsModel: PecsModel {
-    var childParentRef: CKRecord.Reference?
-    
-    static var recordType: String { "CustomPecs" }
-    
-    // For easy access to name fields
-    static let childParentRef = (
-        "childParentRef"
-    )
-    
-    
-    override init(imageURL: URL?, audioURL: URL?, name: String, category: String) {
-        super.init(imageURL: imageURL, audioURL: audioURL, name: name, category: category)
-    }
-    
-    override init?(record: CKRecord) {
-        self.childParentRef = record.value(forKey: ChildParentModel.keys.childRef) as? CKRecord.Reference
-        super.init(record: record)
-    }
-    
-    func toDictonary(childParentRef: CKRecord.Reference) -> [String: Any] {
-        var dic: [String: Any] = [:]
-        dic = super.toDictonary()
-        dic [CustomPecsModel.childParentRef] = childParentRef
-        return dic
     }
 }
