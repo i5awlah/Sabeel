@@ -10,7 +10,7 @@ import Shimmer
 
 struct PicCell: View {
     @StateObject var Cloud = CloudViewModel()
-    @StateObject var PECS = PECSViewModel()
+   // @StateObject var PECS = PECSViewModel()
     @State var isHidden :Bool = false
     @Binding var isEditing : Bool
     
