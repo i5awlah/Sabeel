@@ -24,7 +24,11 @@ struct SplashScreen: View {
                         OnboardingView()
                     } else {
                         if (cloudViewModel.currentUser != nil) {
-                            PecsView()
+                            if cloudViewModel.isChild {
+                                PecsView()
+                            } else {
+                                TabBar()
+                            }
                         } else {
                             ChooseUserView()
                         }

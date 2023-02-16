@@ -12,7 +12,7 @@ struct PicCell: View {
    
     @State var isHidden :Bool = false
     @Binding var isEditing : Bool
-    let isChild :Bool
+    let isChild :Bool 
     let pecs: PecsModel
     
     var body: some View {
@@ -30,8 +30,9 @@ struct PicCell: View {
                             }label: {
                                 Image(systemName: "x.circle")
                                     .foregroundColor(.red)
-                            }}
-                        else {
+                            }
+                            
+                        } else {
                             Button{
                                 //   PECS.hidePECS()
                                 isHidden.toggle()
