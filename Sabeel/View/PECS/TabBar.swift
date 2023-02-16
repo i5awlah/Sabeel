@@ -10,7 +10,7 @@ import SwiftUI
 struct TabBar: View {
     var body: some View {
         TabView {
-            PecsView().environmentObject(CloudViewModel())
+            PecsView()
                 .tabItem {
                     Label("PECS", systemImage: "person.line.dotted.person")
                 }

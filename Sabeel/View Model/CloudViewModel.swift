@@ -25,7 +25,6 @@ class CloudViewModel: ObservableObject {
     init() {
         self.container = CKContainer.default()
         getiCloudStatus()
-        fetchUser()
     }
     
     func getiCloudStatus() {
@@ -33,6 +32,7 @@ class CloudViewModel: ObservableObject {
             if status == .available {
                 DispatchQueue.main.async {
                     self.iCloudAvailable = true
+                    self.fetchUser()
                 }
             } else {
                 DispatchQueue.main.async {
@@ -42,6 +42,7 @@ class CloudViewModel: ObservableObject {
         }
     }
     
+    // get ID of user
     func fetchiCloudUserRecordId() async -> String {
         return await withCheckedContinuation { continuation in
             container.fetchUserRecordID { recordID, error in
@@ -52,7 +53,9 @@ class CloudViewModel: ObservableObject {
         }
     }
     
+    // add new user to record
     func addUser(user: UserModel) {
+        // get the record type name based on the type of user
         let recordName = user is ChildModel ? ChildModel.recordTypeKey : ParentModel.recordTypeKey
         print("Add new \(recordName)")
         
@@ -63,7 +66,7 @@ class CloudViewModel: ObservableObject {
             if let error {
                 debugPrint("ERROR: Failed to save new \(recordName): \(error.localizedDescription)")
             } else if let record {
-                debugPrint("Successfully to save new \(recordName): \(record.description)")
+                debugPrint("Added \(recordName) successfully: \(record.description)")
                 DispatchQueue.main.async {
                     self.currentUser = user
                     print("currentUser: \(self.currentUser?.id ?? "NA")")
@@ -72,16 +75,17 @@ class CloudViewModel: ObservableObject {
         }
     }
     
+    // fetch current user info
     func fetchUser() {
         Task {
-            await performFetchUserQuery(isChild: true)
+            await getCurrentUser(isChild: true)
         }
         Task {
-            await performFetchUserQuery(isChild: false)
+            await getCurrentUser(isChild: false)
         }
     }
     
-    func performFetchUserQuery(isChild: Bool) async {
+    func getCurrentUser(isChild: Bool) async {
         let currentUserID = await fetchiCloudUserRecordId()
         let predicate = NSPredicate(format: "\(UserModel.idKey) == %@", currentUserID)
         let query = CKQuery(recordType: isChild ? ChildModel.recordTypeKey : ParentModel.recordTypeKey, predicate: predicate)
@@ -110,11 +114,9 @@ class CloudViewModel: ObservableObject {
         }
     }
     
-    func fetchUser(id: String, isChild: Bool, completionHandler: @escaping (UserModel) -> Void) {
-        print("id: \(id)")
-        print("Name: \(isChild ? ChildModel.recordTypeKey : ParentModel.recordTypeKey)")
-        let predicate = NSPredicate(format: "\(UserModel.idKey) == %@", id)
-        let query = CKQuery(recordType: isChild ? ChildModel.recordTypeKey : ParentModel.recordTypeKey, predicate: predicate)
+    func fetchChild(childID: String, completionHandler: @escaping (ChildModel) -> Void) {
+        let predicate = NSPredicate(format: "\(UserModel.idKey) == %@", childID)
+        let query = CKQuery(recordType: ChildModel.recordTypeKey, predicate: predicate)
         container.publicCloudDatabase.fetch(withQuery: query) { result in
             print("result: \(result)")
             switch(result) {
@@ -123,7 +125,7 @@ class CloudViewModel: ObservableObject {
                     .forEach {
                         switch $0 {
                         case .success(let record):
-                            let user = isChild ? ChildModel(record: record) : ParentModel(record: record)
+                            let user = ChildModel(record: record)
                             DispatchQueue.main.async {
                                 if let user {
                                     completionHandler(user)
@@ -166,7 +168,7 @@ class CloudViewModel: ObservableObject {
             }
         }
     }
-    
+
     func fetchChildParent() {
         
         guard let currentUser = currentUser else { return }
@@ -187,7 +189,7 @@ class CloudViewModel: ObservableObject {
                         case .success(let record):
                             let childParentModel = ChildParentModel(record: record)
                             DispatchQueue.main.async {
-                                print("SUCCESS: fetchChildParent")
+                                print("fetchChildParent successfully")
                                 self.childParentModel = childParentModel
                                 self.fetchHomeContent()
                                 if !self.isChild {
@@ -209,11 +211,10 @@ class CloudViewModel: ObservableObject {
         }
     }
     
-    //MARK: 4,5 pecs and custom pecs
+    //MARK: PECS
     
-    // (call juse ONE TIME AT APP)
     func addPecs(pecs: PecsModel) {
-        let record = CKRecord(recordType: PecsModel.recordTypeKey)
+        let record = CKRecord(recordType: "CustomPecs")
         record.setValuesForKeys(pecs.toDictonary())
 
         container.publicCloudDatabase.save(record) { record, error in
@@ -221,18 +222,23 @@ class CloudViewModel: ObservableObject {
                 debugPrint("ERROR: Failed to save PECS: \(error.localizedDescription)")
             } else if let record {
                 debugPrint("PECS has been successfully saveded: \(record.description)")
+                guard let pec = PecsModel(record: record) else { return }
+                self.addHomeContent(pec: pec, isCustom: true) { homeContent in
+                     DispatchQueue.main.async {
+                         self.homeContents.append(homeContent)
+                     }
+                }
             }
         }
     }
     
-    func fetchPecs(completionHandler: @escaping ([PecsModel]) -> Void) {
+    private func fetchSharedPecs(completionHandler: @escaping ([PecsModel]) -> Void) {
         print("fetchPecs")
         
         var allPecs: [PecsModel] = []
-        
         let predicate = NSPredicate(value: true)
         
-        let query = CKQuery(recordType: PecsModel.recordTypeKey, predicate: predicate)
+        let query = CKQuery(recordType: "Pecs", predicate: predicate)
         container.publicCloudDatabase.fetch(withQuery: query) { result in
             
             switch(result) {
@@ -255,73 +261,51 @@ class CloudViewModel: ObservableObject {
         }
     }
     
-    func addCustomPecs(pecs: CustomPecsModel) {
-        guard let childParentModel else { return }
-        let childParentRef = CKRecord.Reference(recordID: childParentModel.associatedRecord.recordID, action: .deleteSelf)
-        
-        let record = CKRecord(recordType: CustomPecsModel.recordType)
-        record.setValuesForKeys(pecs.toDictonary(childParentRef: childParentRef))
-
-        container.publicCloudDatabase.save(record) { record, error in
-            if let error {
-                debugPrint("ERROR: Failed to save PECS: \(error.localizedDescription)")
-            } else if let record {
-                debugPrint("PECS has been successfully saveded: \(record.description)")
+    private func fetchOnePecs(pecsRecordName: String, completionHandler: @escaping (PecsModel) -> Void) {
+        container.publicCloudDatabase.fetch(withRecordID: CKRecord.ID(recordName: pecsRecordName)) { record, error in
+            if let record {
+                guard let pecs = PecsModel(record: record) else { return }
+                print("fetch One Pecs")
+                completionHandler(pecs)
+            } else if let error {
+                print("Error: \(error.localizedDescription)")
             }
         }
     }
     
-    func fetchCustomPecs(completionHandler: @escaping ([CustomPecsModel]) -> Void) {
-        print("fetchCustomPecs")
-        
-        var allPecs: [CustomPecsModel] = []
-        
-        guard let childParentModel else { return }
-        let childParentRef = CKRecord.Reference(recordID: childParentModel.associatedRecord.recordID, action: .deleteSelf)
-        let predicate = NSPredicate(format: "\(HomeContent.keys.childParentRef) == %@", childParentRef)
-        
-        let query = CKQuery(recordType: CustomPecsModel.recordType, predicate: predicate)
-        container.publicCloudDatabase.fetch(withQuery: query) { result in
-            
-            switch(result) {
-            case .success((let result)):
-                result.matchResults.compactMap { $0.1 }
-                    .forEach {
-                        switch $0 {
-                        case .success(let record):
-                            guard let customPecs = CustomPecsModel(record: record) else { return }
-                            allPecs.append(customPecs)
-                        case .failure(let error):
-                            print("Error: \(error.localizedDescription)")
-                        }
-                    }
-                completionHandler(allPecs)
-                
-            case .failure(let error):
-                print("error: \(error.localizedDescription)")
-            }
-        }
-    }
     
-    // All pecs alerady join i want to add its id (call juse ONE TIME for user)
+    //MARK: home content
+    // For example, all pec is in table -> add its id (call juse ONE TIME for user)
     func takePecsAndAppendInHomeContent() {
-        fetchPecs { pecs in
-            
-            guard let childParentModel = self.childParentModel else { return }
-            let childParentRef = CKRecord.Reference(recordID: childParentModel.associatedRecord.recordID, action: .deleteSelf)
-            
+        fetchSharedPecs { pecs in
             pecs.forEach { pec in
-                let pecsRef = CKRecord.Reference(recordID: pec.associatedRecord.recordID, action: .deleteSelf)
-                
-                let homeContent = HomeContent(childParentRef: childParentRef, customPecsRef: nil, pecsRef: pecsRef)
-                self.addHomeContent(homeContent: homeContent, pecsID: pec.id)
+                self.addHomeContent(pec: pec, isCustom: false) { homeContent in
+                    DispatchQueue.main.async {
+                        self.homeContents.append(homeContent)
+                    }
+               }
             }
         }
     }
     
-    //MARK: 6- home content
+    private func addHomeContent(pec: PecsModel, isCustom: Bool, completionHandler: @escaping (HomeContent) -> Void) {
+        guard let childParentModel = self.childParentModel else { return }
+        let childParentRef = CKRecord.Reference(recordID: childParentModel.associatedRecord.recordID, action: .deleteSelf)
+        
+        let pecsRef = CKRecord.Reference(recordID: pec.associatedRecord.recordID, action: .none)
+        let customPecsRef = CKRecord.Reference(recordID: pec.associatedRecord.recordID, action: .deleteSelf)
+        
+        let homeContent = HomeContent(childParentRef: childParentRef, customPecsRef: nil, pecsRef: pecsRef, pecs: pec)
+        let homeContentWithCustom = HomeContent(childParentRef: childParentRef, customPecsRef: customPecsRef, pecsRef: nil, pecs: pec)
+        
+        if isCustom {
+            self.saveHomeContent(homeContent: homeContentWithCustom, completionHandler: completionHandler)
+        } else {
+            self.saveHomeContent(homeContent: homeContent, completionHandler: completionHandler)
+        }
+    }
     
-    func addHomeContent(homeContent: HomeContent, pecsID: String) {
+    func saveHomeContent(homeContent: HomeContent, completionHandler: @escaping (HomeContent) -> Void) {
         
         let record = CKRecord(recordType: HomeContent.recordTypeKey)
         record.setValuesForKeys(homeContent.toDictonary())
@@ -329,14 +313,17 @@ class CloudViewModel: ObservableObject {
         container.publicCloudDatabase.save(record) { record, error in
             if let error {
                 debugPrint("ERROR: Failed to save Home Content: \(error.localizedDescription)")
-            } else if let record {
-                debugPrint("Home Content has been successfully saveded: \(record.description)")
+            } else if record != nil {
+                debugPrint("Home Content has been successfully saveded.")
+                completionHandler(homeContent)
             }
         }
     }
     
+    // fetch all home content with pecs
     func fetchHomeContent() {
-        print("fetchHomeContent")
+        
+        self.homeContents = []
         
         guard let childParentModel else { return }
         let childParentRef = CKRecord.Reference(recordID: childParentModel.associatedRecord.recordID, action: .deleteSelf)
@@ -348,6 +335,10 @@ class CloudViewModel: ObservableObject {
             switch(result) {
             case .success((let result)):
                 
+                if result.matchResults.count == 0 {
+                    self.takePecsAndAppendInHomeContent()
+                }
+                
                 result.matchResults.compactMap { $0.1 }
                     .forEach {
                         switch $0 {
@@ -355,22 +346,23 @@ class CloudViewModel: ObservableObject {
                             let customPecsRef = record.value(forKey: HomeContent.keys.customPecsRef) as? CKRecord.Reference
                             let pecsRef = record.value(forKey: HomeContent.keys.pecsRef) as? CKRecord.Reference
                             
-                            if let customPecsRef {
-                                self.fetchOnePecs(customPecsRef: customPecsRef, pecsRef: nil) { pec in
-                                    guard let homeContent = HomeContent(record: record, pecs: pec) else { return }
-                                    DispatchQueue.main.async {
-                                        self.homeContents.append(homeContent)
-                                        self.fetchChildRequests(homeContent: homeContent)
-                                    }
+                            
+                             var pecsRecordName = ""
+                             
+                             if let customPecsRef {
+                                 pecsRecordName = customPecsRef.recordID.recordName
+                             } else if let pecsRef {
+                                 pecsRecordName = pecsRef.recordID.recordName
+                             }
+                             
+                            self.fetchOnePecs(pecsRecordName: pecsRecordName) { pec in
+                                guard let homeContent = HomeContent(record: record, pecs: pec) else { return }
+                                DispatchQueue.main.async {
+                                    print("fetchHomeContent")
+                                    self.homeContents.append(homeContent)
+                                    self.fetchChildRequests(homeContent: homeContent)
                                 }
-                            } else if let pecsRef {
-                                self.fetchOnePecs(customPecsRef: nil, pecsRef: pecsRef) { pec in
-                                    guard let homeContent = HomeContent(record: record, pecs: pec) else { return }
-                                    DispatchQueue.main.async {
-                                        self.homeContents.append(homeContent)
-                                        self.fetchChildRequests(homeContent: homeContent)
-                                    }
-                                }
+
                             }
                             
                         case .failure(let error):
@@ -385,29 +377,20 @@ class CloudViewModel: ObservableObject {
         }
     }
     
-    func fetchOnePecs(customPecsRef: CKRecord.Reference?, pecsRef: CKRecord.Reference?, completionHandler: @escaping (PecsModel) -> Void) {
-        print("fetchPecs")
-        
-        var id = ""
-        
-        if let customPecsRef {
-            id = customPecsRef.recordID.recordName
-        } else if let pecsRef {
-            id = pecsRef.recordID.recordName
-        }
-        
-        container.publicCloudDatabase.fetch(withRecordID: CKRecord.ID(recordName: id)) { record, error in
-            if let record {
-                guard let pecs = PecsModel(record: record) else { return }
-                completionHandler(pecs)
-            } else if let error {
-                print("Error: \(error.localizedDescription)")
+    func deleteHomeContent(homeContent: HomeContent) {
+        container.publicCloudDatabase.delete(withRecordID: homeContent.associatedRecord.recordID) { recordID, error in
+            if let error {
+                debugPrint("ERROR: Failed to delete home content: \(error.localizedDescription)")
+            } else if recordID != nil {
+                debugPrint("\(homeContent.pecs.name) has been successfully deleted.")
+                DispatchQueue.main.async {
+                    self.homeContents = self.homeContents.filter { $0.id != homeContent.id }
+                }
             }
         }
     }
     
-    //MARK: 7- Child Request
-    
+    //MARK: Child Request
     func addChildRequest(homeContent: HomeContent) {
         
         let homeContentRef = CKRecord.Reference(recordID: homeContent.associatedRecord.recordID, action: .deleteSelf)
@@ -419,8 +402,8 @@ class CloudViewModel: ObservableObject {
         
         guard let childParentModel else { return }
         var dic = childRequest.toDictonary(childParentID: childParentModel.id)
-        dic["title"] = homeContent.pecs.name
-        dic["content"] = homeContent.pecs.name
+        dic["title"] = homeContent.pecs.category
+        dic["content"] = "Your child wants \(homeContent.pecs.name)"
         record.setValuesForKeys(dic)
 
         container.publicCloudDatabase.save(record) { record, error in
@@ -428,14 +411,14 @@ class CloudViewModel: ObservableObject {
                 debugPrint("ERROR: Failed to save child request: \(error.localizedDescription)")
             } else if let record {
                 debugPrint("Child request has been successfully saveded: \(record.description)")
+                guard let childRequest = ChildRequestModel(record: record, pec: homeContent.pecs) else { return }
+                self.childRequests.append(childRequest)
             }
         }
     }
     
     func fetchChildRequests(homeContent: HomeContent) {
 
-        print("fetchChildRequests")
-        
         let reference = CKRecord.Reference(recordID: homeContent.associatedRecord.recordID, action: .deleteSelf)
         let predicate = NSPredicate(format: "\(ChildRequestModel.keys.homeContentRef) == %@", reference)
         
@@ -451,6 +434,7 @@ class CloudViewModel: ObservableObject {
                             guard let childRequest = ChildRequestModel(record: record, pec: homeContent.pecs) else { return }
                             
                             DispatchQueue.main.async {
+                                print("fetchChildRequests")
                                 self.childRequests.append(childRequest)
                             }
                         case .failure(let error):
@@ -463,7 +447,5 @@ class CloudViewModel: ObservableObject {
             }
         }
     }
-    
-    
     
 }

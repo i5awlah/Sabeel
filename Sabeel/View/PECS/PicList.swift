@@ -32,7 +32,7 @@ struct PicList: View {
                             cloudViewModel.addChildRequest(homeContent: item)
                         }
                     } label: {
-                        PicCell(isEditing: $isEditing,isChild: cloudViewModel.isChild ,pecs: item.pecs)
+                        PicCell(isEditing: $isEditing, homeContent: item)
 //                            .shimmering(
 //                                active: parent
 //                            )

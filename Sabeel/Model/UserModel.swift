@@ -165,7 +165,7 @@ struct HomeContent {
         endTime: "endTime"
     )
     
-    init(childParentRef: CKRecord.Reference, customPecsRef: CKRecord.Reference? = nil, pecsRef: CKRecord.Reference? = nil, isShown: Bool = true, startTime: Date = .now, endTime: Date = .now) {
+    init(childParentRef: CKRecord.Reference, customPecsRef: CKRecord.Reference? = nil, pecsRef: CKRecord.Reference? = nil, isShown: Bool = true, startTime: Date = .now, endTime: Date = .now, pecs: PecsModel) {
         self.id = UUID().uuidString
         self.childParentRef = childParentRef
         self.customPecsRef = customPecsRef
@@ -174,8 +174,7 @@ struct HomeContent {
         self.startTime = startTime
         self.endTime = endTime
         self.associatedRecord = CKRecord(recordType: HomeContent.recordTypeKey)
-        // should be add pec to argument
-        self.pecs = PecsModel(imageURL: nil, audioURL: nil, name: "", category: "")
+        self.pecs = pecs
     }
 
     init?(record: CKRecord, pecs: PecsModel) {

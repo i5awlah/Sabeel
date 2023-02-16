@@ -60,7 +60,7 @@ extension AddChildView {
         let childID = vm.qr
         vm.qr = ""
         // get child record
-        cloudViewModel.fetchUser(id: childID, isChild: true) { child in
+        cloudViewModel.fetchChild(childID: childID) { child in
             cloudViewModel.addChildToParent(child: child, parent: currentUser)
         }
     }
