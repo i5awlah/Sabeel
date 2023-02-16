@@ -292,7 +292,7 @@ class CloudViewModel: ObservableObject {
         guard let childParentModel = self.childParentModel else { return }
         let childParentRef = CKRecord.Reference(recordID: childParentModel.associatedRecord.recordID, action: .deleteSelf)
         
-        let pecsRef = CKRecord.Reference(recordID: pec.associatedRecord.recordID, action: .none)
+        let pecsRef = CKRecord.Reference(recordID: pec.associatedRecord.recordID, action: .deleteSelf)
         let customPecsRef = CKRecord.Reference(recordID: pec.associatedRecord.recordID, action: .deleteSelf)
         
         let homeContent = HomeContent(childParentRef: childParentRef, customPecsRef: nil, pecsRef: pecsRef, pecs: pec)
@@ -378,7 +378,8 @@ class CloudViewModel: ObservableObject {
     }
     
     func deleteHomeContent(homeContent: HomeContent) {
-        container.publicCloudDatabase.delete(withRecordID: homeContent.associatedRecord.recordID) { recordID, error in
+        let recordID = (homeContent.customPecsRef != nil) ? homeContent.pecs.associatedRecord.recordID : homeContent.associatedRecord.recordID
+        container.publicCloudDatabase.delete(withRecordID: recordID) { recordID, error in
             if let error {
                 debugPrint("ERROR: Failed to delete home content: \(error.localizedDescription)")
             } else if recordID != nil {
