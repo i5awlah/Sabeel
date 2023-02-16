@@ -9,6 +9,9 @@ import SwiftUI
 
 struct CloudNotAvailableView: View {
     
+    @Environment(\.scenePhase) private var scenePhase
+    @EnvironmentObject var cloudViewModel : CloudViewModel
+    
     let image = "connectiCloud"
     let title = "Can’t connect to iCloud!"
     let description = "Please make sure that your apple ID is existing in your device settings."
@@ -19,11 +22,17 @@ struct CloudNotAvailableView: View {
             title: title,
             description: description
         )
+        .onChange(of: scenePhase) { phase in
+            if phase == .active {
+                cloudViewModel.getiCloudStatus()
+            }
+        }
     }
 }
 
 struct CloudNotAvailableView_Previews: PreviewProvider {
     static var previews: some View {
         CloudNotAvailableView()
+            .environmentObject(CloudViewModel())
     }
 }
