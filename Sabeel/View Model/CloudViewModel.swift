@@ -438,7 +438,7 @@ class CloudViewModel: ObservableObject {
         }
     }
     //MArk: Update schedule
-    func updateSchedulePECS(homeContent: HomeContent, Category: String, startTime: Date, endTime: date ){
+    func updateSchedulePECS(homeContent: HomeContent, Category: String, startTime: Date, endTime: Date ){
         let record = homeContent.associatedRecord
         
         //fetch all the records in the category to change it to the new time
