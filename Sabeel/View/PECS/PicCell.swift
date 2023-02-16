@@ -7,14 +7,28 @@
 
 import SwiftUI
 import Shimmer
+import CloudKit
 
 struct PicCell: View {
    
     @State var isHidden :Bool = false
     @Binding var isEditing : Bool
-    let homeContent: HomeContent
+    let homeContent: HomeContent?
+    let pecs: PecsModel
     
     @EnvironmentObject var cloudViewModel : CloudViewModel
+    
+    init(isEditing: Binding<Bool>, homeContent: HomeContent) {
+        _isEditing = isEditing
+        self.homeContent = homeContent
+        self.pecs = homeContent.pecs
+    }
+    
+    init(pecs: PecsModel) {
+        self.pecs = pecs
+        self.homeContent = nil
+        _isEditing = .constant(false)
+    }
     
     var body: some View {
         GeometryReader { geo in
@@ -23,10 +37,11 @@ struct PicCell: View {
             VStack(spacing: 5){
                 HStack{
                     Spacer()
-                    if cloudViewModel.isChild == false {
+                    if cloudViewModel.isChild == false, (cloudViewModel.childParentModel != nil) {
                         if isEditing
                         {
                             Button{
+                                guard let homeContent else { return }
                                 cloudViewModel.deleteHomeContent(homeContent: homeContent)
                             }label: {
                                 Image(systemName: "x.circle")
@@ -48,7 +63,7 @@ struct PicCell: View {
                     }
                 }
                 Spacer()
-                AsyncImage(url: homeContent.pecs.imageURL) { image in
+                AsyncImage(url: pecs.imageURL) { image in
                     image.resizable()
                     image.scaledToFit()
                     image.frame(width: imageWidth, height: 50)
@@ -60,7 +75,7 @@ struct PicCell: View {
                         .frame(width: imageWidth, height: 50)
                 }
                 Spacer()
-                Text(homeContent.pecs.name)
+                Text(pecs.name)
                     .foregroundColor(cloudViewModel.isChild ?  .darkGreen : .darkBlue)
                     .font(.system(size: TextSize))
             } .padding(15)

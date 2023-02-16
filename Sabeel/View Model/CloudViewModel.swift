@@ -232,7 +232,7 @@ class CloudViewModel: ObservableObject {
         }
     }
     
-    private func fetchSharedPecs(completionHandler: @escaping ([PecsModel]) -> Void) {
+    func fetchSharedPecs(completionHandler: @escaping ([PecsModel]) -> Void) {
         print("fetchPecs")
         
         var allPecs: [PecsModel] = []
