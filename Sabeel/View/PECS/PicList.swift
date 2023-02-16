@@ -12,6 +12,8 @@ struct PicList: View {
     @AppStorage("number0fColumns") var number0fColumns = 2
     @Binding var isEditing : Bool
     
+    @EnvironmentObject var cloudViewModel : CloudViewModel
+    
     var coulmns: [GridItem] {
         Array(repeating: GridItem(.flexible(),spacing: spacing), count: number0fColumns)
         
@@ -20,9 +22,17 @@ struct PicList: View {
         var body: some View {
         ScrollView {
             LazyVGrid(columns: coulmns, spacing: spacing) {
-                ForEach(0..<10) { item in
-                    Button{} label: {
-                        PicCell(isEditing: $isEditing)
+                if cloudViewModel.isChild == false {
+                    AddCell()
+                }
+                ForEach(cloudViewModel.homeContents, id: \.id) { item in
+                    Button{
+                        if cloudViewModel.isChild {
+                            // sound
+                            cloudViewModel.addChildRequest(homeContent: item)
+                        }
+                    } label: {
+                        PicCell(isEditing: $isEditing,isChild: cloudViewModel.isChild ,pecs: item.pecs)
 //                            .shimmering(
 //                                active: parent
 //                            )
@@ -43,5 +53,6 @@ struct PicList: View {
 struct PicList_Previews: PreviewProvider {
     static var previews: some View {
         PicList(isEditing: Binding<Bool>.constant(false))
+            .environmentObject(CloudViewModel())
     }
 }

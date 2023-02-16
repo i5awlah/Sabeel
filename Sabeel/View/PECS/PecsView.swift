@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PecsView: View {
-    @EnvironmentObject var Cloud : CloudViewModel
+    @EnvironmentObject var cloudViewModel : CloudViewModel
     @State var isEditing = false
     
     var body: some View {
@@ -17,10 +17,10 @@ struct PecsView: View {
                 PicList(isEditing: $isEditing)
             }
             .navigationTitle("PECS")
-            .foregroundColor(Cloud.isChild ? .darkGreen : .darkBlue )
+            .foregroundColor(cloudViewModel.isChild ? .darkGreen : .darkBlue )
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    if Cloud.isChild{
+                    if cloudViewModel.isChild{
                         NavigationLink {
                             SettingsView()
                         } label: {
