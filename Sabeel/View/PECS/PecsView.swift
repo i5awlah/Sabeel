@@ -8,28 +8,30 @@
 import SwiftUI
 
 struct PecsView: View {
-    @State var parent : Bool = true
+    @StateObject var Cloud = CloudViewModel()
     @State var isEditing = false
     
     var body: some View {
-        NavigationView {
+        NavigationStack{
             VStack{
-                Text("Hello")
+               PicList(isEditing: $isEditing)
             }
                 .navigationTitle("PECS")
-                .foregroundColor(parent ? .darkBlue : .darkGreen)
+                .foregroundColor(Cloud.isChild ? .darkGreen : .darkBlue )
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
-                        if parent{
-                        Button{ isEditing.toggle() }label: {
-                                Text( isEditing ? "Close" : "Edit")}
-                            .foregroundColor(.darkBlue)
-                        }
-                        else{
-                            Button{}label: {
+                        if Cloud.isChild{
+                            NavigationLink {
+                                SettingsView()
+                            } label: {
                                 Image(systemName: "gear")
                                     .foregroundColor(.darkGreen)
                             }
+                        }
+                        else{
+                            Button{ isEditing.toggle() }label: {
+                                    Text( isEditing ? "Close" : "Edit")}
+                                .foregroundColor(.darkBlue)
                         }
                     }
                 }

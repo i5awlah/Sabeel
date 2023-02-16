@@ -8,16 +8,40 @@
 import SwiftUI
 
 struct PicList: View {
-    var items: [GridItem] {
-        Array(repeating: .init(.adaptive(minimum: 120)), count: 2)
+    let spacing: CGFloat = 20
+    @AppStorage("number0fColumns") var number0fColumns = 2
+    @Binding var isEditing : Bool
+    
+    var coulmns: [GridItem] {
+        Array(repeating: GridItem(.flexible(),spacing: spacing), count: number0fColumns)
+        
     }
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+
+        var body: some View {
+        ScrollView {
+            LazyVGrid(columns: coulmns, spacing: spacing) {
+                ForEach(0..<10) { item in
+                    Button{} label: {
+                        PicCell(isEditing: $isEditing)
+//                            .shimmering(
+//                                active: parent
+//                            )
+                    }
+                 
+                }
+            }.padding (.horizontal)
+        }
+       
+        }
+
+  
+
+
     }
-}
+
 
 struct PicList_Previews: PreviewProvider {
     static var previews: some View {
-        PicList()
+        PicList(isEditing: Binding<Bool>.constant(false))
     }
 }
