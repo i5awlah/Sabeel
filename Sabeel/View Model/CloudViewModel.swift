@@ -15,6 +15,9 @@ class CloudViewModel: ObservableObject {
     @Published var currentUser: UserModel?
     @Published var childParentModel: ChildParentModel?
     
+    @Published var homeContents: [HomeContent] = []
+    @Published var childRequests: [ChildRequestModel] = []
+    
     var isChild: Bool {
         return currentUser is ChildModel
     }
@@ -155,13 +158,16 @@ class CloudViewModel: ObservableObject {
                 debugPrint("Child has been successfully saved to Parent: \(record.description)")
                 DispatchQueue.main.async {
                     self.childParentModel = ChildParentModel(record: record)
+                    NotificationManager.shared.requestPermission()
+                    
+                    let predicate = NSPredicate(format: "childParentID == %@", childParentModel.id)
+                    NotificationManager.shared.subscribeToNotifications(predicate: predicate)
                 }
             }
         }
     }
     
     func fetchChildParent() {
-        print("fetchChildParent")
         
         guard let currentUser = currentUser else { return }
         
@@ -181,9 +187,16 @@ class CloudViewModel: ObservableObject {
                         case .success(let record):
                             let childParentModel = ChildParentModel(record: record)
                             DispatchQueue.main.async {
+                                print("SUCCESS: fetchChildParent")
                                 self.childParentModel = childParentModel
-                                //print("childRef: \(self.childParentModel?.childRef)")
-                                //print("parentRef: \(self.childParentModel?.parentRef)")
+                                self.fetchHomeContent()
+                                if !self.isChild {
+                                    NotificationManager.shared.requestPermission()
+                                    
+                                    guard let childParentModel = childParentModel else { return }
+                                    let predicate = NSPredicate(format: "childParentID == %@", childParentModel.id)
+                                    NotificationManager.shared.subscribeToNotifications(predicate: predicate)
+                                }
                             }
                         case .failure(let error):
                             print("Error: \(error.localizedDescription)")
@@ -195,5 +208,262 @@ class CloudViewModel: ObservableObject {
             }
         }
     }
+    
+    //MARK: 4,5 pecs and custom pecs
+    
+    // (call juse ONE TIME AT APP)
+    func addPecs(pecs: PecsModel) {
+        let record = CKRecord(recordType: PecsModel.recordTypeKey)
+        record.setValuesForKeys(pecs.toDictonary())
+
+        container.publicCloudDatabase.save(record) { record, error in
+            if let error {
+                debugPrint("ERROR: Failed to save PECS: \(error.localizedDescription)")
+            } else if let record {
+                debugPrint("PECS has been successfully saveded: \(record.description)")
+            }
+        }
+    }
+    
+    func fetchPecs(completionHandler: @escaping ([PecsModel]) -> Void) {
+        print("fetchPecs")
+        
+        var allPecs: [PecsModel] = []
+        
+        let predicate = NSPredicate(value: true)
+        
+        let query = CKQuery(recordType: PecsModel.recordTypeKey, predicate: predicate)
+        container.publicCloudDatabase.fetch(withQuery: query) { result in
+            
+            switch(result) {
+            case .success((let result)):
+                result.matchResults.compactMap { $0.1 }
+                    .forEach {
+                        switch $0 {
+                        case .success(let record):
+                            guard let pecs = PecsModel(record: record) else { return }
+                            allPecs.append(pecs)
+                        case .failure(let error):
+                            print("Error: \(error.localizedDescription)")
+                        }
+                    }
+                completionHandler(allPecs)
+                
+            case .failure(let error):
+                print("error: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    func addCustomPecs(pecs: CustomPecsModel) {
+        guard let childParentModel else { return }
+        let childParentRef = CKRecord.Reference(recordID: childParentModel.associatedRecord.recordID, action: .deleteSelf)
+        
+        let record = CKRecord(recordType: CustomPecsModel.recordType)
+        record.setValuesForKeys(pecs.toDictonary(childParentRef: childParentRef))
+
+        container.publicCloudDatabase.save(record) { record, error in
+            if let error {
+                debugPrint("ERROR: Failed to save PECS: \(error.localizedDescription)")
+            } else if let record {
+                debugPrint("PECS has been successfully saveded: \(record.description)")
+            }
+        }
+    }
+    
+    func fetchCustomPecs(completionHandler: @escaping ([CustomPecsModel]) -> Void) {
+        print("fetchCustomPecs")
+        
+        var allPecs: [CustomPecsModel] = []
+        
+        guard let childParentModel else { return }
+        let childParentRef = CKRecord.Reference(recordID: childParentModel.associatedRecord.recordID, action: .deleteSelf)
+        let predicate = NSPredicate(format: "\(HomeContent.keys.childParentRef) == %@", childParentRef)
+        
+        let query = CKQuery(recordType: CustomPecsModel.recordType, predicate: predicate)
+        container.publicCloudDatabase.fetch(withQuery: query) { result in
+            
+            switch(result) {
+            case .success((let result)):
+                result.matchResults.compactMap { $0.1 }
+                    .forEach {
+                        switch $0 {
+                        case .success(let record):
+                            guard let customPecs = CustomPecsModel(record: record) else { return }
+                            allPecs.append(customPecs)
+                        case .failure(let error):
+                            print("Error: \(error.localizedDescription)")
+                        }
+                    }
+                completionHandler(allPecs)
+                
+            case .failure(let error):
+                print("error: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    // All pecs alerady join i want to add its id (call juse ONE TIME for user)
+    func takePecsAndAppendInHomeContent() {
+        fetchPecs { pecs in
+            
+            guard let childParentModel = self.childParentModel else { return }
+            let childParentRef = CKRecord.Reference(recordID: childParentModel.associatedRecord.recordID, action: .deleteSelf)
+            
+            pecs.forEach { pec in
+                let pecsRef = CKRecord.Reference(recordID: pec.associatedRecord.recordID, action: .deleteSelf)
+                
+                let homeContent = HomeContent(childParentRef: childParentRef, customPecsRef: nil, pecsRef: pecsRef)
+                self.addHomeContent(homeContent: homeContent, pecsID: pec.id)
+            }
+        }
+    }
+    
+    //MARK: 6- home content
+    
+    func addHomeContent(homeContent: HomeContent, pecsID: String) {
+        
+        let record = CKRecord(recordType: HomeContent.recordTypeKey)
+        record.setValuesForKeys(homeContent.toDictonary())
+
+        container.publicCloudDatabase.save(record) { record, error in
+            if let error {
+                debugPrint("ERROR: Failed to save Home Content: \(error.localizedDescription)")
+            } else if let record {
+                debugPrint("Home Content has been successfully saveded: \(record.description)")
+            }
+        }
+    }
+    
+    func fetchHomeContent() {
+        print("fetchHomeContent")
+        
+        guard let childParentModel else { return }
+        let childParentRef = CKRecord.Reference(recordID: childParentModel.associatedRecord.recordID, action: .deleteSelf)
+        let predicate = NSPredicate(format: "\(HomeContent.keys.childParentRef) == %@", childParentRef)
+        
+        let query = CKQuery(recordType: HomeContent.recordTypeKey, predicate: predicate)
+        container.publicCloudDatabase.fetch(withQuery: query) { result in
+            
+            switch(result) {
+            case .success((let result)):
+                
+                result.matchResults.compactMap { $0.1 }
+                    .forEach {
+                        switch $0 {
+                        case .success(let record):
+                            let customPecsRef = record.value(forKey: HomeContent.keys.customPecsRef) as? CKRecord.Reference
+                            let pecsRef = record.value(forKey: HomeContent.keys.pecsRef) as? CKRecord.Reference
+                            
+                            if let customPecsRef {
+                                self.fetchOnePecs(customPecsRef: customPecsRef, pecsRef: nil) { pec in
+                                    guard let homeContent = HomeContent(record: record, pecs: pec) else { return }
+                                    DispatchQueue.main.async {
+                                        self.homeContents.append(homeContent)
+                                        self.fetchChildRequests(homeContent: homeContent)
+                                    }
+                                }
+                            } else if let pecsRef {
+                                self.fetchOnePecs(customPecsRef: nil, pecsRef: pecsRef) { pec in
+                                    guard let homeContent = HomeContent(record: record, pecs: pec) else { return }
+                                    DispatchQueue.main.async {
+                                        self.homeContents.append(homeContent)
+                                        self.fetchChildRequests(homeContent: homeContent)
+                                    }
+                                }
+                            }
+                            
+                        case .failure(let error):
+                            print("Error: \(error.localizedDescription)")
+                        }
+                    }
+                
+                
+            case .failure(let error):
+                print("error: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    func fetchOnePecs(customPecsRef: CKRecord.Reference?, pecsRef: CKRecord.Reference?, completionHandler: @escaping (PecsModel) -> Void) {
+        print("fetchPecs")
+        
+        var id = ""
+        
+        if let customPecsRef {
+            id = customPecsRef.recordID.recordName
+        } else if let pecsRef {
+            id = pecsRef.recordID.recordName
+        }
+        
+        container.publicCloudDatabase.fetch(withRecordID: CKRecord.ID(recordName: id)) { record, error in
+            if let record {
+                guard let pecs = PecsModel(record: record) else { return }
+                completionHandler(pecs)
+            } else if let error {
+                print("Error: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    //MARK: 7- Child Request
+    
+    func addChildRequest(homeContent: HomeContent) {
+        
+        let homeContentRef = CKRecord.Reference(recordID: homeContent.associatedRecord.recordID, action: .deleteSelf)
+    
+        let childRequest = ChildRequestModel(homeContentRef: homeContentRef, pec: homeContent.pecs)
+
+        let record = CKRecord(recordType: ChildRequestModel.recordTypeKey)
+//        record.setValuesForKeys(childRequest.toDictonary())
+        
+        guard let childParentModel else { return }
+        var dic = childRequest.toDictonary(childParentID: childParentModel.id)
+        dic["title"] = homeContent.pecs.name
+        dic["content"] = homeContent.pecs.name
+        record.setValuesForKeys(dic)
+
+        container.publicCloudDatabase.save(record) { record, error in
+            if let error {
+                debugPrint("ERROR: Failed to save child request: \(error.localizedDescription)")
+            } else if let record {
+                debugPrint("Child request has been successfully saveded: \(record.description)")
+            }
+        }
+    }
+    
+    func fetchChildRequests(homeContent: HomeContent) {
+
+        print("fetchChildRequests")
+        
+        let reference = CKRecord.Reference(recordID: homeContent.associatedRecord.recordID, action: .deleteSelf)
+        let predicate = NSPredicate(format: "\(ChildRequestModel.keys.homeContentRef) == %@", reference)
+        
+        let query = CKQuery(recordType: ChildRequestModel.recordTypeKey, predicate: predicate)
+        container.publicCloudDatabase.fetch(withQuery: query) { result in
+            
+            switch(result) {
+            case .success((let result)):
+                result.matchResults.compactMap { $0.1 }
+                    .forEach {
+                        switch $0 {
+                        case .success(let record):
+                            guard let childRequest = ChildRequestModel(record: record, pec: homeContent.pecs) else { return }
+                            
+                            DispatchQueue.main.async {
+                                self.childRequests.append(childRequest)
+                            }
+                        case .failure(let error):
+                            print("Error: \(error.localizedDescription)")
+                        }
+                    }
+                
+            case .failure(let error):
+                print("error: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    
     
 }
