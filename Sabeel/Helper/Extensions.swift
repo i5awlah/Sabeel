@@ -16,3 +16,22 @@ extension Color {
     static let buttonBlue = Color("buttonBlue")
 }
 
+extension Date {
+    var polite: String {
+        if Calendar.current.isDateInToday(self) {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "h:mm a"
+            return formatter.string(from: self)
+        }
+        
+        if Calendar.current.isDateInYesterday(self) {
+            return "Yesterday"
+        }
+        
+        let formatter = RelativeDateTimeFormatter()
+        formatter.unitsStyle = .full
+        
+        return formatter.localizedString(for: self, relativeTo: Date())
+    }
+}
+
