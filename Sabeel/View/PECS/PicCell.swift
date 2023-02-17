@@ -75,7 +75,7 @@ struct PicCell: View {
                         .frame(width: imageWidth)
                 }
      
-                Text(pecs.name)
+                Text(getPicName())
                     .foregroundColor(cloudViewModel.isChild ?  .darkGreen : .darkBlue)
                     .font(.system(size: TextSize))
             } .padding(15)
@@ -93,6 +93,16 @@ struct PicCell: View {
             )
             
         
+    }
+}
+
+extension PicCell {
+    func getPicName() -> String {
+        if let pecs: MainPecs = pecs as? MainPecs {
+            return Helper.shared.isEnglishLanguage() ? pecs.name : pecs.arabicName
+        } else {
+            return pecs.name
+        }
     }
 }
 

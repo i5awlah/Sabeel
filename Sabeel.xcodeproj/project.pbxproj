@@ -39,6 +39,8 @@
 		901182A529915E9D0024ABC1 /* PecsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901182A429915E9D0024ABC1 /* PecsModel.swift */; };
 		901182A729915EC50024ABC1 /* PecsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901182A629915EC50024ABC1 /* PecsViewModel.swift */; };
 		901182AC29916C3C0024ABC1 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901182AB29916C3C0024ABC1 /* Extensions.swift */; };
+		906035C229A026CE002D4192 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906035C129A026CE002D4192 /* Helper.swift */; };
+		906035C529A02A68002D4192 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 906035C729A02A68002D4192 /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,6 +78,8 @@
 		901182A429915E9D0024ABC1 /* PecsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PecsModel.swift; sourceTree = "<group>"; };
 		901182A629915EC50024ABC1 /* PecsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PecsViewModel.swift; sourceTree = "<group>"; };
 		901182AB29916C3C0024ABC1 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		906035C129A026CE002D4192 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		906035C629A02A68002D4192 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,6 +161,7 @@
 				901182AD29923C520024ABC1 /* Helper */,
 				5D26FC01299AB15F005C5FE2 /* Assets */,
 				90118275298D0EAC0024ABC1 /* Preview Content */,
+				906035C729A02A68002D4192 /* Localizable.strings */,
 			);
 			path = Sabeel;
 			sourceTree = "<group>";
@@ -228,6 +233,7 @@
 		901182AD29923C520024ABC1 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				906035C129A026CE002D4192 /* Helper.swift */,
 				901182AB29916C3C0024ABC1 /* Extensions.swift */,
 				900DDC35299D0765005A471F /* NotificationManager.swift */,
 			);
@@ -279,6 +285,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ar,
 			);
 			mainGroup = 90118263298D0EAA0024ABC1;
 			packageReferences = (
@@ -299,6 +306,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5DB4383D299AA712004F2A53 /* SplashScreenLight.mp4 in Resources */,
+				906035C529A02A68002D4192 /* Localizable.strings in Resources */,
 				90118277298D0EAC0024ABC1 /* Preview Assets.xcassets in Resources */,
 				90118274298D0EAC0024ABC1 /* Assets.xcassets in Resources */,
 			);
@@ -338,11 +346,23 @@
 				900DDC162994E782005A471F /* SingleOnboardingView.swift in Sources */,
 				9011828429915C910024ABC1 /* OnboardingView.swift in Sources */,
 				900DDC0F29939AF2005A471F /* NotificationCell.swift in Sources */,
+				906035C229A026CE002D4192 /* Helper.swift in Sources */,
 				5D4B3575299E2E830089A3F9 /* TabBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		906035C729A02A68002D4192 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				906035C629A02A68002D4192 /* ar */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		90118278298D0EAC0024ABC1 /* Debug */ = {
@@ -469,7 +489,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Sabeel/Preview Content\"";
-				DEVELOPMENT_TEAM = UQ5HPP32DR;
+				DEVELOPMENT_TEAM = DMXBNDQ3Y6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Sabeel/Info.plist;
@@ -503,7 +523,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Sabeel/Preview Content\"";
-				DEVELOPMENT_TEAM = UQ5HPP32DR;
+				DEVELOPMENT_TEAM = DMXBNDQ3Y6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Sabeel/Info.plist;

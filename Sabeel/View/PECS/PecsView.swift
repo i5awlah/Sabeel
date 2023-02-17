@@ -11,7 +11,7 @@ struct PecsView: View {
     @EnvironmentObject var cloudViewModel : CloudViewModel
     @State var isEditing = false
     
-    @State private var pecs: [PecsModel] = []
+    @State private var pecs: [MainPecs] = []
     
     var body: some View {
         NavigationStack{
