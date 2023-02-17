@@ -10,9 +10,7 @@ import SwiftUI
 struct PicList: View {
     let spacing: CGFloat = 20
     @AppStorage("number0fColumns") var number0fColumns = 2
-    @ObservedObject var audioPlayer = AudioPlayer()
     @Binding var isEditing : Bool
-    @State var isLoading : Bool = false
     let pecs: [PecsModel]
     
     @EnvironmentObject var cloudViewModel : CloudViewModel
@@ -42,23 +40,20 @@ struct PicList: View {
                     ForEach(cloudViewModel.homeContents, id: \.id) { item in
                         if cloudViewModel.isChild {
                             Button{
-                                if audioPlayer.isPlaying == false {
-                                    self.audioPlayer.startPlayback(audio: item.pecs.audioURL!)
-                                }
                                 cloudViewModel.addChildRequest(homeContent: item)
                                 
                             } label: {
                                 PicCell(isEditing: $isEditing, homeContent: item)
-                                    .shimmering(
-                                        active: isLoading
-                                    )
+//                                    .shimmering(
+//                                        active: isLoading
+//                                    )
                             }
                         }
                         else{
-                            PicCell(isLoading: $isLoading, isEditing: $isEditing,isChild: cloudViewModel.isChild ,pecs: item.pecs)
-                                .shimmering(
-                                    active: isLoading
-                                )
+                            PicCell(isEditing: $isEditing,isChild: cloudViewModel.isChild ,pecs: item.pecs)
+//                                .shimmering(
+//                                    active: isLoading
+//                                )
                         }
                         
                     }
