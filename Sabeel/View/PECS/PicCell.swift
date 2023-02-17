@@ -7,13 +7,28 @@
 
 import SwiftUI
 import Shimmer
+import CloudKit
 
 struct PicCell: View {
    
     @State var isHidden :Bool = false
     @Binding var isEditing : Bool
-    let isChild :Bool 
+    let homeContent: HomeContent?
     let pecs: PecsModel
+    
+    @EnvironmentObject var cloudViewModel : CloudViewModel
+    
+    init(isEditing: Binding<Bool>, homeContent: HomeContent) {
+        _isEditing = isEditing
+        self.homeContent = homeContent
+        self.pecs = homeContent.pecs
+    }
+    
+    init(pecs: PecsModel) {
+        self.pecs = pecs
+        self.homeContent = nil
+        _isEditing = .constant(false)
+    }
     
     var body: some View {
         GeometryReader { geo in
@@ -22,11 +37,12 @@ struct PicCell: View {
             VStack(spacing: 5){
                 HStack{
                     Spacer()
-                    if isChild == false {
+                    if cloudViewModel.isChild == false, (cloudViewModel.childParentModel != nil) {
                         if isEditing
                         {
                             Button{
-                                //     PECS.deletePECS()
+                                guard let homeContent else { return }
+                                cloudViewModel.deleteHomeContent(homeContent: homeContent)
                             }label: {
                                 Image(systemName: "x.circle")
                                     .foregroundColor(.red)
@@ -60,11 +76,11 @@ struct PicCell: View {
                 }
                 Spacer()
                 Text(pecs.name)
-                    .foregroundColor(isChild ?  .darkGreen : .darkBlue)
+                    .foregroundColor(cloudViewModel.isChild ?  .darkGreen : .darkBlue)
                     .font(.system(size: TextSize))
             } .padding(15)
                 .frame (width: geo.size.width, height: geo.size.height)
-                .background(LinearGradient(gradient: Gradient(colors: [isChild ? .lightGreen: .lightBlue, .white]), startPoint: .top, endPoint: .bottom))
+                .background(LinearGradient(gradient: Gradient(colors: [cloudViewModel.isChild ? .lightGreen: .lightBlue, .white]), startPoint: .top, endPoint: .bottom))
                 .cornerRadius(10)
             
             
@@ -112,11 +128,12 @@ struct AddCell: View {
 }
 
 
-struct PicCell_Previews: PreviewProvider {
-    static var previews: some View {
-        PicCell(isEditing:Binding.constant(false), isChild: false, pecs: PecsModel(imageURL: nil, audioURL: nil, name: "qq", category: "eat"))
-        AddCell()
-    }
-}
+//struct PicCell_Previews: PreviewProvider {
+//    static var previews: some View {
+//        PicCell(isEditing:Binding.constant(false), isChild: false, pecs: PecsModel(imageURL: nil, audioURL: nil, name: "qq", category: "eat"))
+//            .environmentObject(CloudViewModel())
+//        AddCell()
+//    }
+//}
 
 
