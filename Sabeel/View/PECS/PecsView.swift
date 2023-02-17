@@ -43,7 +43,7 @@ struct PecsView: View {
                     else{
                         if (cloudViewModel.childParentModel != nil) {
                             Button{ isEditing.toggle() }label: {
-                                Text( isEditing ? "Close" : "Edit")}
+                                Text( isEditing ? "Done" : "Edit")}
                             .foregroundColor(.darkBlue)
                         }
                     }
