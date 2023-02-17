@@ -24,10 +24,10 @@ struct PicCell: View {
         self.pecs = homeContent.pecs
     }
     
-    init(pecs: PecsModel) {
+    init(isEditing: Binding<Bool>, pecs: PecsModel) {
         self.pecs = pecs
         self.homeContent = nil
-        _isEditing = .constant(false)
+        _isEditing = isEditing
     }
     
     var body: some View {
@@ -140,7 +140,7 @@ struct AddCell: View {
 
 struct PicCell_Previews: PreviewProvider {
     static var previews: some View {
-        PicCell(pecs: PecsModel(imageURL: nil, audioURL: nil, name: "", category: ""))
+        PicCell(isEditing: .constant(false), pecs: PecsModel(imageURL: nil, audioURL: nil, name: "", category: ""))
         AddCell()
     }
 }

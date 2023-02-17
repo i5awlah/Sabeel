@@ -28,9 +28,9 @@ struct PicList: View {
         self.pecs = []
     }
     
-    init(pecs: [MainPecs]) {
+    init(isEditing: Binding<Bool>, pecs: [MainPecs]) {
         self.pecs = pecs
-        _isEditing = .constant(false)
+        _isEditing = isEditing
     }
 
         var body: some View {
@@ -52,7 +52,7 @@ struct PicList: View {
                             }
                         }
                         else{
-                            PicCell(pecs: item.pecs)
+                            PicCell(isEditing: $isEditing, pecs: item.pecs)
 //                                .shimmering(
 //                                    active: isLoading
 //                                )
@@ -68,7 +68,7 @@ struct PicList: View {
                                 playPecsSound(url: url)
                            // }
                         } label: {
-                            PicCell(pecs: pecs)
+                            PicCell(isEditing: $isEditing, pecs: pecs)
                             //                            .shimmering(
                             //                                active: parent
                             //                            )

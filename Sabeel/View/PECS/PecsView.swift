@@ -19,7 +19,7 @@ struct PecsView: View {
                 if (cloudViewModel.childParentModel != nil) {
                     PicList(isEditing: $isEditing)
                 } else {
-                    PicList(pecs: pecs)
+                    PicList(isEditing: $isEditing, pecs: pecs)
                         .onAppear{
                             print("fetch pecs without home content")
                             cloudViewModel.fetchSharedPecs { pecs in
