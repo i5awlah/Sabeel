@@ -12,7 +12,6 @@ import CloudKit
 struct PicCell: View {
    
     @State var isHidden :Bool = false
-    @Binding var isLoading : Bool
     @Binding var isEditing : Bool
     let homeContent: HomeContent?
     let pecs: PecsModel
@@ -75,9 +74,6 @@ struct PicCell: View {
                         .scaledToFit()
                         .frame(width: imageWidth)
                 }
-//                .onAppear(
-//                    perform: isLoading.toggle()
-//              )
      
                 Text(pecs.name)
                     .foregroundColor(cloudViewModel.isChild ?  .darkGreen : .darkBlue)
@@ -134,7 +130,7 @@ struct AddCell: View {
 
 struct PicCell_Previews: PreviewProvider {
     static var previews: some View {
-        PicCell( isLoading: Binding<Bool>.constant(false), isEditing:Binding.constant(false), isChild: false, pecs: PecsModel(imageURL: nil, audioURL: nil, name: "qq", category: "eat"))
+        PicCell(pecs: PecsModel(imageURL: nil, audioURL: nil, name: "", category: ""))
         AddCell()
     }
 }
