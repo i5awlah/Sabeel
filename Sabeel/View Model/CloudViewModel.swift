@@ -213,9 +213,20 @@ class CloudViewModel: ObservableObject {
     
     //MARK: PECS
     
-    // (call just ONE TIME AT APP)
-    // if linked fetch from HomeContent
-    // else only PECS
+    //should be for admin
+    func addMainPecs(pecs: MainPecs) {
+        let record = CKRecord(recordType: "Pecs")
+        record.setValuesForKeys(pecs.toDictonary())
+
+        container.publicCloudDatabase.save(record) { record, error in
+            if let error {
+                debugPrint("ERROR: Failed to save PECS: \(error.localizedDescription)")
+            } else if let record {
+                debugPrint("PECS has been successfully saveded: \(record.description)")
+            }
+        }
+    }
+    
     func addPecs(pecs: PecsModel) {
         let record = CKRecord(recordType: "CustomPecs")
         record.setValuesForKeys(pecs.toDictonary())
@@ -235,10 +246,10 @@ class CloudViewModel: ObservableObject {
         }
     }
     
-    func fetchSharedPecs(completionHandler: @escaping ([PecsModel]) -> Void) {
+    func fetchSharedPecs(completionHandler: @escaping ([MainPecs]) -> Void) {
         print("fetchPecs")
         
-        var allPecs: [PecsModel] = []
+        var allPecs: [MainPecs] = []
         let predicate = NSPredicate(value: true)
         
         let query = CKQuery(recordType: "Pecs", predicate: predicate)
@@ -250,7 +261,7 @@ class CloudViewModel: ObservableObject {
                     .forEach {
                         switch $0 {
                         case .success(let record):
-                            guard let pecs = PecsModel(record: record) else { return }
+                            guard let pecs = MainPecs(record: record) else { return }
                             allPecs.append(pecs)
                         case .failure(let error):
                             print("Error: \(error.localizedDescription)")
@@ -264,11 +275,12 @@ class CloudViewModel: ObservableObject {
         }
     }
     
-    private func fetchOnePecs(pecsRecordName: String, completionHandler: @escaping (PecsModel) -> Void) {
+    private func fetchOnePecs(pecsRecordName: String, isCustom: Bool, completionHandler: @escaping (PecsModel) -> Void) {
         container.publicCloudDatabase.fetch(withRecordID: CKRecord.ID(recordName: pecsRecordName)) { record, error in
             if let record {
-                guard let pecs = PecsModel(record: record) else { return }
-                print("fetch One Pecs")
+                
+                guard let pecs = isCustom ? PecsModel(record: record) : MainPecs(record: record) else { return }
+                print("fetch \(isCustom ? "custom" : "main") Pecs")
                 completionHandler(pecs)
             } else if let error {
                 print("Error: \(error.localizedDescription)")
@@ -351,14 +363,16 @@ class CloudViewModel: ObservableObject {
                             
                             
                              var pecsRecordName = ""
-                             
+                             var isCustom = false
                              if let customPecsRef {
                                  pecsRecordName = customPecsRef.recordID.recordName
+                                 isCustom = true
                              } else if let pecsRef {
                                  pecsRecordName = pecsRef.recordID.recordName
+                                 isCustom = false
                              }
                              
-                            self.fetchOnePecs(pecsRecordName: pecsRecordName) { pec in
+                            self.fetchOnePecs(pecsRecordName: pecsRecordName, isCustom: isCustom) { pec in
                                 guard let homeContent = HomeContent(record: record, pecs: pec) else { return }
                                 DispatchQueue.main.async {
                                     print("fetchHomeContent")
@@ -429,8 +443,7 @@ class CloudViewModel: ObservableObject {
         
         //fetch all the records in the category to change it to the new time
     }
-    //MARK: 7- Child Request
-    
+    //MARK: Child Request
     func addChildRequest(homeContent: HomeContent) {
         
         let homeContentRef = CKRecord.Reference(recordID: homeContent.associatedRecord.recordID, action: .deleteSelf)

@@ -67,3 +67,51 @@ class PecsModel: Identifiable {
         return dictonary
     }
 }
+
+class MainPecs: PecsModel {
+    let arabicAudioURL: URL?
+    let arabicName: String
+    let arabicCategory: String
+    
+    // For easy access to name fields
+    let keys = (
+        arabicAudioURL: "arabicAudioURL",
+        arabicName: "arabicName",
+        arabicCategory : "arabicCategory"
+    )
+    
+    init(imageURL: URL?, audioURL: URL?, name: String, category: String, arabicAudioURL: URL?, arabicName: String, arabicCategory: String) {
+        self.arabicAudioURL = arabicAudioURL
+        self.arabicName = arabicName
+        self.arabicCategory = arabicCategory
+        super.init(imageURL: imageURL, audioURL: audioURL, name: name, category: category)
+    }
+    
+    override init?(record: CKRecord) {
+        guard let arabicName = record.value(forKey: keys.arabicName) as? String
+                , let arabicCategory = record.value(forKey: keys.arabicCategory) as? String else { return nil }
+
+        
+        self.arabicName = arabicName
+        self.arabicCategory = arabicCategory
+
+        let audioAsset = record.value(forKey: keys.arabicAudioURL) as? CKAsset
+        self.arabicAudioURL = audioAsset?.fileURL
+        
+        super.init(record: record)
+    }
+    
+    override func toDictonary() -> [String: Any] {
+        
+        var dictonary = super.toDictonary()
+        
+        dictonary[keys.arabicName] = arabicName
+        dictonary[keys.arabicCategory] = arabicCategory
+        
+        if let arabicAudioURL {
+            dictonary[keys.arabicAudioURL] = CKAsset(fileURL: arabicAudioURL)
+        }
+        
+        return dictonary
+    }
+}
