@@ -213,6 +213,9 @@ class CloudViewModel: ObservableObject {
     
     //MARK: PECS
     
+    // (call just ONE TIME AT APP)
+    // if linked fetch from HomeContent
+    // else only PECS
     func addPecs(pecs: PecsModel) {
         let record = CKRecord(recordType: "CustomPecs")
         record.setValuesForKeys(pecs.toDictonary())
@@ -391,7 +394,43 @@ class CloudViewModel: ObservableObject {
         }
     }
     
-    //MARK: Child Request
+    //Mark: Update Hide
+    func updateHidePECS(homeContent: HomeContent, isHidden: Bool, indexSet: IndexSet){
+        
+        let record = homeContent.associatedRecord
+                if isHidden {
+                    record["isShown"] = 1
+                } else {
+                    record["isShown"] = 0
+                }
+        
+        saveRecord(record: record)
+        //change the record it self to the new value
+    
+    }
+    
+    //Mark: Save Record
+    private func saveRecord(record: CKRecord){
+        let container = container
+        container.publicCloudDatabase.save(record) {[weak self] returnedRecord, returnedError in
+            print("Record: \(returnedRecord)")
+            print("Error: \(returnedError)")
+            
+            //if we need to update anything in the UI
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+//
+//            }
+
+        }
+    }
+    //MArk: Update schedule
+    func updateSchedulePECS(homeContent: HomeContent, Category: String, startTime: Date, endTime: Date ){
+        let record = homeContent.associatedRecord
+        
+        //fetch all the records in the category to change it to the new time
+    }
+    //MARK: 7- Child Request
+    
     func addChildRequest(homeContent: HomeContent) {
         
         let homeContentRef = CKRecord.Reference(recordID: homeContent.associatedRecord.recordID, action: .deleteSelf)
