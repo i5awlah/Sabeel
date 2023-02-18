@@ -32,6 +32,9 @@ struct NotificationsView: View {
                 
                 
             }
+            .onAppear{
+                UIApplication.shared.applicationIconBadgeNumber = 0
+            }
             .navigationTitle("Notifications")
         }
     }

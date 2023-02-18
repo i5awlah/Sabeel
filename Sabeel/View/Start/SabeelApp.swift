@@ -34,7 +34,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     // This function will be called when the app receive notification
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         // show the notification alert (banner), and with sound
-        completionHandler([.banner, .sound])
+        completionHandler([.banner, .sound, .badge])
     }
     
     // This function will be called right after user tap on the notification

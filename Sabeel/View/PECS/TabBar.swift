@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct TabBar: View {
+    
+    @EnvironmentObject var cloudViewModel : CloudViewModel
+    
     var body: some View {
         TabView {
             PecsView()
@@ -18,6 +21,7 @@ struct TabBar: View {
                 .tabItem {
                     Label("Notifications", systemImage: "bell.badge")
                 }
+                .badge(cloudViewModel.childRequests.filter({ !$0.isRead }).count)
             
             SettingsView()
                 .tabItem {
@@ -31,5 +35,6 @@ struct TabBar: View {
 struct TabBar_Previews: PreviewProvider {
     static var previews: some View {
         TabBar()
+            .environmentObject(CloudViewModel())
     }
 }
