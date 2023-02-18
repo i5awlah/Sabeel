@@ -11,7 +11,7 @@ struct PecsView: View {
     @EnvironmentObject var cloudViewModel : CloudViewModel
     @State var isEditing = false
     
-    @State private var pecs: [PecsModel] = []
+    @State private var pecs: [MainPecs] = []
     
     var body: some View {
         NavigationStack{
@@ -19,7 +19,7 @@ struct PecsView: View {
                 if (cloudViewModel.childParentModel != nil) {
                     PicList(isEditing: $isEditing)
                 } else {
-                    PicList(pecs: pecs)
+                    PicList(isEditing: $isEditing, pecs: pecs)
                         .onAppear{
                             print("fetch pecs without home content")
                             cloudViewModel.fetchSharedPecs { pecs in
