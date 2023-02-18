@@ -18,20 +18,22 @@ struct NotificationsView: View {
             ZStack{
                 Color.lightGray.ignoresSafeArea()
                 
-                if cloudViewModel.childRequests != nil {
-                    NotificationList()
-
-                } else
-                {
-                    NoNotification()
+                ScrollView {
+                    if cloudViewModel.childRequests.isEmpty {
+                        NoNotification()
+                    } else {
+                            NotificationList(
+                                childRequests: cloudViewModel.childRequests
+                                    .sorted(by: { $0.associatedRecord.creationDate ?? .now > $1.associatedRecord.creationDate ?? .now })
+                            )
+                    }
+                }
+                .refreshable {
+                    cloudViewModel.fetchHomeContent()
                 }
                 
-            }.navigationTitle("Notification")
-          
-            
-             
-                
-            
+            }
+            .navigationTitle("Notification")
         }
     }
 }
@@ -40,7 +42,6 @@ struct NotificationsView: View {
 
 struct NotificationsView_Previews: PreviewProvider {
     static var previews: some View {
-
         NotificationsView()
             .environmentObject(CloudViewModel())
     }

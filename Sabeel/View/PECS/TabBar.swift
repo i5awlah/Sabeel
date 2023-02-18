@@ -14,7 +14,7 @@ struct TabBar: View {
                 .tabItem {
                     Label("PECS", systemImage: "person.line.dotted.person")
                 }
-            NotificationsView().environmentObject(CloudViewModel())
+            NotificationsView()
                 .tabItem {
                     Label("Notifications", systemImage: "bell.badge")
                 }

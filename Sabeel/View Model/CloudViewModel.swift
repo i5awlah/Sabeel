@@ -339,6 +339,7 @@ class CloudViewModel: ObservableObject {
     func fetchHomeContent() {
         
         self.homeContents = []
+        self.childRequests = []
         
         guard let childParentModel else { return }
         let childParentRef = CKRecord.Reference(recordID: childParentModel.associatedRecord.recordID, action: .deleteSelf)
@@ -468,6 +469,13 @@ class CloudViewModel: ObservableObject {
                 self.childRequests.append(childRequest)
             }
         }
+    }
+    
+    func parentReadRequest(childRequest: ChildRequestModel) {
+        let record = childRequest.associatedRecord
+        // make it 1 -> True
+        record[ChildRequestModel.keys.isRead] = 1
+        saveRecord(record: record)
     }
     
     func fetchChildRequests(homeContent: HomeContent) {
