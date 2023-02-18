@@ -160,6 +160,7 @@ class CloudViewModel: ObservableObject {
                 debugPrint("Child has been successfully saved to Parent: \(record.description)")
                 DispatchQueue.main.async {
                     self.childParentModel = ChildParentModel(record: record)
+                    self.fetchHomeContent()
                     NotificationManager.shared.requestPermission()
                     
                     let predicate = NSPredicate(format: "childParentID == %@", childParentModel.id)
@@ -378,7 +379,9 @@ class CloudViewModel: ObservableObject {
                                 DispatchQueue.main.async {
                                     print("fetchHomeContent")
                                     self.homeContents.append(homeContent)
-                                    self.fetchChildRequests(homeContent: homeContent)
+                                    if !self.isChild {
+                                        self.fetchChildRequests(homeContent: homeContent)
+                                    }
                                 }
 
                             }
@@ -466,7 +469,9 @@ class CloudViewModel: ObservableObject {
             } else if let record {
                 debugPrint("Child request has been successfully saveded: \(record.description)")
                 guard let childRequest = ChildRequestModel(record: record, pec: homeContent.pecs) else { return }
-                self.childRequests.append(childRequest)
+                DispatchQueue.main.async {
+                    self.childRequests.append(childRequest)
+                }
             }
         }
     }
