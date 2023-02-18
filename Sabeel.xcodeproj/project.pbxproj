@@ -10,6 +10,7 @@
 		5D4B3573299CDFE70089A3F9 /* Shimmer in Frameworks */ = {isa = PBXBuildFile; productRef = 5D4B3572299CDFE70089A3F9 /* Shimmer */; };
 		5D4B3575299E2E830089A3F9 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B3574299E2E830089A3F9 /* TabBar.swift */; };
 		5DB4383D299AA712004F2A53 /* SplashScreenLight.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 5DB4383C299AA712004F2A53 /* SplashScreenLight.mp4 */; };
+		5DC1C23329A01DB400FB6BD1 /* NoNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC1C23229A01DB400FB6BD1 /* NoNotification.swift */; };
 		900DDC0A29939AA6005A471F /* SchedulePecsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900DDC0929939AA6005A471F /* SchedulePecsView.swift */; };
 		900DDC0D29939AE9005A471F /* NotificationList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900DDC0C29939AE9005A471F /* NotificationList.swift */; };
 		900DDC0F29939AF2005A471F /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900DDC0E29939AF2005A471F /* NotificationCell.swift */; };
@@ -44,6 +45,7 @@
 /* Begin PBXFileReference section */
 		5D4B3574299E2E830089A3F9 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		5DB4383C299AA712004F2A53 /* SplashScreenLight.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = SplashScreenLight.mp4; sourceTree = "<group>"; };
+		5DC1C23229A01DB400FB6BD1 /* NoNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoNotification.swift; sourceTree = "<group>"; };
 		900DDC0929939AA6005A471F /* SchedulePecsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulePecsView.swift; sourceTree = "<group>"; };
 		900DDC0C29939AE9005A471F /* NotificationList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationList.swift; sourceTree = "<group>"; };
 		900DDC0E29939AF2005A471F /* NotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 				9011829E29915E0A0024ABC1 /* NotificationsView.swift */,
 				900DDC0C29939AE9005A471F /* NotificationList.swift */,
 				900DDC0E29939AF2005A471F /* NotificationCell.swift */,
+				5DC1C23229A01DB400FB6BD1 /* NoNotification.swift */,
 			);
 			path = Notifications;
 			sourceTree = "<group>";
@@ -315,6 +318,7 @@
 				900DDC22299658AE005A471F /* UserModel.swift in Sources */,
 				9011829629915DAF0024ABC1 /* PicList.swift in Sources */,
 				900DDC282998CA3C005A471F /* DataScannerView.swift in Sources */,
+				5DC1C23329A01DB400FB6BD1 /* NoNotification.swift in Sources */,
 				900DDC2A2998CA88005A471F /* ScanViewModel.swift in Sources */,
 				900DDC1129941EA5005A471F /* CloudNotAvailableView.swift in Sources */,
 				900DDC2C2998D1BF005A471F /* ScanQRView.swift in Sources */,

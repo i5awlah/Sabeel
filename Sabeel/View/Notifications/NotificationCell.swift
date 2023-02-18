@@ -11,7 +11,7 @@ struct NotificationCell: View {
     let ChildRequestVM: ChildRequestModel
     var body: some View {
         GeometryReader { geo in
-            HStack(spacing:15){
+            HStack{
                 
                 AsyncImage(url: ChildRequestVM.pecs.imageURL) { image in
                     image.resizable()
@@ -25,12 +25,13 @@ struct NotificationCell: View {
                         .frame(width: 50, height: 50)
                 }
                 
-                VStack(alignment: .leading, spacing: 5){
+                VStack(alignment: .leading, spacing: 7){
                     Text(ChildRequestVM.pecs.category)
                         .foregroundColor(.darkBlue)
-                        .font(.title2)
+                        .font(.system(size: 14)).bold()
                     Text("Your child want **\(ChildRequestVM.pecs.name)** ")
                         .foregroundColor(.darkGray)
+                        .font(.system(size: 14))
                 }
                 
                 Spacer()
@@ -39,17 +40,21 @@ struct NotificationCell: View {
                 if let date = ChildRequestVM.associatedRecord.creationDate {
                     Text("\(date.polite)")
                         .foregroundColor(.darkGray)
+                        .font(.system(size: 12))
                 }
                     
                 
                 
-            }.padding(20)
+            }
+            .padding(.leading, 5)
+            .padding(.trailing)
             .frame (width: geo.size.width, height: geo.size.height)
             .background(.white)
             .cornerRadius(10)
             
-        }.frame(height: 90)
-         .padding(5)
+        }.frame(height: 60)
+            .padding(.horizontal)
+   
     }
 }
 
