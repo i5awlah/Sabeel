@@ -32,7 +32,7 @@ struct NotificationsView: View {
                 
                 
             }
-            .navigationTitle("Notification")
+            .navigationTitle("Notifications")
         }
     }
 }
