@@ -12,25 +12,24 @@ struct NotificationsView: View {
     @EnvironmentObject var cloudViewModel: CloudViewModel
     
     var body: some View {
-    
+        
         NavigationStack{
             
             ZStack{
                 Color.lightGray.ignoresSafeArea()
                 
-                ScrollView {
-                    if cloudViewModel.childRequests.isEmpty {
-                        NoNotification()
-                    } else {
-                            NotificationList(
-                                childRequests: cloudViewModel.childRequests
-                                    .sorted(by: { $0.associatedRecord.creationDate ?? .now > $1.associatedRecord.creationDate ?? .now })
-                            )
+                
+                if cloudViewModel.childRequests.isEmpty {
+                    NoNotification()
+                } else {
+                    ScrollView {
+                        NotificationList(
+                            childRequests: cloudViewModel.childRequests
+                                .sorted(by: { $0.associatedRecord.creationDate ?? .now > $1.associatedRecord.creationDate ?? .now })
+                        )
                     }
                 }
-                .refreshable {
-                    cloudViewModel.fetchHomeContent()
-                }
+                
                 
             }
             .navigationTitle("Notification")
