@@ -181,6 +181,25 @@ struct HomeContent {
         self.associatedRecord = CKRecord(recordType: HomeContent.recordTypeKey)
         self.pecs = pecs
     }
+    
+    init?(record: CKRecord) {
+        guard let id = record.value(forKey: HomeContent.keys.id) as? String
+                , let childParentRef = record.value(forKey: HomeContent.keys.childParentRef) as? CKRecord.Reference
+                , let isShown = record.value(forKey: HomeContent.keys.isShown) as? Bool
+                , let startTime = record.value(forKey: HomeContent.keys.startTime) as? Date
+                , let endTime = record.value(forKey: HomeContent.keys.endTime) as? Date else { return nil }
+
+        self.id = id
+        self.childParentRef = childParentRef
+        self.customPecsRef = record.value(forKey: HomeContent.keys.customPecsRef) as? CKRecord.Reference
+        self.pecsRef = record.value(forKey: HomeContent.keys.pecsRef) as? CKRecord.Reference
+        self.isShown = isShown
+        self.startTime = startTime
+        self.endTime = endTime
+        self.associatedRecord = record
+        
+        self.pecs = PecsModel(imageURL: nil, audioURL: nil, name: "", category: "")
+    }
 
     init?(record: CKRecord, pecs: PecsModel) {
         guard let id = record.value(forKey: HomeContent.keys.id) as? String
