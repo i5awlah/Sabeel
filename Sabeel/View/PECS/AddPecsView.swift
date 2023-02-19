@@ -9,6 +9,7 @@ import SwiftUI
 import UIKit
 import AVKit
 import AVFoundation
+import PhotosUI
 
 struct AddPecsView: View {
     // Variable
@@ -25,7 +26,7 @@ struct AddPecsView: View {
     @State var isRecording = true
     @State var isPlaying = false
     @State var isPremission = true
-    @State var isPhotoPremission = true
+    @State var isPhotoPremission = false
     @State var countDownTimer = 0.0
     @State var timerRuning = true
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
@@ -44,13 +45,16 @@ struct AddPecsView: View {
                         Image(systemName: "photo.on.rectangle").resizable().frame(width: 70, height: 65).foregroundColor(.gray)   .overlay(Circle().stroke(Color.gray, lineWidth: 0.5).frame(width: 155, height: 155))
                     }
                     Button(action: {
-                        self.ispickerShowing = true
+                        if checkPhotoPremission() {
+                            self.ispickerShowing = true
+                                
+                        }
                     }) {
                         Image(systemName: "camera")
                             .resizable()
-                            .frame(width: 20, height: 20)
+                            .frame(width: 18, height: 18)
                             .foregroundColor(.white)
-                            .padding(10)
+                            .padding(9)
                             .background(Color.buttonBlue)
                             .clipShape(Circle())
                             .padding(.top,-12)
@@ -61,11 +65,15 @@ struct AddPecsView: View {
                 .padding(.top, 80)
                 
                     .frame(maxHeight: .infinity, alignment: .top)
-                
-                    .sheet(isPresented: $ispickerShowing) {
-                        ImagePickerView(sourceType: .photoLibrary) { image in
-                            self.image = image }
-                    }
+               
+                    
+                    
+                    
+                        .sheet(isPresented: $ispickerShowing) {
+                            ImagePickerView(sourceType: .photoLibrary) { image in
+                                self.image = image }
+                        }
+                    
                 // text filed
                     VStack (spacing: -20){
                         TextField("Enter the name of image", text: $Name)
@@ -247,34 +255,52 @@ struct AddPecsView: View {
 //    }
 
 
-func checkPremission() -> Bool {
-    do {
-
-        
-        self.session = AVAudioSession.sharedInstance()
-         try self.session.setCategory(.playAndRecord)
-
-        self.session.requestRecordPermission { (status) in
-
-            if !status {
+func checkPhotoPremission() -> Bool {
+  
+        PHPhotoLibrary.requestAuthorization { status in
+            if status == .authorized {
                 
+                //self.alert.toggle()
+                isPhotoPremission = true
+            } else {
                 self.alert.toggle()
-                isPremission = false
             }
-//                else {
-//                    self.getAudios()                            }
+            
+            
+        }
+
+    return isPhotoPremission
+}
+    
+    
+    func checkPremission() -> Bool {
+        do {
+
+            
+            self.session = AVAudioSession.sharedInstance()
+             try self.session.setCategory(.playAndRecord)
+
+            self.session.requestRecordPermission { (status) in
+
+                if !status {
+                    
+                    self.alert.toggle()
+                    isPremission = false
+                }
+    //                else {
+    //                    self.getAudios()                            }
+
+            }
+            
+
+
+        } catch {
+
+            print(error.localizedDescription)
 
         }
-        
-
-
-    } catch {
-
-        print(error.localizedDescription)
-
+        return isPremission
     }
-    return isPremission
-}
 
 func preparePlayer() {
       var error: NSError?
@@ -295,6 +321,8 @@ func preparePlayer() {
   }
 
 
+    
+   
 
 func getDocumentsDirectory() -> URL
 {
