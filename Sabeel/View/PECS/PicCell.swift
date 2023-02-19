@@ -82,7 +82,7 @@ struct PicCell: View {
      
                 Text(getPicName())
                     .foregroundColor(cloudViewModel.isChild ?  .darkGreen : .darkBlue)
-                    .font(.system(size: TextSize))
+                    .font(.customFont(size: TextSize))
             } .padding(15)
                 .frame (width: geo.size.width, height: geo.size.height)
                 .background(LinearGradient(gradient: Gradient(colors: [cloudViewModel.isChild ? .lightGreen: .lightBlue, .white]), startPoint: .top, endPoint: .bottom))
@@ -125,7 +125,7 @@ struct AddCell: View {
                     .scaledToFit()
                     .frame(width: imageWidth, height: 50)
                 Text("Add PECS")
-                    .font(.system(size: TextSize))
+                    .font(.customFont(size: TextSize))
             } .padding(15)
                 .frame (width: geo.size.width, height: geo.size.height)
                 .background(.white)

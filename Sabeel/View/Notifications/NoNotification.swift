@@ -14,7 +14,7 @@ struct NoNotification: View {
                 .resizable()
                 .scaledToFit()
             Text("No Notifications yet!")
-                .font(.system(size: 20))
+                .font(.customFont(size: 20))
         } .padding(.horizontal)
     }
 }

@@ -28,10 +28,10 @@ struct NotificationCell: View {
                 VStack(alignment: .leading, spacing: 7){
                     Text(ChildRequestVM.pecs.category)
                         .foregroundColor(.darkBlue)
-                        .font(.system(size: 14)).bold()
+                        .font(.customFont(size: 14)).bold()
                     Text("Your child want **\(ChildRequestVM.pecs.name)** ")
                         .foregroundColor(.darkGray)
-                        .font(.system(size: 14))
+                        .font(.customFont(size: 14))
                 }
                 
                 Spacer()
@@ -40,7 +40,7 @@ struct NotificationCell: View {
                 if let date = ChildRequestVM.associatedRecord.creationDate {
                     Text("\(date.polite)")
                         .foregroundColor(.darkGray)
-                        .font(.system(size: 12))
+                        .font(.customFont(size: 14))
                 }
                     
                 
