@@ -12,6 +12,8 @@
 		5DB4383D299AA712004F2A53 /* SplashScreenLight.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 5DB4383C299AA712004F2A53 /* SplashScreenLight.mp4 */; };
 		5DC1C23329A01DB400FB6BD1 /* NoNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC1C23229A01DB400FB6BD1 /* NoNotification.swift */; };
 		5DFA3FBD29A2367100A7B44B /* Tajawal-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5DFA3FBC29A2367100A7B44B /* Tajawal-Regular.ttf */; };
+		900866F929A2BB5B00C5E26E /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900866F829A2BB5B00C5E26E /* ImagePickerView.swift */; };
+		900866FC29A2BC3200C5E26E /* CaptionTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900866FB29A2BC3200C5E26E /* CaptionTextFieldStyle.swift */; };
 		900DDC0A29939AA6005A471F /* SchedulePecsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900DDC0929939AA6005A471F /* SchedulePecsView.swift */; };
 		900DDC0D29939AE9005A471F /* NotificationList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900DDC0C29939AE9005A471F /* NotificationList.swift */; };
 		900DDC0F29939AF2005A471F /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900DDC0E29939AF2005A471F /* NotificationCell.swift */; };
@@ -50,6 +52,8 @@
 		5DB4383C299AA712004F2A53 /* SplashScreenLight.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = SplashScreenLight.mp4; sourceTree = "<group>"; };
 		5DC1C23229A01DB400FB6BD1 /* NoNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoNotification.swift; sourceTree = "<group>"; };
 		5DFA3FBC29A2367100A7B44B /* Tajawal-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Tajawal-Regular.ttf"; sourceTree = "<group>"; };
+		900866F829A2BB5B00C5E26E /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
+		900866FB29A2BC3200C5E26E /* CaptionTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptionTextFieldStyle.swift; sourceTree = "<group>"; };
 		900DDC0929939AA6005A471F /* SchedulePecsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulePecsView.swift; sourceTree = "<group>"; };
 		900DDC0C29939AE9005A471F /* NotificationList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationList.swift; sourceTree = "<group>"; };
 		900DDC0E29939AF2005A471F /* NotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
@@ -122,6 +126,15 @@
 				5DFA3FBC29A2367100A7B44B /* Tajawal-Regular.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		900866FA29A2BBFB00C5E26E /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				900866F829A2BB5B00C5E26E /* ImagePickerView.swift */,
+				900866FB29A2BC3200C5E26E /* CaptionTextFieldStyle.swift */,
+			);
+			path = Shared;
 			sourceTree = "<group>";
 		};
 		900DDC0829939A5B005A471F /* Settings */ = {
@@ -204,6 +217,7 @@
 				9011828A29915CF00024ABC1 /* PECS */,
 				900DDC0829939A5B005A471F /* Settings */,
 				900DDC0B29939ACC005A471F /* Notifications */,
+				900866FA29A2BBFB00C5E26E /* Shared */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -335,6 +349,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				90118282299157100024ABC1 /* SplashScreen.swift in Sources */,
+				900866F929A2BB5B00C5E26E /* ImagePickerView.swift in Sources */,
 				900DDC22299658AE005A471F /* UserModel.swift in Sources */,
 				9011829629915DAF0024ABC1 /* PicList.swift in Sources */,
 				900DDC282998CA3C005A471F /* DataScannerView.swift in Sources */,
@@ -363,6 +378,7 @@
 				9011828429915C910024ABC1 /* OnboardingView.swift in Sources */,
 				900DDC0F29939AF2005A471F /* NotificationCell.swift in Sources */,
 				906035C229A026CE002D4192 /* Helper.swift in Sources */,
+				900866FC29A2BC3200C5E26E /* CaptionTextFieldStyle.swift in Sources */,
 				5D4B3575299E2E830089A3F9 /* TabBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

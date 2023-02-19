@@ -45,7 +45,7 @@ struct PicCell: View {
                             }label: {
                                 Image(systemName: "x.circle")
                                     .foregroundColor(.red)
-                            }.confirmationDialog("Are you sure you want to delete ?", isPresented: $deleteConfirm,
+                            }.confirmationDialog("Are you sure you want to delete \(getPicName())?", isPresented: $deleteConfirm,
                                                  titleVisibility: .visible) {
                                 Button("Delete", role: .destructive) {
                                     guard let homeContent else { return }

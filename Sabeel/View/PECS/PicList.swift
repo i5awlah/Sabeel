@@ -46,16 +46,16 @@ struct PicList: View {
                                 handleCellClicked(item: item)
                             } label: {
                                 PicCell(isEditing: $isEditing, homeContent: item)
-//                                    .shimmering(
-//                                        active: isLoading
-//                                    )
+                                    .shimmering(
+                                        active: item.pecs.imageURL == nil
+                                    )
                             }
                         }
                         else{
-                            PicCell(isEditing: $isEditing, pecs: item.pecs)
-//                                .shimmering(
-//                                    active: isLoading
-//                                )
+                            PicCell(isEditing: $isEditing, homeContent: item)
+                                .shimmering(
+                                    active: item.pecs.imageURL == nil
+                                )
                         }
                         
                     }
@@ -77,6 +77,9 @@ struct PicList: View {
                     }
                 }
             }.padding (.horizontal)
+        }
+        .refreshable {
+            cloudViewModel.fetchHomeContent()
         }
        
         }
@@ -101,14 +104,15 @@ extension PicList {
         if item.pecs is MainPecs {
             let pecs: MainPecs = item.pecs as! MainPecs
             // check language
-            guard let url = Helper.shared.isEnglishLanguage() ? pecs.audioURL : pecs.arabicAudioURL else { return }
-            playPecsSound(url: url)
+            if let url = Helper.shared.isEnglishLanguage() ? pecs.audioURL : pecs.arabicAudioURL {
+                playPecsSound(url: url)
+            }
             
         } else {
-            guard let url = item.pecs.audioURL else { return }
-            playPecsSound(url: url)
+            if let url = item.pecs.audioURL {
+                playPecsSound(url: url)
+            }
         }
-        
         cloudViewModel.addChildRequest(homeContent: item)
     }
     

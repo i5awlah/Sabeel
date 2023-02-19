@@ -240,7 +240,7 @@ class CloudViewModel: ObservableObject {
                 guard let pec = PecsModel(record: record) else { return }
                 self.addHomeContent(pec: pec, isCustom: true) { homeContent in
                      DispatchQueue.main.async {
-                         self.homeContents.append(homeContent)
+                         self.homeContents.insert(homeContent, at: 0)
                      }
                 }
             }

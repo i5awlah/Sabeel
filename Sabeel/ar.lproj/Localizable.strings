@@ -42,3 +42,16 @@
 "No Notifications yet!" = "لا توجد إشعارات حتى الآن";
 
 //MARK: Settings
+
+//MARK: Categories
+"Food" = "";
+"Drink" = "";
+"Utensils" = "";
+"Clothes" = "";
+"Bathroom" = "";
+"Activities" = "";
+"Feelings" = "";
+"Family" = "";
+"People" = "";
+"Places" = "";
+"Tools" = "";
