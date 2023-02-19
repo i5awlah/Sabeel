@@ -19,24 +19,66 @@ struct SchedulePecsView: View {
         DropdownOption(key: uniqueKey, value: "Activities"),
         DropdownOption(key: uniqueKey, value: "Feelings"),
         DropdownOption(key: uniqueKey, value: "Family"),
-        DropdownOption(key: uniqueKey, value: "people"),
-        DropdownOption(key: uniqueKey, value: "places"),
+        DropdownOption(key: uniqueKey, value: "People"),
+        DropdownOption(key: uniqueKey, value: "Places"),
         DropdownOption(key: uniqueKey, value: "Tools")
     ]
+    @State private var fromTime = Date.now
+    @State private var toTime = Date.now
     var body: some View {
-        HStack{
-            Text("Category")
-            Group {
-                DropdownSelector(
-                    placeholder: "Select Option",
-                    options: SchedulePecsView.options,
-                    onOptionSelected: { option in
-                        print(option)
-                    })
-                .padding(.horizontal)
-            }}.background()
-    }
-   }
+        ZStack{
+            Color.lightGray.ignoresSafeArea()
+            VStack{
+                
+                HStack{
+                    Text("Category").padding()
+                    
+           
+
+                    Group {
+                        DropdownSelector(
+                            placeholder: "Select Option",
+                            options: SchedulePecsView.options,
+                            onOptionSelected: { option in
+                                print(option)
+                            }).padding()
+                         
+                    }
+                    
+                }
+                                .frame(maxWidth: .infinity)
+                               
+                                .background(.white)
+                                .cornerRadius(10)
+                                .padding(EdgeInsets(.init(top: 20, leading: 20, bottom: 8, trailing: 20)))
+                              
+                              
+                VStack{
+                    Text("Time").listRowSeparator(.hidden).padding(.top)   .frame(maxWidth: .infinity, alignment: .leading).padding(.leading)
+                    DatePicker("From", selection: $fromTime, displayedComponents: .hourAndMinute).padding(.horizontal,20).listRowSeparator(.hidden)
+                    DatePicker("To", selection: $toTime, displayedComponents: .hourAndMinute).padding(EdgeInsets(.init(top: 0, leading: 20, bottom: 20, trailing: 20)))} .frame(maxWidth: .infinity)
+                
+                    .background(.white)
+                    .cornerRadius(10).padding(EdgeInsets(.init(top: 20, leading: 20, bottom: 0, trailing: 20)))
+                  
+                
+                Button {
+                } label: {
+                    Text("Schedule It").padding(.vertical, 12)
+                }
+                .frame(maxWidth: .infinity) .foregroundColor(.white)
+                .background(Color.buttonBlue)      .cornerRadius(10).padding(.all,20)
+                
+         
+          
+            
+            } .frame(maxHeight: .infinity, alignment: .top)  .navigationTitle("Scheduled PECS")
+            
+            
+       
+           
+        }
+    }}
 
 
 struct SchedulePecsView_Previews: PreviewProvider {
@@ -57,46 +99,42 @@ struct DropdownSelector: View {
        var onOptionSelected: ((_ option: DropdownOption) -> Void)?
        private let buttonHeight: CGFloat = 45
 
-       var body: some View {
-           Button(action: {
-               self.shouldShowDropdown.toggle()
-           }) {
-               HStack {
-                   Text(selectedOption == nil ? placeholder : selectedOption!.value)
-                       .font(.system(size: 14))
-                       .foregroundColor(selectedOption == nil ? Color.gray: Color.black)
+    var body: some View {
+        HStack{
+            Menu{
+             
+                Dropdown(options: self.options, onOptionSelected: { option in
+                    shouldShowDropdown = false
+                    selectedOption = option
+                    self.onOptionSelected?(option)
+                })
 
-                   Spacer()
-
-                   Image(systemName: self.shouldShowDropdown ? "arrowtriangle.up.fill" : "arrowtriangle.down.fill")
-                       .resizable()
-                       .frame(width: 9, height: 5)
-                       .font(Font.system(size: 9, weight: .medium))
-                       .foregroundColor(Color.black)
-               }
-           }
-           .padding(.horizontal)
-           .cornerRadius(5)
-           .frame(width: .infinity, height: self.buttonHeight)
-           .overlay(
-               RoundedRectangle(cornerRadius: 5)
-                   .stroke(Color.gray, lineWidth: 1)
-           )
-           .overlay(
-               VStack {
-                   if self.shouldShowDropdown {
-                       Spacer(minLength: buttonHeight + 10)
-                       Dropdown(options: self.options, onOptionSelected: { option in
-                           shouldShowDropdown = false
-                           selectedOption = option
-                           self.onOptionSelected?(option)
-                       })
-                   }
-               }, alignment: .topLeading
-           )
-           .background(
-               RoundedRectangle(cornerRadius: 5).fill(Color.white)
-           )
+              
+                  }
+        label: {
+            Text(selectedOption == nil ? placeholder : selectedOption!.value)
+                .font(.system(size: 14))
+                .foregroundColor(selectedOption == nil ? Color.gray: Color.black)
+            Spacer()
+            
+            Image(systemName: self.shouldShowDropdown ? "arrowtriangle.up.fill" : "arrowtriangle.down.fill")
+                .resizable()
+                .frame(width: 9, height: 5)
+                .font(Font.system(size: 9, weight: .medium))
+                .foregroundColor(Color.black)
+                          }   .padding(.horizontal)
+                .cornerRadius(5)
+                .frame(width: .infinity, height: self.buttonHeight)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 5)
+                        .stroke(Color.gray, lineWidth: 1)
+                )
+              
+                .background(
+                    RoundedRectangle(cornerRadius: 5).fill(Color.white)
+                )
+  
+     }
        }
    }
 
@@ -122,7 +160,7 @@ struct Dropdown: View {
                 }
             }
         }
-        .frame(minHeight: CGFloat(options.count) * 30, maxHeight: 250)
+        .frame(minHeight: CGFloat(options.count) * 30, maxHeight: 200)
         .padding(.vertical, 5)
         .background(Color.white)
         .cornerRadius(5)

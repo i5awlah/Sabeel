@@ -105,13 +105,16 @@ struct ChildRequestModel {
     var associatedRecord: CKRecord
     var homeContentRef: CKRecord.Reference
     var pecs: PecsModel
+    var isRead: Bool = false
     
     static let recordTypeKey = "ChildRequest"
     
     // For easy access to name fields
     static let keys = (
         id: "id",
-        homeContentRef: "homeContentRef"
+        isRead: "isRead",
+        homeContentRef: "homeContentRef",
+        childParentID: "childParentID"
     )
     
     init(homeContentRef: CKRecord.Reference, pec: PecsModel) {
@@ -123,9 +126,10 @@ struct ChildRequestModel {
     
     init?(record: CKRecord, pec: PecsModel) {
         guard let id = record.value(forKey: ChildRequestModel.keys.id) as? String
-        , let homeContentRef = record.value(forKey: ChildRequestModel.keys.homeContentRef) as? CKRecord.Reference else { return nil }
+                , let homeContentRef = record.value(forKey: ChildRequestModel.keys.homeContentRef) as? CKRecord.Reference else { return nil }
 
         self.id = id
+        self.isRead = record.value(forKey: ChildRequestModel.keys.isRead) as? Bool ?? false
         self.homeContentRef = homeContentRef
         self.associatedRecord = record
         self.pecs = pec
@@ -135,8 +139,9 @@ struct ChildRequestModel {
     func toDictonary(childParentID: String) -> [String: Any] {
         return [
             ChildRequestModel.keys.id: id,
+            ChildRequestModel.keys.isRead: isRead,
             ChildRequestModel.keys.homeContentRef: homeContentRef,
-            "childParentID" : childParentID
+            ChildRequestModel.keys.childParentID : childParentID
         ]
     }
 }

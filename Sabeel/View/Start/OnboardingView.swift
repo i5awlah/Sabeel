@@ -24,7 +24,9 @@ struct OnboardingView: View {
                         selectedOnboardingType = newValue
                     })
                 }
+                .rotation3DEffect(.degrees(Helper.shared.isEnglishLanguage() ? 0 : 180), axis: (x: 0, y: 1, z: 0))
             }
+            .flipsForRightToLeftLayoutDirection(Helper.shared.isEnglishLanguage() ? false : true)
             .tabViewStyle(.page(indexDisplayMode: .always))
             .indexViewStyle(.page(backgroundDisplayMode: .always))
             

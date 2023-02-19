@@ -5,3 +5,40 @@
   Created by Khawlah on 18/02/2023.
   
 */
+
+//MARK: Onboarding
+"Get Started" = "البدء";
+"skip" = "تخطي";
+
+/*
+"Can’t connect to iCloud!" = "";
+"Please make sure that your apple ID is existing in your device settings." = "";
+"Alway Connected" = "";
+"Stay connected with your Special Autistic one in his own PECS way by just a TAP ." = "";
+"Get Notification" = "";
+"Download the app on both devices to get you special autistic notification." = ""
+"Customize PECS" = "";
+"Add any pictures that your child want with text, and sound ." = "";
+"Settings" = "";
+"we hid and jammed everything you need under the settings." = "";
+*/
+
+//MARK: TabBar
+"PECS" = "بطاقاتي";
+"Notifications" = "الإشعارات";
+"Settings" = "الإعدادات";
+
+//MARK: PECS
+"Done" = "تم";
+"Edit" = "تحرير";
+"Add PECS" = "إضافة بطاقة";
+
+//MARK: Add PECS
+
+//MARK: Notifications
+"New" = "الجديدة";
+"Previous" = "السابقة";
+//"Your child want **\(ChildRequestVM.pecs.name)** " = "";
+"No Notifications yet!" = "لا توجد إشعارات حتى الآن";
+
+//MARK: Settings

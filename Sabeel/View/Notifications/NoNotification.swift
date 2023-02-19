@@ -13,7 +13,7 @@ struct NoNotification: View {
             Image("noNotification")
                 .resizable()
                 .scaledToFit()
-            Text("No Notifications yet !")
+            Text("No Notifications yet!")
                 .font(.system(size: 20))
         } .padding(.horizontal)
     }

@@ -41,6 +41,7 @@ class NotificationManager {
         info.alertLocalizationKey = "%1$@"
         info.alertLocalizationArgs = ["content"]
         
+        info.shouldBadge = true
         info.soundName = "default"
         
         subscription.notificationInfo = info
