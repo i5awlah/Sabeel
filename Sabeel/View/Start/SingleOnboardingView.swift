@@ -39,11 +39,11 @@ struct SingleOnboardingView: View {
             
             Text(title)
                 .bold()
-                .font(.system(size: 30))
+                .font(.customFont(size: 30))
                 .foregroundColor(.darkBlue)
             
             Text(description)
-                .font(.system(size: 20))
+                .font(.customFont(size: 20))
                 .foregroundColor(.darkGray)
                 .multilineTextAlignment(.center)
             
@@ -58,7 +58,7 @@ struct SingleOnboardingView: View {
                         .frame(height: 48)
                         .overlay(content: {
                             Text("Get Started")
-                                .font(.system(size: 20))
+                                .font(.customFont(size: 20))
                                 .fontWeight(.semibold)
                                 .foregroundColor(.white)
                         })

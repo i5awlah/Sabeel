@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "Group 18544.png",
+      "filename" : "EnglishChild.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
@@ -14,7 +14,7 @@
       "scale" : "3x"
     },
     {
-      "filename" : "طفل.png",
+      "filename" : "ArabicChild.png",
       "idiom" : "universal",
       "locale" : "ar",
       "scale" : "1x"

@@ -37,3 +37,21 @@ extension Date {
     }
 }
 
+
+extension Font {
+    
+    static func customFont( size : CGFloat) -> Font {
+        let language = NSLocale.current.language.languageCode?.identifier
+        switch language {
+        case "en":
+            return .custom("SF-Pro" , size: size)
+        case "ar":
+            return .custom("Tajawal-Regular" , size: size)
+            
+            
+        default:
+            return .body
+        }
+    }
+}
+

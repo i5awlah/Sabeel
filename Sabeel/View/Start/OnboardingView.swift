@@ -54,7 +54,7 @@ extension OnboardingView {
             }
         } label: {
             Text("skip")
-                .font(.system(size: 20))
+                .font(.customFont(size: 20))
                 .foregroundColor(.black)
                 .padding(10)
         }

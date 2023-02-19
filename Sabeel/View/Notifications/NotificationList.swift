@@ -25,7 +25,8 @@ struct NotificationList: View {
         VStack(alignment : .leading , spacing: 12){
             
             if !unReadRequest.isEmpty {
-                Section(header : Text("New").font(.title2).bold().padding(.leading)) {
+                Section(header : Text("New")
+                .font(.customFont(size: 20)).bold().padding(.leading)){
                     
                     ForEach(unReadRequest, id: \.id) { childRequest in
                         NotificationCell(ChildRequestVM : childRequest)
@@ -39,7 +40,7 @@ struct NotificationList: View {
             
             
             if !readRequest.isEmpty {
-                Section(header : Text("Previous").font(.title2).bold() .padding(.leading).padding(.top, 15)) {
+                Section(header : Text("Previous").font(.customFont(size: 20)).bold() .padding(.leading).padding(.top, 15)) {
                     ForEach(readRequest, id: \.id) { childRequest in
                         NotificationCell(ChildRequestVM : childRequest)
                     }

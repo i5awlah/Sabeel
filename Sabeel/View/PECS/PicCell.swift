@@ -29,7 +29,7 @@ struct PicCell: View {
         self.homeContent = nil
         _isEditing = isEditing
     }
-    
+    @State var deleteConfirm = false
     var body: some View {
         GeometryReader { geo in
             let TextSize = min(geo.size.width * 0.5, 16)
@@ -41,11 +41,16 @@ struct PicCell: View {
                         if isEditing
                         {
                             Button{
-                                guard let homeContent else { return }
-                                cloudViewModel.deleteHomeContent(homeContent: homeContent)
+                                self.deleteConfirm.toggle()
                             }label: {
                                 Image(systemName: "x.circle")
                                     .foregroundColor(.red)
+                            }.confirmationDialog("Are you sure you want to delete ?", isPresented: $deleteConfirm,
+                                                 titleVisibility: .visible) {
+                                Button("Delete", role: .destructive) {
+                                    guard let homeContent else { return }
+                                    cloudViewModel.deleteHomeContent(homeContent: homeContent)
+                                }
                             }
                             
                         } else {
@@ -77,7 +82,7 @@ struct PicCell: View {
      
                 Text(getPicName())
                     .foregroundColor(cloudViewModel.isChild ?  .darkGreen : .darkBlue)
-                    .font(.system(size: TextSize))
+                    .font(.customFont(size: TextSize))
             } .padding(15)
                 .frame (width: geo.size.width, height: geo.size.height)
                 .background(LinearGradient(gradient: Gradient(colors: [cloudViewModel.isChild ? .lightGreen: .lightBlue, .white]), startPoint: .top, endPoint: .bottom))
@@ -120,7 +125,7 @@ struct AddCell: View {
                     .scaledToFit()
                     .frame(width: imageWidth, height: 50)
                 Text("Add PECS")
-                    .font(.system(size: TextSize))
+                    .font(.customFont(size: TextSize))
             } .padding(15)
                 .frame (width: geo.size.width, height: geo.size.height)
                 .background(.white)
