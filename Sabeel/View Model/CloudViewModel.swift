@@ -376,7 +376,7 @@ class CloudViewModel: ObservableObject {
                             self.queryRecords(cursor: cursor!, continueWithResults: results, completionHandler: completionHandler, errorHandler: errorHandler)
                         } else {
                             print("No Cursor: \(results.count)")
-                            self.getPecsForHomes()
+                            self.getPecsForHomes(count: results.count)
                         }
                     }
             }
@@ -415,9 +415,9 @@ class CloudViewModel: ObservableObject {
     
 
     
-    private func getPecsForHomes() {
+    private func getPecsForHomes(count: Int) {
         Task {
-            for i in 0..<self.homeContents.count {
+            for i in 0..<count {
                 let homeContentWithPecs = await self.getPecsHomeFromHome(homeContent: self.homeContents[i])
                 if self.homeContents.indices.contains(i) {
                     DispatchQueue.main.async {
