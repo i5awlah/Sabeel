@@ -466,8 +466,8 @@ class CloudViewModel: ObservableObject {
         }
     }
     
-    //Mark: Update Hide
-    func updateHidePECS(homeContent: HomeContent, isHidden: Bool, indexSet: IndexSet){
+    // Update Hide
+    func updateHidePECS(homeContent: HomeContent, isHidden: Bool, index: Int){
         
         let record = homeContent.associatedRecord
                 if isHidden {
@@ -476,31 +476,56 @@ class CloudViewModel: ObservableObject {
                     record["isShown"] = 0
                 }
         
-        saveRecord(record: record)
-        //change the record it self to the new value
-    
+        //saveRecord
+        container.publicCloudDatabase.save(record) { returnedRecord, returnedError in
+            if let returnedError {
+                debugPrint("ERROR: Failed to update home content: \(returnedError.localizedDescription)")
+            } else if returnedRecord != nil {
+                debugPrint("\(homeContent.pecs.name) has been successfully updated.")
+                DispatchQueue.main.async {
+                    //change the record it self to the new value
+                    guard let returnedRecord else { return }
+                    let newHome = HomeContent(record: returnedRecord, pecs: homeContent.pecs)
+                    guard let newHome else { return }
+                    self.homeContents[index] = newHome
+                }
+            }
+        }
+       
     }
     
-    //Mark: Save Record
-    private func saveRecord(record: CKRecord){
-        let container = container
-        container.publicCloudDatabase.save(record) {[weak self] returnedRecord, returnedError in
-            print("Record: \(returnedRecord)")
-            print("Error: \(returnedError)")
-            
-            //if we need to update anything in the UI
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-//
-//            }
+    // Update schedule
+    func updateSchedulePECS(category: String, startTime: Date, endTime: Date ){
+
+       //fetch all the records from homeContent based on the category the user picked
+        var filteredHomeContent = homeContents.filter({ $0.category.contains(category) })
+
+        var updateRecords:[CKRecord] = []
+
+        for homeContent in filteredHomeContent {
+            let record = homeContent.associatedRecord
+
+            record[HomeContent.keys.startTime] = startTime
+            record[HomeContent.keys.endTime] = endTime
+
+            updateRecords.append(record)
 
         }
+
+        let operation = CKModifyRecordsOperation.init(recordsToSave: updateRecords, recordIDsToDelete: nil)
+
+        operation.modifyRecordsCompletionBlock = { _, _, error in
+            if let error = error{
+                print(error.localizedDescription)
+            }
+        }
+        container.add(operation)
+
+        //fetch the record again or modify it in the homeContents
+
     }
-    //MArk: Update schedule
-    func updateSchedulePECS(homeContent: HomeContent, Category: String, startTime: Date, endTime: Date ){
-        let record = homeContent.associatedRecord
-        
-        //fetch all the records in the category to change it to the new time
-    }
+
+    
     //MARK: Child Request
     func addChildRequest(homeContent: HomeContent) {
         
@@ -535,6 +560,14 @@ class CloudViewModel: ObservableObject {
         // make it 1 -> True
         record[ChildRequestModel.keys.isRead] = 1
         saveRecord(record: record)
+    }
+    
+    //Mark: Save Record
+    private func saveRecord(record: CKRecord){
+    let container = container
+    container.publicCloudDatabase.save(record) {[weak self] returnedRecord, returnedError in
+
+        }
     }
     
     func fetchChildRequests(homeContent: HomeContent) {
