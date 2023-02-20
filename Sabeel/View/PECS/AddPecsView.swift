@@ -50,6 +50,7 @@ struct AddPecsView: View {
     @State var isPhotoPremission = false
     @State var countDownTimer = 0.0
     @State var timerRuning = true
+
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var body: some View {
@@ -207,7 +208,6 @@ struct AddPecsView: View {
                     
                 }
                 
-                // categories
                 Picker(
                     selection: $selectedCategory,
                     label: Text(""),
@@ -217,14 +217,30 @@ struct AddPecsView: View {
                                 .tag(category)
                         }
                     }
-                    
                 )
+                .padding()
+                .frame(maxWidth: .infinity)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 8)
+                        .stroke(lineWidth: 0.2)
+                        .foregroundColor(Color.darkGray)
+                )
+                .overlay(alignment: .topLeading) {
+                    Text("Category")
+                        .foregroundColor(Color.darkBlue)
+                        .padding(3)
+                        .background(.white)
+                        .offset(x: 16, y: -16)
+                        
+                }
+               
                 
                 Button {
                     addPecs()
                 } label: {
                     RoundedRectangle(cornerRadius: 8)
-                        .fill(Color.buttonBlue)
+                        //.fill(Color.buttonBlue)
+                        .foregroundColor(checkRequiredField() ? Color.buttonBlue : Color.gray)
                         .frame(height: 56)
                         .overlay {
                             Text("Save")
@@ -232,7 +248,7 @@ struct AddPecsView: View {
                                 .fontWeight(.semibold)
                                 .foregroundColor(.white)
                         }
-                }
+                }.disabled(!checkRequiredField())
                 Spacer()
                 
                 
@@ -353,6 +369,13 @@ struct AddPecsView: View {
             cloudViewModel.addPecs(pecs: pecs)
             dismiss()
         }
+    }
+    
+    func checkRequiredField() -> Bool {
+        if image != nil && !pecsName.isEmpty{
+            return true
+        }
+        return false
     }
     
 }
