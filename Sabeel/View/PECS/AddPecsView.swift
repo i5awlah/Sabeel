@@ -157,7 +157,7 @@ struct AddPecsView: View {
                                         .frame(width: 20, height: 20)
                                         .foregroundColor(.red)
                                         .onTapGesture {
-                                            startAndStopRecoed()
+                                            startAndStopRecord()
                                         }
                                 }
                                 .frame(maxWidth: .infinity, alignment: .center)
@@ -200,7 +200,7 @@ struct AddPecsView: View {
                                         .foregroundColor(Color.darkBlue)
                                         .padding(.trailing)
                                         .onTapGesture {
-                                            startAndStopRecoed()
+                                            startAndStopRecord()
                                         }
                                 }
                             }
@@ -265,8 +265,8 @@ struct AddPecsView: View {
         }
     }
     
-    func startAndStopRecoed() {
-        if checkPremission() {
+    func startAndStopRecord() {
+        if checkPermission() {
             do {
                 if self.record {
                     isThereAnAudio = true
@@ -307,7 +307,7 @@ struct AddPecsView: View {
         }
     }
     
-    func checkPremission() -> Bool {
+    func checkPermission() -> Bool {
         do {
             self.session = AVAudioSession.sharedInstance()
             try self.session.setCategory(.playAndRecord)
