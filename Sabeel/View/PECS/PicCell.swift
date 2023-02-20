@@ -70,6 +70,8 @@ struct PicCell: View {
                                 .padding(5)
                                 .frame(width: 60 ,height: 30, alignment: .trailing)
                                 .foregroundColor(.darkGray)
+                            
+                        
                         }
                             
                             
