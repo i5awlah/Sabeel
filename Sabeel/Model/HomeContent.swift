@@ -7,7 +7,11 @@
 
 import CloudKit
 
-struct HomeContent {
+struct HomeContent: Equatable {
+    static func == (lhs: HomeContent, rhs: HomeContent) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
     var id: String
     var category: String
     var childParentRef: CKRecord.Reference
