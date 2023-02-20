@@ -397,6 +397,8 @@ class CloudViewModel: ObservableObject {
         
         
         let query = CKQuery(recordType: HomeContent.recordTypeKey, predicate: predicate)
+        query.sortDescriptors = [NSSortDescriptor(key: HomeContent.keys.category, ascending: true)]
+
         queryRecords(query: query) { results in
             print("Result: \(results.count)")
             if results.count == 0 {
