@@ -85,7 +85,7 @@ struct HomeContent {
     }
     
     
-    func toDictonary() -> [String: Any] {
+    func toDictionary() -> [String: Any] {
         var dic: [String: Any] = [
             HomeContent.keys.id: id,
             HomeContent.keys.category: category,

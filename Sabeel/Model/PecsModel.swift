@@ -49,22 +49,22 @@ class PecsModel: Identifiable {
         self.audioURL = audioAsset?.fileURL
     }
     
-    func toDictonary() -> [String: Any] {
+    func toDictionary() -> [String: Any] {
         
-        var dictonary : [String: Any] = [
+        var dictionary : [String: Any] = [
             PecsModel.keys.id : id,
             PecsModel.keys.name : name,
             PecsModel.keys.category : category
         ]
         
         if let imageURL {
-            dictonary[PecsModel.keys.imageURL] = CKAsset(fileURL: imageURL)
+            dictionary[PecsModel.keys.imageURL] = CKAsset(fileURL: imageURL)
         }
         if let audioURL {
-            dictonary[PecsModel.keys.audioURL] = CKAsset(fileURL: audioURL)
+            dictionary[PecsModel.keys.audioURL] = CKAsset(fileURL: audioURL)
         }
         
-        return dictonary
+        return dictionary
     }
 }
 
@@ -101,17 +101,17 @@ class MainPecs: PecsModel {
         super.init(record: record)
     }
     
-    override func toDictonary() -> [String: Any] {
+    override func toDictionary() -> [String: Any] {
         
-        var dictonary = super.toDictonary()
+        var dictionary = super.toDictionary()
         
-        dictonary[keys.arabicName] = arabicName
-        dictonary[keys.arabicCategory] = arabicCategory
+        dictionary[keys.arabicName] = arabicName
+        dictionary[keys.arabicCategory] = arabicCategory
         
         if let arabicAudioURL {
-            dictonary[keys.arabicAudioURL] = CKAsset(fileURL: arabicAudioURL)
+            dictionary[keys.arabicAudioURL] = CKAsset(fileURL: arabicAudioURL)
         }
         
-        return dictonary
+        return dictionary
     }
 }
