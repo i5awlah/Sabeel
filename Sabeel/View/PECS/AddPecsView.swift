@@ -42,7 +42,8 @@ struct AddPecsView: View {
     @State var record = false
     @State var session : AVAudioSession!
     @State var recorder : AVAudioRecorder!
-    @State var alert = false
+    @State var imageAlert = false
+    @State var voiceAlert = false
     @State var audioPlayer : AVAudioPlayer!
     @State var isRecording = true
     @State var isPlaying = false
@@ -258,8 +259,11 @@ struct AddPecsView: View {
                 ImagePickerView(sourceType: .photoLibrary) { image in
                     self.image = image }
             }
-            .alert(isPresented: self.$alert, content: {
-                Alert(title: Text("Error"), message: Text("Enable Access"))
+            .alert(isPresented: $imageAlert, content: {
+                Alert(title: Text("Error"), message: Text("Enable Access to photo library from sittings"))
+            })
+            .alert(isPresented: $voiceAlert, content: {
+                Alert(title: Text("Error"), message: Text("Enable Access to microphone from sittings"))
             })
             .navigationBarTitle("Add New PECS")
         }
@@ -302,7 +306,7 @@ struct AddPecsView: View {
         PHPhotoLibrary.requestAuthorization { status in
             if status == .authorized {
             } else {
-                self.alert.toggle()
+                imageAlert.toggle()
             }
         }
     }
@@ -314,7 +318,7 @@ struct AddPecsView: View {
             
             self.session.requestRecordPermission { (status) in
                 if !status {
-                    self.alert.toggle()
+                    self.voiceAlert.toggle()
                     isPermission = false
                 }
             }
