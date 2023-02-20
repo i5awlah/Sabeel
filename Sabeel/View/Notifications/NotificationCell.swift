@@ -26,7 +26,7 @@ struct NotificationCell: View {
                 }
                 
                 VStack(alignment: .leading, spacing: 7){
-                    Text(NSLocalizedString(ChildRequestVM.pecs.category, comment: ""))
+                    Text(ChildRequestVM.pecs.category.localized)
                         .foregroundColor(.darkBlue)
                         .font(.customFont(size: 14)).bold()
                     Text("Your child want **\(Helper.shared.getPicName(pecs: ChildRequestVM.pecs))** ")
