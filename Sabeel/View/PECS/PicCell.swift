@@ -12,7 +12,8 @@ import CloudKit
 struct PicCell: View {
    
     @State var isShownPecs = true
-  
+    @State var isAssigned = false
+    
     @Binding var isEditing : Bool
     @State var deleteConfirm = false
     let homeContent: HomeContent?
@@ -112,7 +113,11 @@ struct PicCell: View {
                 .cornerRadius(10) : nil
             )
         .onAppear{
-            isShownPecs = homeContent?.isShown ?? true
+            if !isAssigned {
+                isShownPecs = homeContent?.isShown ?? true
+                isAssigned = true
+            }
+            
         }
             
         

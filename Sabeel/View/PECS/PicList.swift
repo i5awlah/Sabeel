@@ -42,7 +42,7 @@ struct PicList: View {
                     }
                         if cloudViewModel.isChild {
                             ForEach(cloudViewModel.homeContents.filter({ HomeContent in
-                                return HomeContent.isItTime || HomeContent.isShown
+                                return HomeContent.isItTime && HomeContent.isShown
                             }), id: \.id) { item in
                                 Button{
                                     handleCellClicked(item: item)
@@ -83,9 +83,9 @@ struct PicList: View {
                 }
             }.padding (.horizontal)
         }
-        .refreshable {
-            cloudViewModel.fetchHomeContent()
-        }
+//        .refreshable {
+//            cloudViewModel.fetchHomeContent()
+//        }
        
         }
 
