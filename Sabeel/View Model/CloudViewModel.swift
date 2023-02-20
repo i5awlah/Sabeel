@@ -519,7 +519,7 @@ class CloudViewModel: ObservableObject {
                 print(error.localizedDescription)
             }
         }
-        container.add(operation)
+        container.publicCloudDatabase.add(operation)
 
         //fetch the record again or modify it in the homeContents
 
