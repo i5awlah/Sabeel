@@ -16,20 +16,30 @@ struct PicCell: View {
     @State var deleteConfirm = false
     let homeContent: HomeContent?
     let pecs: PecsModel
-    //let index : Int
+    let index : Int?
     @EnvironmentObject var cloudViewModel : CloudViewModel
+    
+    init(isEditing: Binding<Bool>, homeContent: HomeContent , index: Int) {
+        _isEditing = isEditing
+        self.homeContent = homeContent
+        self.pecs = homeContent.pecs
+        self.index = index
+    }
     
     init(isEditing: Binding<Bool>, homeContent: HomeContent) {
         _isEditing = isEditing
         self.homeContent = homeContent
         self.pecs = homeContent.pecs
+        self.index = nil
     }
     
     init(isEditing: Binding<Bool>, pecs: PecsModel) {
         self.pecs = pecs
         self.homeContent = nil
         _isEditing = isEditing
+        self.index = nil
     }
+    
     
     var body: some View {
         GeometryReader { geo in
@@ -60,7 +70,7 @@ struct PicCell: View {
                             
                         } else {
                             Button{
-//                                cloudViewModel.updateHidePECS(homeContent: homeContent!, isHidden: homeContent?.isShown ?? true, index: index)
+                                cloudViewModel.updateHidePECS(homeContent: homeContent!, isHidden: homeContent?.isShown ?? true, index: index!)
                                 
                             }
                         label: {
