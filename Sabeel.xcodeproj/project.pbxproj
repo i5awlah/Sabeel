@@ -14,6 +14,9 @@
 		5DFA3FBD29A2367100A7B44B /* Tajawal-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5DFA3FBC29A2367100A7B44B /* Tajawal-Regular.ttf */; };
 		900866F929A2BB5B00C5E26E /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900866F829A2BB5B00C5E26E /* ImagePickerView.swift */; };
 		900866FC29A2BC3200C5E26E /* CaptionTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900866FB29A2BC3200C5E26E /* CaptionTextFieldStyle.swift */; };
+		900866FE29A3482000C5E26E /* ChildRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900866FD29A3482000C5E26E /* ChildRequestModel.swift */; };
+		9008670029A3483B00C5E26E /* HomeContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900866FF29A3483B00C5E26E /* HomeContent.swift */; };
+		9008670229A34D3100C5E26E /* ChildParentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9008670129A34D3100C5E26E /* ChildParentModel.swift */; };
 		900DDC0A29939AA6005A471F /* SchedulePecsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900DDC0929939AA6005A471F /* SchedulePecsView.swift */; };
 		900DDC0D29939AE9005A471F /* NotificationList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900DDC0C29939AE9005A471F /* NotificationList.swift */; };
 		900DDC0F29939AF2005A471F /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900DDC0E29939AF2005A471F /* NotificationCell.swift */; };
@@ -54,6 +57,9 @@
 		5DFA3FBC29A2367100A7B44B /* Tajawal-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Tajawal-Regular.ttf"; sourceTree = "<group>"; };
 		900866F829A2BB5B00C5E26E /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
 		900866FB29A2BC3200C5E26E /* CaptionTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptionTextFieldStyle.swift; sourceTree = "<group>"; };
+		900866FD29A3482000C5E26E /* ChildRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildRequestModel.swift; sourceTree = "<group>"; };
+		900866FF29A3483B00C5E26E /* HomeContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeContent.swift; sourceTree = "<group>"; };
+		9008670129A34D3100C5E26E /* ChildParentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildParentModel.swift; sourceTree = "<group>"; };
 		900DDC0929939AA6005A471F /* SchedulePecsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulePecsView.swift; sourceTree = "<group>"; };
 		900DDC0C29939AE9005A471F /* NotificationList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationList.swift; sourceTree = "<group>"; };
 		900DDC0E29939AF2005A471F /* NotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
@@ -206,6 +212,9 @@
 			children = (
 				901182A429915E9D0024ABC1 /* PecsModel.swift */,
 				900DDC21299658AE005A471F /* UserModel.swift */,
+				9008670129A34D3100C5E26E /* ChildParentModel.swift */,
+				900866FD29A3482000C5E26E /* ChildRequestModel.swift */,
+				900866FF29A3483B00C5E26E /* HomeContent.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -350,12 +359,14 @@
 			files = (
 				90118282299157100024ABC1 /* SplashScreen.swift in Sources */,
 				900866F929A2BB5B00C5E26E /* ImagePickerView.swift in Sources */,
+				9008670029A3483B00C5E26E /* HomeContent.swift in Sources */,
 				900DDC22299658AE005A471F /* UserModel.swift in Sources */,
 				9011829629915DAF0024ABC1 /* PicList.swift in Sources */,
 				900DDC282998CA3C005A471F /* DataScannerView.swift in Sources */,
 				5DC1C23329A01DB400FB6BD1 /* NoNotification.swift in Sources */,
 				900DDC2A2998CA88005A471F /* ScanViewModel.swift in Sources */,
 				900DDC1129941EA5005A471F /* CloudNotAvailableView.swift in Sources */,
+				900866FE29A3482000C5E26E /* ChildRequestModel.swift in Sources */,
 				900DDC2C2998D1BF005A471F /* ScanQRView.swift in Sources */,
 				901182A729915EC50024ABC1 /* PecsViewModel.swift in Sources */,
 				90118270298D0EAA0024ABC1 /* SabeelApp.swift in Sources */,
@@ -363,6 +374,7 @@
 				9011828E29915D140024ABC1 /* EditPecsView.swift in Sources */,
 				9011828929915CDC0024ABC1 /* PecsView.swift in Sources */,
 				900DDC36299D0765005A471F /* NotificationManager.swift in Sources */,
+				9008670229A34D3100C5E26E /* ChildParentModel.swift in Sources */,
 				9011829D29915DF50024ABC1 /* SettingsView.swift in Sources */,
 				901182AC29916C3C0024ABC1 /* Extensions.swift in Sources */,
 				9011829829915DBA0024ABC1 /* PicCell.swift in Sources */,
