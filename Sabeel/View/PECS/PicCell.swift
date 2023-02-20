@@ -114,7 +114,7 @@ struct PicCell: View {
         }
         .frame (height: 170)
         .overlay(
-            homeContent?.isShown ?? true ? Rectangle().foregroundColor(.gray).opacity(0.5)
+            cloudViewModel.isChild == false && homeContent?.isShown == false ? Rectangle().foregroundColor(.gray).opacity(0.5)
                 .cornerRadius(10) : nil
             )
             
@@ -155,9 +155,10 @@ struct AddCell: View {
         }
         }
         .frame (height: 170)
+   
         .overlay(
-            RoundedRectangle(cornerRadius: 10)
-                .stroke(Color.darkBlue, style: StrokeStyle(lineWidth: 1, dash: [13, 5]))
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(Color.darkBlue, style: StrokeStyle(lineWidth: 1, dash: [13, 5]))
         )
         
     }

@@ -2,7 +2,7 @@
 //  PecsView.swift
 //  Sabeel
 //
-//  Created by Khawlah on 06/02/2023.
+//  Created by hoton on 06/02/2023.
 //
 
 import SwiftUI
@@ -39,8 +39,7 @@ struct PecsView: View {
                             Image(systemName: "gear")
                                 .foregroundColor(.darkGreen)
                         }
-                    }
-                    else{
+                    } else {
                         if (cloudViewModel.childParentModel != nil) {
                             Button{ isEditing.toggle() }label: {
                                 Text( isEditing ? "Done" : "Edit")}
