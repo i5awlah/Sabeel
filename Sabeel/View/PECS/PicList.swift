@@ -58,9 +58,8 @@ struct PicList: View {
                         
                     else{
                         ForEach(cloudViewModel.homeContents, id: \.id) { item in
-                            let index = cloudViewModel.homeContents.firstIndex(of: item)
                             
-                            PicCell(isEditing: $isEditing, homeContent: item, index: index!)
+                            PicCell(isEditing: $isEditing, homeContent: item)
                                 .shimmering(
                                     active: item.pecs.imageURL == nil
                                 )
