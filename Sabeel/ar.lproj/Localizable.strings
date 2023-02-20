@@ -50,20 +50,21 @@
 //MARK: Notifications
 "New" = "الجديدة";
 "Previous" = "السابقة";
+"Your child want %@ " = "طفلك يريد %@" ;
 "Your child want **%@** " = "طفلك يريد **%@**" ;
 "No Notifications yet!" = "لا توجد إشعارات حتى الآن";
 
 //MARK: Settings
 
 //MARK: Categories
-"Food" = "";
-"Drink" = "";
-"Utensils" = "";
-"Clothes" = "";
-"Bathroom" = "";
-"Activities" = "";
-"Feelings" = "";
-"Family" = "";
-"People" = "";
-"Places" = "";
-"Tools" = "";
+"Food" = "طعام";
+"Drink" = "شراب";
+"Utensils" = "أواني";
+"Clothes" = "ملابس";
+"Bathroom" = "دورة المياه";
+"Activities" = "نشاطات";
+"Feelings" = "مشاعر";
+"Family" = "عائلة";
+"People" = "أشخاص";
+"Places" = "أماكن";
+"Tools" = "أدوات";

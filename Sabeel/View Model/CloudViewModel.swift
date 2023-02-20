@@ -539,7 +539,7 @@ class CloudViewModel: ObservableObject {
         guard let childParentModel else { return }
         var dic = childRequest.toDictionary(childParentID: childParentModel.id)
         dic["title"] = homeContent.pecs.category
-        dic["content"] = "Your child wants \(homeContent.pecs.name)"
+        dic["content"] = "Your child wants \(Helper.shared.getPicName(pecs: homeContent.pecs))"
         record.setValuesForKeys(dic)
 
         container.publicCloudDatabase.save(record) { record, error in
