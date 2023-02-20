@@ -18,6 +18,18 @@ struct HomeContent {
     var endTime: Date?
     var associatedRecord: CKRecord
     var pecs: PecsModel
+    var isItTime: Bool {
+        let CurrentTime: Date = Date()
+        if self.startTime != nil && self.endTime != nil {
+            if CurrentTime > self.startTime! && CurrentTime < self.endTime! {
+                
+                return true
+            } else {
+                return false
+            }
+        }
+        return true
+    }
     
     static let recordTypeKey = "HomeContent"
     
