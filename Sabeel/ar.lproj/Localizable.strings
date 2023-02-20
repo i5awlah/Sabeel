@@ -32,13 +32,25 @@
 "Done" = "تم";
 "Edit" = "تحرير";
 "Add PECS" = "إضافة بطاقة";
+"Are you sure you want to delete %@?" = "هل انت متاكد من رغبتك في حذف %@؟" ;
+"Delete" = "حذف";
+
 
 //MARK: Add PECS
+"Enter the name of image" = "ادخل اسم الصورة";
+"Name" = "الاسم" ;
+"Audio" = "الصوت";
+"Click the mic icon to start recording" = "اضغط على ايقونة الميكرفون لبدء التسجيل";
+"Save" = "حفظ";
+"Error" = "خطأ";
+"Enable Access to photo library from sittings" = "السماح بالوصول للصور من الإعدادات ";
+"Add New PECS" = "اضافة بطاقة جديدة";
+
 
 //MARK: Notifications
 "New" = "الجديدة";
 "Previous" = "السابقة";
-//"Your child want **\(ChildRequestVM.pecs.name)** " = "";
+"Your child want **%@** " = "طفلك يريد **%@**" ;
 "No Notifications yet!" = "لا توجد إشعارات حتى الآن";
 
 //MARK: Settings
