@@ -35,4 +35,12 @@ final class Helper {
         }
     }
     
+    func getPicName(pecs: PecsModel) -> String {
+        if let pecs: MainPecs = pecs as? MainPecs {
+            return Helper.shared.isEnglishLanguage() ? pecs.name : pecs.arabicName
+        } else {
+            return pecs.name
+        }
+    }
+    
 }

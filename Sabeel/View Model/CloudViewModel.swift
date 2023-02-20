@@ -60,7 +60,7 @@ class CloudViewModel: ObservableObject {
         print("Add new \(recordName)")
         
         let record = CKRecord(recordType: recordName)
-        record.setValuesForKeys(user.toDictonary())
+        record.setValuesForKeys(user.toDictionary())
         
         container.publicCloudDatabase.save(record) { record, error in
             if let error {
@@ -151,7 +151,7 @@ class CloudViewModel: ObservableObject {
         let childParentModel = ChildParentModel()
 
         let record = CKRecord(recordType: ChildParentModel.recordTypeKey)
-        record.setValuesForKeys(childParentModel.toDictonary(childRef: childRef, parentRef: parentRef))
+        record.setValuesForKeys(childParentModel.toDictionary(childRef: childRef, parentRef: parentRef))
 
         container.publicCloudDatabase.save(record) { record, error in
             if let error {
@@ -217,7 +217,7 @@ class CloudViewModel: ObservableObject {
     // should be available for admin ONLY
     private func addMainPecs(pecs: MainPecs) {
         let record = CKRecord(recordType: "Pecs")
-        record.setValuesForKeys(pecs.toDictonary())
+        record.setValuesForKeys(pecs.toDictionary())
 
         container.publicCloudDatabase.save(record) { record, error in
             if let error {
@@ -230,7 +230,7 @@ class CloudViewModel: ObservableObject {
     
     func addPecs(pecs: PecsModel) {
         let record = CKRecord(recordType: "CustomPecs")
-        record.setValuesForKeys(pecs.toDictonary())
+        record.setValuesForKeys(pecs.toDictionary())
 
         container.publicCloudDatabase.save(record) { record, error in
             if let error {
@@ -326,7 +326,7 @@ class CloudViewModel: ObservableObject {
     private func saveHomeContent(homeContent: HomeContent, completionHandler: @escaping (HomeContent) -> Void) {
         
         let record = CKRecord(recordType: HomeContent.recordTypeKey)
-        record.setValuesForKeys(homeContent.toDictonary())
+        record.setValuesForKeys(homeContent.toDictionary())
 
         container.publicCloudDatabase.save(record) { record, error in
             if let error {
@@ -466,8 +466,8 @@ class CloudViewModel: ObservableObject {
         }
     }
     
-    //Mark: Update Hide
-    func updateHidePECS(homeContent: HomeContent, isHidden: Bool, indexSet: IndexSet){
+    // Update Hide
+    func updateHidePECS(homeContent: HomeContent, isHidden: Bool, index: Int){
         
         let record = homeContent.associatedRecord
                 if isHidden {
@@ -476,31 +476,56 @@ class CloudViewModel: ObservableObject {
                     record["isShown"] = 0
                 }
         
-        saveRecord(record: record)
-        //change the record it self to the new value
-    
+        //saveRecord
+        container.publicCloudDatabase.save(record) { returnedRecord, returnedError in
+            if let returnedError {
+                debugPrint("ERROR: Failed to update home content: \(returnedError.localizedDescription)")
+            } else if returnedRecord != nil {
+                debugPrint("\(homeContent.pecs.name) has been successfully updated.")
+                DispatchQueue.main.async {
+                    //change the record it self to the new value
+                    guard let returnedRecord else { return }
+                    let newHome = HomeContent(record: returnedRecord, pecs: homeContent.pecs)
+                    guard let newHome else { return }
+                    self.homeContents[index] = newHome
+                }
+            }
+        }
+       
     }
     
-    //Mark: Save Record
-    private func saveRecord(record: CKRecord){
-        let container = container
-        container.publicCloudDatabase.save(record) {[weak self] returnedRecord, returnedError in
-            print("Record: \(returnedRecord)")
-            print("Error: \(returnedError)")
-            
-            //if we need to update anything in the UI
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-//
-//            }
+    // Update schedule
+    func updateSchedulePECS(category: String, startTime: Date, endTime: Date ){
+
+       //fetch all the records from homeContent based on the category the user picked
+        var filteredHomeContent = homeContents.filter({ $0.category.contains(category) })
+
+        var updateRecords:[CKRecord] = []
+
+        for homeContent in filteredHomeContent {
+            let record = homeContent.associatedRecord
+
+            record[HomeContent.keys.startTime] = startTime
+            record[HomeContent.keys.endTime] = endTime
+
+            updateRecords.append(record)
 
         }
+
+        let operation = CKModifyRecordsOperation.init(recordsToSave: updateRecords, recordIDsToDelete: nil)
+
+        operation.modifyRecordsCompletionBlock = { _, _, error in
+            if let error = error{
+                print(error.localizedDescription)
+            }
+        }
+        container.add(operation)
+
+        //fetch the record again or modify it in the homeContents
+
     }
-    //MArk: Update schedule
-    func updateSchedulePECS(homeContent: HomeContent, Category: String, startTime: Date, endTime: Date ){
-        let record = homeContent.associatedRecord
-        
-        //fetch all the records in the category to change it to the new time
-    }
+
+    
     //MARK: Child Request
     func addChildRequest(homeContent: HomeContent) {
         
@@ -509,12 +534,12 @@ class CloudViewModel: ObservableObject {
         let childRequest = ChildRequestModel(homeContentRef: homeContentRef, pec: homeContent.pecs)
 
         let record = CKRecord(recordType: ChildRequestModel.recordTypeKey)
-//        record.setValuesForKeys(childRequest.toDictonary())
+//        record.setValuesForKeys(childRequest.toDictionary())
         
         guard let childParentModel else { return }
-        var dic = childRequest.toDictonary(childParentID: childParentModel.id)
+        var dic = childRequest.toDictionary(childParentID: childParentModel.id)
         dic["title"] = homeContent.pecs.category
-        dic["content"] = "Your child wants \(homeContent.pecs.name)"
+        dic["content"] = "Your child wants \(Helper.shared.getPicName(pecs: homeContent.pecs))"
         record.setValuesForKeys(dic)
 
         container.publicCloudDatabase.save(record) { record, error in
@@ -535,6 +560,14 @@ class CloudViewModel: ObservableObject {
         // make it 1 -> True
         record[ChildRequestModel.keys.isRead] = 1
         saveRecord(record: record)
+    }
+    
+    //Mark: Save Record
+    private func saveRecord(record: CKRecord){
+    let container = container
+    container.publicCloudDatabase.save(record) {[weak self] returnedRecord, returnedError in
+
+        }
     }
     
     func fetchChildRequests(homeContent: HomeContent) {

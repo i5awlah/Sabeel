@@ -37,12 +37,12 @@ struct SingleOnboardingView: View {
                 .scaledToFit()
                 .padding(.horizontal, 16)
             
-            Text(title)
+            Text(title.localized)
                 .bold()
                 .font(.customFont(size: 30))
                 .foregroundColor(.darkBlue)
             
-            Text(description)
+            Text(description.localized)
                 .font(.customFont(size: 20))
                 .foregroundColor(.darkGray)
                 .multilineTextAlignment(.center)
