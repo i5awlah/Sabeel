@@ -13,6 +13,7 @@ struct PicCell: View {
    
     @State var isHidden :Bool = false
     @Binding var isEditing : Bool
+    @State var deleteConfirm = false
     let homeContent: HomeContent?
     let pecs: PecsModel
     
@@ -29,12 +30,12 @@ struct PicCell: View {
         self.homeContent = nil
         _isEditing = isEditing
     }
-    @State var deleteConfirm = false
+    
     var body: some View {
         GeometryReader { geo in
             let TextSize = min(geo.size.width * 0.5, 16)
             let imageWidth: CGFloat = min (160, geo.size.width * 0.6 )
-            VStack(spacing: 5){
+            VStack(spacing: 10){
                 HStack{
                     Spacer()
                     if cloudViewModel.isChild == false, (cloudViewModel.childParentModel != nil) {
@@ -43,7 +44,11 @@ struct PicCell: View {
                             Button{
                                 self.deleteConfirm.toggle()
                             }label: {
-                                Image(systemName: "x.circle")
+                                Image(systemName: "minus.circle")
+                                    .resizable()
+                                    .frame(width: 20)
+                                    .padding(5)
+                                    .frame(width: 60 ,height: 30, alignment: .trailing)
                                     .foregroundColor(.red)
                             }.confirmationDialog("Are you sure you want to delete \(getPicName())?", isPresented: $deleteConfirm,
                                                  titleVisibility: .visible) {
@@ -60,7 +65,13 @@ struct PicCell: View {
                             }
                         label: {
                             Image(systemName: isHidden ? "eye" : "eye.slash")
+                                .resizable()
+                                .frame(width: 20,height: 15)
+                                .padding(5)
+                                .frame(width: 60 ,height: 30, alignment: .trailing)
                                 .foregroundColor(.darkGray)
+                            
+                        
                         }
                             
                             
@@ -71,13 +82,13 @@ struct PicCell: View {
                 AsyncImage(url: pecs.imageURL) { image in
                     image.resizable()
                          .scaledToFit()
-                         .frame(width: imageWidth)
+                         .frame(width: imageWidth ,height: 80)
                     
                 } placeholder: {
                     Image(systemName: "photo")
                         .resizable()
                         .scaledToFit()
-                        .frame(width: imageWidth)
+                        .frame(width: imageWidth, height: 80)
                 }
      
                 Text(getPicName())

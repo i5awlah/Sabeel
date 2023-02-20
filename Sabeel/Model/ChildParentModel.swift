@@ -38,7 +38,7 @@ class ChildParentModel {
     }
     
     
-    func toDictonary(childRef: CKRecord.Reference, parentRef: CKRecord.Reference) -> [String: Any] {
+    func toDictionary(childRef: CKRecord.Reference, parentRef: CKRecord.Reference) -> [String: Any] {
         return [
             ChildParentModel.keys.id: id,
             ChildParentModel.keys.childRef: childRef,
