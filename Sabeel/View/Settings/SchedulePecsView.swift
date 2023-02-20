@@ -11,17 +11,19 @@ struct SchedulePecsView: View {
     static var uniqueKey: String {
         UUID().uuidString
     }
+   
     static let options: [DropdownOption] = [
-        DropdownOption(key: uniqueKey, value: "Food"),
-        DropdownOption(key: uniqueKey, value: "Utensils"),
-        DropdownOption(key: uniqueKey, value: "Clothes"),
-        DropdownOption(key: uniqueKey, value: "Bathroom"),
-        DropdownOption(key: uniqueKey, value: "Activities"),
-        DropdownOption(key: uniqueKey, value: "Feelings"),
-        DropdownOption(key: uniqueKey, value: "Family"),
-        DropdownOption(key: uniqueKey, value: "People"),
-        DropdownOption(key: uniqueKey, value: "Places"),
-        DropdownOption(key: uniqueKey, value: "Tools")
+        DropdownOption(key: uniqueKey, value: NSLocalizedString("Food", comment: "")),
+        DropdownOption(key: uniqueKey, value:  NSLocalizedString("Drink", comment: "")),
+        DropdownOption(key: uniqueKey, value: NSLocalizedString("Utensils", comment: "")),
+        DropdownOption(key: uniqueKey, value: NSLocalizedString("Clothes", comment: "")),
+        DropdownOption(key: uniqueKey, value: NSLocalizedString("Bathroom", comment: "")),
+        DropdownOption(key: uniqueKey, value: NSLocalizedString("Activities", comment: "")),
+        DropdownOption(key: uniqueKey, value: NSLocalizedString("Feelings", comment: "")),
+        DropdownOption(key: uniqueKey, value: NSLocalizedString("Family", comment: "")),
+        DropdownOption(key: uniqueKey, value: NSLocalizedString("People", comment: "")),
+        DropdownOption(key: uniqueKey, value: NSLocalizedString("Places", comment: "")),
+        DropdownOption(key: uniqueKey, value: NSLocalizedString("Tools", comment: ""))
     ]
     @State private var fromTime = Date.now
     @State private var toTime = Date.now
@@ -31,16 +33,18 @@ struct SchedulePecsView: View {
             VStack{
                 
                 HStack{
-                    Text("Category").padding()
+                    Text("Category").padding().font(Font.customFont(size: 16))
                     
            
 
                     Group {
                         DropdownSelector(
-                            placeholder: "Select Option",
+                            placeholder: NSLocalizedString(  "Select Option", comment: "")
+                              ,
                             options: SchedulePecsView.options,
                             onOptionSelected: { option in
                                 print(option)
+                                
                             }).padding()
                          
                     }
@@ -57,14 +61,14 @@ struct SchedulePecsView: View {
                     Text("Time").listRowSeparator(.hidden).padding(.top)   .frame(maxWidth: .infinity, alignment: .leading).padding(.leading)
                     DatePicker("From", selection: $fromTime, displayedComponents: .hourAndMinute).padding(.horizontal,20).listRowSeparator(.hidden)
                     DatePicker("To", selection: $toTime, displayedComponents: .hourAndMinute).padding(EdgeInsets(.init(top: 0, leading: 20, bottom: 20, trailing: 20)))} .frame(maxWidth: .infinity)
-                
+                    .font(Font.customFont(size: 16))
                     .background(.white)
                     .cornerRadius(10).padding(EdgeInsets(.init(top: 20, leading: 20, bottom: 0, trailing: 20)))
                   
                 
                 Button {
                 } label: {
-                    Text("Schedule It").padding(.vertical, 12)
+                    Text("Schedule It").padding(.vertical, 12).font(Font.customFont(size: 20))
                 }
                 .frame(maxWidth: .infinity) .foregroundColor(.white)
                 .background(Color.buttonBlue)      .cornerRadius(10).padding(.all,20)
@@ -72,12 +76,12 @@ struct SchedulePecsView: View {
          
           
             
-            } .frame(maxHeight: .infinity, alignment: .top)  .navigationTitle("Scheduled PECS")
+            } .frame(maxHeight: .infinity, alignment: .top)  .navigationTitle("Schedule PECS")
             
             
        
            
-        }
+        }.toolbar(.hidden,for: .tabBar)
     }}
 
 
@@ -112,8 +116,8 @@ struct DropdownSelector: View {
               
                   }
         label: {
-            Text(selectedOption == nil ? placeholder : selectedOption!.value)
-                .font(.system(size: 14))
+            Text(selectedOption == nil ? placeholder : selectedOption!.value).font(Font.customFont(size: 14))
+    
                 .foregroundColor(selectedOption == nil ? Color.gray: Color.black)
             Spacer()
             
@@ -156,7 +160,7 @@ struct Dropdown: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 0) {
                 ForEach(self.options, id: \.self) { option in
-                    DropdownRow(option: option, onOptionSelected: self.onOptionSelected)
+                    DropdownRow(option: option, onOptionSelected: self.onOptionSelected).font(Font.customFont(size: 14))
                 }
             }
         }
@@ -181,12 +185,12 @@ struct DropdownRow: View {
                 onOptionSelected(self.option)
             }
         }) {
-            HStack {
+          
                 Text(self.option.value)
-                    .font(.system(size: 14))
+                   
                     .foregroundColor(Color.black)
-                Spacer()
-            }
+                   
+         
         }
         .padding(.horizontal, 16)
         .padding(.vertical, 5)

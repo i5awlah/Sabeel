@@ -266,7 +266,7 @@ struct AddPecsView: View {
                 Alert(title: Text("Error"), message: Text("Enable Access to microphone from sittings"))
             })
             .navigationBarTitle("Add New PECS")
-        }
+        }.toolbar(.hidden,for: .tabBar)
     }
     
     func startAndStopRecord() {

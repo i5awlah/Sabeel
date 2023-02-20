@@ -56,6 +56,22 @@
 "No Notifications yet!" = "لا توجد إشعارات حتى الآن";
 
 //MARK: Settings
+"Settings" = "الإعدادات";
+"Link your Autistic child" = "الربط مع طفلك";
+"Link with your parent" = "الربط مع الأهل";
+"Schedule PECS" = "جدولة أوقات ظهور الصور";
+"Number of PECS per row:" = "عدد الصور في الصف الواحد:";
+
+//MARK: Schedule PECS
+"Category" = "فئات الصور";
+"Select Option" = "اختر فئة";
+"Time" = "الوقت";
+"From" = "من";
+"To" = "إلى";
+"Schedule It" = "جدولة";
+
+
+
 
 //MARK: Categories
 "Food" = "طعام";

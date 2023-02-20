@@ -9,12 +9,12 @@ import SwiftUI
 
 struct SettingsView: View {
     var settingsData = [
-        SettingTile(title: "Link your Autistic ", icon: "link.icloud", navigationDestination: AnyView(ChildQRView())),
-        SettingTile(title:"Scheduled PECS", icon: "list.bullet.clipboard", navigationDestination: AnyView(SchedulePecsView()))
+        SettingTile(title: NSLocalizedString("Link your Autistic child", comment: ""), icon: "link.icloud", navigationDestination: AnyView(ChildQRView())),
+        SettingTile(title:NSLocalizedString("Schedule PECS", comment: ""), icon: "list.bullet.clipboard", navigationDestination: AnyView(SchedulePecsView()))
  
       ];
     @AppStorage("number0fColumns") var gridRows = 2
-   // @State private var number: Int = 2
+
     var body: some View {
     
         NavigationStack {
@@ -24,7 +24,7 @@ struct SettingsView: View {
                     NavigationLink(destination:  data.navigationDestination) {
                         HStack{
                             Image(systemName:data.icon).frame(width: 35, height: 30).background(Color("buttonBlue")).foregroundColor(.white).cornerRadius(5)
-                            Text(data.title)
+                            Text(data.title).font(Font.customFont(size: 16))
        
                         }.padding(EdgeInsets(.init(top: 8, leading: 0, bottom: 8, trailing: 0)))
                     } .buttonStyle(.plain)
@@ -36,7 +36,7 @@ struct SettingsView: View {
                 
                 HStack{
                     Image(systemName:"photo.on.rectangle").frame(width: 35, height: 30).background(Color("buttonBlue")).foregroundColor(.white).cornerRadius(5)
-                    Text("Number of PECS per row:")
+                    Text("Number of PECS per row:").font(Font.customFont(size: 16))
                     Spacer()
               
 
@@ -44,7 +44,7 @@ struct SettingsView: View {
                                 ForEach(1...5, id: \.self) { number in
                                     Text("\(number)")
                                 }
-                            }
+                            }.font(Font.customFont(size: 14))
                                 .labelsHidden()
 
                 }.padding(EdgeInsets(.init(top: 8, leading: 0, bottom: 8, trailing: 0)))
