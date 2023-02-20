@@ -2,7 +2,7 @@
 //  PicCell.swift
 //  Sabeel
 //
-//  Created by Khawlah on 06/02/2023.
+//  Created by hoton on 06/02/2023.
 //
 
 import SwiftUI
@@ -11,12 +11,12 @@ import CloudKit
 
 struct PicCell: View {
    
-    @State var isHidden :Bool = false
+  
     @Binding var isEditing : Bool
     @State var deleteConfirm = false
     let homeContent: HomeContent?
     let pecs: PecsModel
-    
+    //let index : Int
     @EnvironmentObject var cloudViewModel : CloudViewModel
     
     init(isEditing: Binding<Bool>, homeContent: HomeContent) {
@@ -60,11 +60,11 @@ struct PicCell: View {
                             
                         } else {
                             Button{
-                                //   PECS.hidePECS()
-                                isHidden.toggle()
+//                                cloudViewModel.updateHidePECS(homeContent: homeContent!, isHidden: homeContent?.isShown ?? true, index: index)
+                                
                             }
                         label: {
-                            Image(systemName: isHidden ? "eye" : "eye.slash")
+                            Image(systemName: homeContent?.isShown ?? true ? "eye" : "eye.slash")
                                 .resizable()
                                 .frame(width: 20,height: 15)
                                 .padding(5)
@@ -104,7 +104,7 @@ struct PicCell: View {
         }
         .frame (height: 170)
         .overlay(
-            isHidden ? Rectangle().foregroundColor(.gray).opacity(0.5)
+            homeContent?.isShown ?? true ? Rectangle().foregroundColor(.gray).opacity(0.5)
                 .cornerRadius(10) : nil
             )
             

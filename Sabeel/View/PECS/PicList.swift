@@ -2,7 +2,7 @@
 //  PicList.swift
 //  Sabeel
 //
-//  Created by Khawlah on 06/02/2023.
+//  Created by hoton on 06/02/2023.
 //
 
 import SwiftUI
@@ -40,26 +40,33 @@ struct PicList: View {
                     if cloudViewModel.isChild == false {
                         AddCell()
                     }
-                    ForEach(cloudViewModel.homeContents, id: \.id) { item in
                         if cloudViewModel.isChild {
-                            Button{
-                                handleCellClicked(item: item)
-                            } label: {
-                                PicCell(isEditing: $isEditing, homeContent: item)
-                                    .shimmering(
-                                        active: item.pecs.imageURL == nil
-                                    )
+                            ForEach(cloudViewModel.homeContents.filter({ HomeContent in
+                                return HomeContent.isItTime || HomeContent.isShown
+                            }), id: \.id) { item in
+                                Button{
+                                    handleCellClicked(item: item)
+                                } label: {
+                                    PicCell(isEditing: $isEditing, homeContent: item)
+                                        .shimmering(
+                                            active: item.pecs.imageURL == nil
+                                        )
+                                }
                             }
                         }
-                        else{
+                        
+                    else{
+                        ForEach(cloudViewModel.homeContents, id: \.id) { item in
+                         //   let index = cloudViewModel.homeContents.firstIndex(of: item)
+                            
                             PicCell(isEditing: $isEditing, homeContent: item)
                                 .shimmering(
                                     active: item.pecs.imageURL == nil
                                 )
                         }
-                        
                     }
-                }
+                    }
+                
                 else {
                     ForEach(pecs, id: \.id) { pecs in
                         Button{
@@ -69,9 +76,7 @@ struct PicList: View {
                            // }
                         } label: {
                             PicCell(isEditing: $isEditing, pecs: pecs)
-                            //                            .shimmering(
-                            //                                active: parent
-                            //                            )
+                
                         }
                         
                     }
