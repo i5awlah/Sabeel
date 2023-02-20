@@ -48,6 +48,7 @@
 		901182AC29916C3C0024ABC1 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901182AB29916C3C0024ABC1 /* Extensions.swift */; };
 		906035C229A026CE002D4192 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906035C129A026CE002D4192 /* Helper.swift */; };
 		906035C529A02A68002D4192 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 906035C729A02A68002D4192 /* Localizable.strings */; };
+		ECA416AC29A3537C003A7F42 /* AppLockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA416AB29A3537C003A7F42 /* AppLockView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -94,6 +95,7 @@
 		901182AB29916C3C0024ABC1 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		906035C129A026CE002D4192 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		906035C629A02A68002D4192 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.strings; sourceTree = "<group>"; };
+		ECA416AB29A3537C003A7F42 /* AppLockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLockView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +151,7 @@
 				9011829C29915DF50024ABC1 /* SettingsView.swift */,
 				900DDC0929939AA6005A471F /* SchedulePecsView.swift */,
 				900DDC272998CA3C005A471F /* DataScannerView.swift */,
+				ECA416AB29A3537C003A7F42 /* AppLockView.swift */,
 				900DDC2B2998D1BF005A471F /* ScanQRView.swift */,
 				900DDC2D2998EE0E005A471F /* AddChildView.swift */,
 				900DDC2F2998EFB5005A471F /* ChildQRView.swift */,
@@ -382,6 +385,7 @@
 				901182A529915E9D0024ABC1 /* PecsModel.swift in Sources */,
 				9011828C29915D060024ABC1 /* AddPecsView.swift in Sources */,
 				9011829F29915E0A0024ABC1 /* NotificationsView.swift in Sources */,
+				ECA416AC29A3537C003A7F42 /* AppLockView.swift in Sources */,
 				900DDC182994F771005A471F /* CloudViewModel.swift in Sources */,
 				9011828629915CAB0024ABC1 /* ChooseUserView.swift in Sources */,
 				900DDC0A29939AA6005A471F /* SchedulePecsView.swift in Sources */,
