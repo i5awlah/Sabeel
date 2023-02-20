@@ -14,9 +14,7 @@ struct SabeelApp: App {
     
     var body: some Scene {
         WindowGroup {
-            AppLockView(
-                pincode: .init("2023")
-            )
+            SplashScreen()
         }
     }
 }
