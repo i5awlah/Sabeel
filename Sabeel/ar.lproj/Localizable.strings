@@ -10,18 +10,18 @@
 "Get Started" = "البدء";
 "skip" = "تخطي";
 
-/*
-"Can’t connect to iCloud!" = "";
-"Please make sure that your apple ID is existing in your device settings." = "";
-"Alway Connected" = "";
-"Stay connected with your Special Autistic one in his own PECS way by just a TAP ." = "";
-"Get Notification" = "";
-"Download the app on both devices to get you special autistic notification." = ""
-"Customize PECS" = "";
-"Add any pictures that your child want with text, and sound ." = "";
-"Settings" = "";
-"we hid and jammed everything you need under the settings." = "";
-*/
+
+"Can’t connect to iCloud!" = "لا يمكن الاتصال بـ iCloud";
+"Please make sure that your apple ID is existing in your device settings." = "يرجى التأكد من أن معرف Apple الخاص بك موجود في إعدادات جهازك";
+"Alway Connected" = "دومًا على اتصال";
+"Stay connected with your Special Autistic one in his own PECS way by just a TAP ." = "ابق على اتصال مع الشخص المصاب بالتوحد بطريقة PECS الخاصة به فقط من خلال النقر";
+"Get Notification" = "احصل على الإشعارات";
+"Download the app on both devices to get you special autistic notification." = "قم بتنزيل التطبيق على كلا الجهازين لتحصل على إشعار خاص من طفلك.";
+"Customize PECS" = "خصص بطاقاتك";
+"Add any pictures that your child want with text, and sound ." = "أضف أي صورة يريدها طفلك مع اسمها وصوتها";
+"Settings" = "الإعدادات";
+"we hid and jammed everything you need under the settings." = "قد أخفينا كل ما تحتاجه في الإعدادات";
+
 
 //MARK: TabBar
 "PECS" = "بطاقاتي";
@@ -50,20 +50,21 @@
 //MARK: Notifications
 "New" = "الجديدة";
 "Previous" = "السابقة";
+"Your child want %@ " = "طفلك يريد %@" ;
 "Your child want **%@** " = "طفلك يريد **%@**" ;
 "No Notifications yet!" = "لا توجد إشعارات حتى الآن";
 
 //MARK: Settings
 
 //MARK: Categories
-"Food" = "";
-"Drink" = "";
-"Utensils" = "";
-"Clothes" = "";
-"Bathroom" = "";
-"Activities" = "";
-"Feelings" = "";
-"Family" = "";
-"People" = "";
-"Places" = "";
-"Tools" = "";
+"Food" = "طعام";
+"Drink" = "شراب";
+"Utensils" = "أواني";
+"Clothes" = "ملابس";
+"Bathroom" = "دورة المياه";
+"Activities" = "نشاطات";
+"Feelings" = "مشاعر";
+"Family" = "عائلة";
+"People" = "أشخاص";
+"Places" = "أماكن";
+"Tools" = "أدوات";

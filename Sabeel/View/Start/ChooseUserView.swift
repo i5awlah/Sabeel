@@ -46,6 +46,9 @@ extension ChooseUserView {
                 }
             } label: {
                 Image("Autistic")
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 220)
             }
 
             Spacer().frame(height: UIScreen.main.bounds.height * 0.11)
@@ -57,6 +60,9 @@ extension ChooseUserView {
                 }
             } label: {
                 Image("Parents")
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 220)
             }
 
             Spacer().frame(height: UIScreen.main.bounds.height * 0.28)

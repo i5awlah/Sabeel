@@ -16,6 +16,7 @@ extension Color {
     static let buttonBlue = Color("buttonBlue")
     static let lightGreen = Color("lightGreen")
     static let darkGreen = Color("darkGreen")
+    static let Green = Color("Green")
 }
 
 extension Date {
@@ -52,6 +53,12 @@ extension Font {
         default:
             return .body
         }
+    }
+}
+
+extension String {
+    var localized: String {
+        return NSLocalizedString(self, comment: "")
     }
 }
 

@@ -34,7 +34,7 @@ struct AddPecsView: View {
     @EnvironmentObject var cloudViewModel: CloudViewModel
     @State var selectedCategory: Category = .food
     
-    @State var ispickerShowing = false
+    @State var isPickerShowing = false
     @State var image: UIImage?
     @State var pecsName = ""
     @State var vName = ""
@@ -46,10 +46,11 @@ struct AddPecsView: View {
     @State var audioPlayer : AVAudioPlayer!
     @State var isRecording = true
     @State var isPlaying = false
-    @State var isPremission = true
-    @State var isPhotoPremission = false
+    @State var isPermission = true
+    @State var isPhotoPermission = false
     @State var countDownTimer = 0.0
-    @State var timerRuning = true
+    @State var timerRunning = true
+
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var body: some View {
@@ -86,8 +87,8 @@ struct AddPecsView: View {
                 .overlay(alignment: .bottomTrailing, content: {
                     Button {
                         print("Pressed")
-                        self.checkPhotoPremission()
-                        self.ispickerShowing = true
+                        self.checkPhotoPermission()
+                        self.isPickerShowing = true
                         
                     } label: {
                         Circle()
@@ -140,15 +141,15 @@ struct AddPecsView: View {
                                         .font(.system(size: 12, weight: .bold))
                                         .opacity(0.80)
                                         .onReceive(timer) { _ in
-                                            if countDownTimer < 0.8 && timerRuning {
+                                            if countDownTimer < 0.8 && timerRunning {
                                                 countDownTimer += 0.1
                                             } else {
-                                                timerRuning = false
+                                                timerRunning = false
                                                 self.recorder.stop()
                                                 countDownTimer = 0.0
                                                 self.record = false
                                             }
-                                            timerRuning = true
+                                            timerRunning = true
                                         }
                                     
                                     Image(systemName: "record.circle")
@@ -156,7 +157,7 @@ struct AddPecsView: View {
                                         .frame(width: 20, height: 20)
                                         .foregroundColor(.red)
                                         .onTapGesture {
-                                            startAndStopRecoed()
+                                            startAndStopRecord()
                                         }
                                 }
                                 .frame(maxWidth: .infinity, alignment: .center)
@@ -199,7 +200,7 @@ struct AddPecsView: View {
                                         .foregroundColor(Color.darkBlue)
                                         .padding(.trailing)
                                         .onTapGesture {
-                                            startAndStopRecoed()
+                                            startAndStopRecord()
                                         }
                                 }
                             }
@@ -207,7 +208,6 @@ struct AddPecsView: View {
                     
                 }
                 
-                // categories
                 Picker(
                     selection: $selectedCategory,
                     label: Text(""),
@@ -217,14 +217,30 @@ struct AddPecsView: View {
                                 .tag(category)
                         }
                     }
-                    
                 )
+                .padding()
+                .frame(maxWidth: .infinity)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 8)
+                        .stroke(lineWidth: 0.2)
+                        .foregroundColor(Color.darkGray)
+                )
+                .overlay(alignment: .topLeading) {
+                    Text("Category")
+                        .foregroundColor(Color.darkBlue)
+                        .padding(3)
+                        .background(.white)
+                        .offset(x: 16, y: -16)
+                        
+                }
+               
                 
                 Button {
                     addPecs()
                 } label: {
                     RoundedRectangle(cornerRadius: 8)
-                        .fill(Color.buttonBlue)
+                        //.fill(Color.buttonBlue)
+                        .foregroundColor(checkRequiredField() ? Color.buttonBlue : Color.gray)
                         .frame(height: 56)
                         .overlay {
                             Text("Save")
@@ -232,13 +248,13 @@ struct AddPecsView: View {
                                 .fontWeight(.semibold)
                                 .foregroundColor(.white)
                         }
-                }
+                }.disabled(!checkRequiredField())
                 Spacer()
                 
                 
             }
             .padding(.horizontal, 24)
-            .sheet(isPresented: $ispickerShowing) {
+            .sheet(isPresented: $isPickerShowing) {
                 ImagePickerView(sourceType: .photoLibrary) { image in
                     self.image = image }
             }
@@ -249,8 +265,8 @@ struct AddPecsView: View {
         }
     }
     
-    func startAndStopRecoed() {
-        if checkPremission() {
+    func startAndStopRecord() {
+        if checkPermission() {
             do {
                 if self.record {
                     isThereAnAudio = true
@@ -281,7 +297,7 @@ struct AddPecsView: View {
         }
     }
     
-    func checkPhotoPremission() {
+    func checkPhotoPermission() {
         
         PHPhotoLibrary.requestAuthorization { status in
             if status == .authorized {
@@ -291,7 +307,7 @@ struct AddPecsView: View {
         }
     }
     
-    func checkPremission() -> Bool {
+    func checkPermission() -> Bool {
         do {
             self.session = AVAudioSession.sharedInstance()
             try self.session.setCategory(.playAndRecord)
@@ -299,13 +315,13 @@ struct AddPecsView: View {
             self.session.requestRecordPermission { (status) in
                 if !status {
                     self.alert.toggle()
-                    isPremission = false
+                    isPermission = false
                 }
             }
         } catch {
             print(error.localizedDescription)
         }
-        return isPremission
+        return isPermission
     }
     
     func preparePlayer() {
@@ -353,6 +369,13 @@ struct AddPecsView: View {
             cloudViewModel.addPecs(pecs: pecs)
             dismiss()
         }
+    }
+    
+    func checkRequiredField() -> Bool {
+        if image != nil && !pecsName.isEmpty{
+            return true
+        }
+        return false
     }
     
 }

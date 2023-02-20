@@ -27,7 +27,7 @@ class UserModel {
     }
     
     
-    func toDictonary() -> [String: Any] {
+    func toDictionary() -> [String: Any] {
         return [UserModel.idKey: id]
     }
 }

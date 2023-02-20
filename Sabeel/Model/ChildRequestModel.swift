@@ -43,7 +43,7 @@ struct ChildRequestModel {
     }
     
     
-    func toDictonary(childParentID: String) -> [String: Any] {
+    func toDictionary(childParentID: String) -> [String: Any] {
         return [
             ChildRequestModel.keys.id: id,
             ChildRequestModel.keys.isRead: isRead,
