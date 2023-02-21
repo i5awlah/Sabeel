@@ -12,19 +12,29 @@ struct ChildQRView: View {
     @EnvironmentObject var cloudViewModel: CloudViewModel
     
     var body: some View {
-        VStack {
-            if let id = cloudViewModel.currentUser?.id {
-                if let data = getQRCodeDate(text: id)
-                    , let image = UIImage(data: data) {
-                    
-                    Image(uiImage: image)
-                        .resizable()
-                        .frame(width: 200, height: 200)
-                    
+        VStack(spacing:20){
+            ZStack {
+                Image("QRBackground")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 300, height: 400)
+                
+                if let id = "cloudViewModel.currentUser?.id "{
+                    if let data = getQRCodeDate(text: id)
+                        , let image = UIImage(data: data) {
+                        
+                        Image(uiImage: image)
+                            .resizable()
+                            .frame(width: 200, height: 200)
+                            .offset(x:-10,y: 80.0)
+                        
+                        
+                    }
                 }
-                Text("Or you can write it manually: \n \(id)")
-                    .multilineTextAlignment(.center)
             }
+            Text("Link your child using the scan in your app setting")
+                .font(.customFont(size: 20)).multilineTextAlignment(.center)
+                .padding(.horizontal, 50)
         }.toolbar(.hidden,for: .tabBar)
     }
 }
