@@ -44,7 +44,7 @@ struct SettingsView: View {
                         }
                     }
                 } else {
-                    // new view
+                    AlreadyLinkedView()
                 }
 
                 // 2- Schedule
