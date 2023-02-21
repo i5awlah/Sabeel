@@ -40,7 +40,7 @@ struct ChildQRView: View {
             
             
             VStack(spacing: 20) {
-                Text("Link your child using the scan in your app setting")
+                Text("Connect your special child using the scan in your app setting")
                 VStack(spacing: 5) {
                     Text("or write it manually".localized)
                     Text("\(cloudViewModel.currentUser?.id ?? "")")

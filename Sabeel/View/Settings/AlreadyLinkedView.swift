@@ -17,12 +17,12 @@ struct AlreadyLinkedView: View {
                 .scaledToFit()
                 .padding(.horizontal, 16) .padding(.vertical, 32)
             
-            Text("Already Linked")
+            Text("Already connected")
                 .bold()
                 .font(.customFont(size: 30))
                 .foregroundColor(.darkBlue)
             
-            Text("This account already linked with another one")
+            Text("This account is already connected with another one")
                 .font(.customFont(size: 20))
                 .foregroundColor(.darkGray)
                 .multilineTextAlignment(.center)

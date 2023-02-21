@@ -14,13 +14,13 @@
 "Can’t connect to iCloud!" = "لا يمكن الاتصال بـ iCloud";
 "Please make sure that you're signed in with your apple ID in device settings." = "يرجى التأكد من تسجيل الدخول باستخدام معرف Apple الخاص بك في إعدادات الجهاز.";
 "Always Connected" = "دائما علي تواصل";
-"Stay connected with your Special Autistic one in his own PECS way by just a TAP." = "ابق على اتصال مع طفلك بطريقة PECS الخاصة به فقط من خلال النقر";
+"Stay connected with your Special child in his own PECS language by just a TAP." = "ابق على اتصال مع طفلك بطريقة PECS الخاصة به فقط من خلال نقرة.";
 "Get Notifications" = "احصل على الإشعارات";
-"Download the app on both devices to get notifications from your special autistic." = "قم بتنزيل التطبيق على كلا الجهازين لتحصل على إشعارات خاص من طفلك المميز.";
+"Download the app on both devices to get notifications from your special child." = "قم بتنزيل التطبيق على كلا الجهازين لتحصل على إشعارات خاصة من طفلك المميز.";
 "Customize PECS" = "خصص بطاقاتك";
-"Add any custom PECS for your own Autistic along with text, and sound." ="أضف بيكس مخصصه لطفلك مع الاسم والصوت.";
+"Add any custom PECS your own child needs along with text, and sound." ="يمكنك اضافة اي بطاقة مخصصه لطفلك مع الاسم والصوت.";
 "Schedule PECS" = "بطاقات مجدولة";
-"Schedule when to show and hide certain pictures to help you maintain your Autistic routine."= "حدد موعدًا لإظهار وإخفاء بطاقات معينة لمساعدتك في الحفاظ على روتين طفلك.";
+"Schedule when to show and hide certain PECS to help you maintain your child routine."= "حدد موعدًا لإظهار وإخفاء PECS معينة لمساعدتك في الحفاظ على روتين طفلك.";
 "Settings" = "الإعدادات";
 "We hid and jammed everything you need under the settings." = "قد أخفينا كل ما تحتاجه في الإعدادات";
 
@@ -60,11 +60,11 @@
 
 //MARK: Settings
 "Settings" = "الإعدادات";
-"Link your Autistic child" = "اقترن بحساب طفلك";
-"Link with your parent" = "الربط مع الأهل";
-"Schedule PECS" = "جدولة البطاقات";
+"Connect your special child" = "اقترن بحساب طفلك المميز";
+"Connect with your parent" = "اقترن بحساب أحد والديك";
+"Schedule PECS" = "جدولة أوقات ظهور البطاقات";
 "Number of PECS per row:" = "عدد البطاقات في الصف الواحد:";
-"Link your child using the scan in your app setting" = "قم بربط طفلك من خلال مسح الرمز باستخدام إعدادات تطبيقك";
+"Connect your special child using the scan in your app setting" = "قم بربط طفلك المميز من خلال مسح الرمز باستخدام إعدادات تطبيقك";
 "or write it manually" = "أو قم بكتابته يدويًا";
 
 "Enter your child id" = "أدخل الـID الخاص بطفلك";
@@ -73,10 +73,11 @@
 "Please provide access to the camera in settings" = "الرجاء إعطاء صلاحية الوصول للكاميرا من الإعدادات";
 "Requesting camera access" = "اطلب الوصول إلى الكاميرا";
 "Cancel" = "إلغاء";
+"Scan" = "مسح";
 
-//MARK: AlredyLinked
-"Already Linked" = "تم الربط";
-"This account already linked with another one" = "هذا الحساب تم ربطه مسبقًا بحساب آخر" ;
+//MARK: AlreadyLinked
+"Already connected" = "تم الربط";
+"This account is already connected with another one" = "هذا الحساب تم ربطه مسبقًا بحساب آخر" ;
 
 //MARK: Schedule PECS
 "Category" = "فئات البطاقات";
