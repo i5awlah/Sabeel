@@ -13,26 +13,37 @@ struct ChildQRView: View {
     
     var body: some View {
         VStack(spacing:20){
-            ZStack {
-                Image("QRBackground")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 300, height: 400)
-                
-                if let id = "cloudViewModel.currentUser?.id "{
-                    if let data = getQRCodeDate(text: id)
-                        , let image = UIImage(data: data) {
-                        
-                        Image(uiImage: image)
-                            .resizable()
-                            .frame(width: 200, height: 200)
-                            .offset(x:-10,y: 80.0)
-                        
-                        
+            
+            Image("QRBackground")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 300, height: 400)
+                .overlay(alignment: .bottom) {
+                    if let id = cloudViewModel.currentUser?.id {
+                        if let data = getQRCodeDate(text: id)
+                            , let image = UIImage(data: data)
+                            , let imageTransparent = makeTransparent(image: image)
+                            , let imageGreen = imageTransparent.withColor(UIColor(Color.darkGreen)) {
+                            
+                            Image(uiImage: imageGreen)
+                                .resizable()
+                                .frame(width: 200, height: 200)
+                                .offset(x: 12, y: -10)
+                            
+                        }
                     }
                 }
+            
+            
+            
+            VStack(spacing: 20) {
+                Text("Link your child using the scan in your app setting")
+                VStack(spacing: 5) {
+                    Text("or write it manually".localized)
+                    Text("\(cloudViewModel.currentUser?.id ?? "")")
+                }
+                .font(.customFont(size: 16))
             }
-            Text("Link your child using the scan in your app setting")
                 .font(.customFont(size: 20)).multilineTextAlignment(.center)
                 .padding(.horizontal, 50)
         }.toolbar(.hidden,for: .tabBar)
@@ -55,6 +66,24 @@ extension ChildQRView {
         let transform = CGAffineTransform(scaleX: 10, y: 10)
         let scaledCIImage = ciimage.transformed(by: transform)
         let uiimage = UIImage(ciImage: scaledCIImage)
-        return uiimage.pngData()!
+        return uiimage.jpegData(compressionQuality: 1 )!
+    }
+    
+    func makeTransparent(image: UIImage) -> UIImage? {
+        guard let rawImage = image.cgImage else { return nil}
+        let colorMasking: [CGFloat] = [255, 255, 255, 255, 255, 255]
+        UIGraphicsBeginImageContext(image.size)
+        
+        if let maskedImage = rawImage.copy(maskingColorComponents: colorMasking),
+           let context = UIGraphicsGetCurrentContext() {
+            context.translateBy(x: 0.0, y: image.size.height)
+            context.scaleBy(x: 1.0, y: -1.0)
+            context.draw(maskedImage, in: CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height))
+            let finalImage = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            return finalImage
+        }
+        
+        return nil
     }
 }
