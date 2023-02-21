@@ -20,7 +20,7 @@
 "Customize PECS" = "خصص بطاقاتك";
 "Add any custom PECS for your own Autistic along with text, and sound." ="أضف بيكس مخصصه لطفلك مع الاسم والصوت.";
 "Schedule PECS" = "بطاقات مجدولة";
-"Schedule when to show and hide certain pictures to help you maintain your Autistic routine."= "حدد موعدًا لإظهار وإخفاء بطاقات معينة لمساعدتك في الحفاظ على روتين طفلك."
+"Schedule when to show and hide certain pictures to help you maintain your Autistic routine."= "حدد موعدًا لإظهار وإخفاء بطاقات معينة لمساعدتك في الحفاظ على روتين طفلك.";
 "Settings" = "الإعدادات";
 "We hid and jammed everything you need under the settings." = "قد أخفينا كل ما تحتاجه في الإعدادات";
 
@@ -63,6 +63,8 @@
 "Link with your parent" = "الربط مع الأهل";
 "Schedule PECS" = "جدولة أوقات ظهور البطاقات";
 "Number of PECS per row:" = "عدد البطاقات في الصف الواحد:";
+"Link your child using the scan in your app setting" = "قم بربط طفلك من خلال مسح الرمز باستخدام إعدادات تطبيقك";
+
 
 //MARK: AlredyLinked
 "Already Linked" = "تم الربط";

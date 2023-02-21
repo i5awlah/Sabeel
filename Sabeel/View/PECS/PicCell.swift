@@ -93,7 +93,7 @@ struct PicCell: View {
                     Image(systemName: "text.below.photo")
                     .resizable()
                     .scaledToFit()
-                    .frame(width: imageWidth, height: 60)
+                    .frame(width: imageWidth, height: 80)
                 }
      
                 Text(getPicName())
