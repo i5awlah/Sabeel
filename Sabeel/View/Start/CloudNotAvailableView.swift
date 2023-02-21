@@ -14,7 +14,7 @@ struct CloudNotAvailableView: View {
     
     let image = "connectiCloud"
     let title = "Can’t connect to iCloud!"
-    let description = "Please make sure that your apple ID is existing in your device settings."
+    let description = "Please make sure that you're signed in with your apple ID in device settings."
     
     var body: some View {
         SingleOnboardingView(

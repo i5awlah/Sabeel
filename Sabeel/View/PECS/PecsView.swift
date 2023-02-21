@@ -12,6 +12,9 @@ struct PecsView: View {
     @State var isEditing = false
     @State private var pecs: [MainPecs] = []
 
+    @State private var goToAppLock: Bool = false
+    @State private var goToSettings: Bool = false
+
     
     var body: some View {
         NavigationStack{
@@ -32,14 +35,11 @@ struct PecsView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     if cloudViewModel.isChild{
-                        NavigationLink {
-                            AppLockView(
-                                pincode: .init("2023")
-                            )
-                        } label: {
-                            Image(systemName: "gear")
-                                .foregroundColor(.darkGreen)
-                        }
+                        Image(systemName: "gear")
+                            .foregroundColor(.darkGreen)
+                            .onTapGesture {
+                                goToAppLock.toggle()
+                            }
                     } else {
                         if (cloudViewModel.childParentModel != nil) {
                             Button{ isEditing.toggle() }label: {
@@ -48,6 +48,12 @@ struct PecsView: View {
                         }
                     }
                 }
+            }
+            .navigationDestination(isPresented: $goToAppLock) {
+                AppLockView(goToSettings: $goToSettings, pincode: .init("2023"))
+            }
+            .navigationDestination(isPresented: $goToSettings) {
+                SettingsView()
             }
             
         }.onAppear(){

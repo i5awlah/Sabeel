@@ -95,26 +95,26 @@ enum OnboardingType: CaseIterable {
     var title: String {
         switch self {
         case .alwayConnected:
-            return "Alway Connected"
+            return "Always Connected"
         case .getNotification:
             return "Get Notification"
         case .customizePECS:
             return "Customize PECS"
         case .settings:
-            return "Settings"
+            return "Schedule PECS"
         }
     }
     
     var description: String {
         switch self {
         case .alwayConnected:
-            return "Stay connected with your Special Autistic one in his own PECS way by just a TAP ."
+            return "Stay connected with your Special Autistic one in his own PECS way by just a TAP."
         case .getNotification:
-            return "Download the app on both devices to get you special autistic notification."
+            return "Download the app on both devices to get notifications from your special autistic."
         case .customizePECS:
-            return "Add any pictures that your child want with text, and sound ."
+            return "Add any custom PECS for your own Autistic along with text, and sound."
         case .settings:
-            return "we hid and jammed everything you need under the settings."
+            return "Schedule when to show and hide certain pictures to help you maintain your Autistic routine."
         }
     }
 }
