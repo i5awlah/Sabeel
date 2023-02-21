@@ -28,7 +28,10 @@ struct ChildQRView: View {
                             Image(uiImage: imageGreen)
                                 .resizable()
                                 .frame(width: 200, height: 200)
-                                .offset(x: 12, y: -10)
+                                .offset(
+                                    x: Helper.shared.isEnglishLanguage() ? -12 : 12,
+                                    y: -10
+                                )
                             
                         }
                     }
