@@ -22,13 +22,19 @@ struct PecsView: View {
                 if (cloudViewModel.childParentModel != nil) {
                     PicList(isEditing: $isEditing)
                 } else {
-                    PicList(isEditing: $isEditing, pecs: pecs)
-                        .onAppear{
-                            print("fetch pecs without home content")
-                            cloudViewModel.fetchSharedPecs { pecs in
-                                self.pecs = pecs
-                            }
+                    Group {
+                        if cloudViewModel.isLoading {
+                            ProgressView()
+                        } else {
+                            PicList(isEditing: $isEditing, pecs: pecs)
                         }
+                    }
+                    .onAppear{
+                        print("fetch pecs without home content")
+                        cloudViewModel.fetchSharedPecs { pecs in
+                            self.pecs = pecs
+                        }
+                    }
                 }
             }
             .navigationTitle("PECS")

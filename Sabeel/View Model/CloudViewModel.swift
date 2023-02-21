@@ -21,6 +21,8 @@ class CloudViewModel: ObservableObject {
     @Published var scrollToTopPecs = false
     @Published var scrollToTopNotification = false
     
+    @Published var isLoading = false
+    
     var isChild: Bool {
         return currentUser is ChildModel
     }
@@ -252,11 +254,13 @@ class CloudViewModel: ObservableObject {
     
     func fetchSharedPecs(completionHandler: @escaping ([MainPecs]) -> Void) {
         print("fetchPecs")
+        isLoading = true
         
         var allPecs: [MainPecs] = []
         let predicate = NSPredicate(value: true)
         
         let query = CKQuery(recordType: "Pecs", predicate: predicate)
+        query.sortDescriptors = [NSSortDescriptor(key: MainPecs.keys.category, ascending: true)]
         container.publicCloudDatabase.fetch(withQuery: query) { result in
             
             switch(result) {
@@ -271,6 +275,9 @@ class CloudViewModel: ObservableObject {
                             print("Error: \(error.localizedDescription)")
                         }
                     }
+                DispatchQueue.main.async {
+                    self.isLoading = false
+                }
                 completionHandler(allPecs)
                 
             case .failure(let error):
