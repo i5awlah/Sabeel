@@ -11,7 +11,7 @@ struct SettingsView: View {
     
     var settingsDataLinkChild = SettingTile(title: NSLocalizedString("Link your Autistic child", comment: ""), icon: "link.icloud")
     
-    var settingsDataLinkParent = SettingTile(title: NSLocalizedString("Link your Parent", comment: ""), icon: "link.icloud")
+    var settingsDataLinkParent = SettingTile(title: NSLocalizedString("Link with your parent", comment: ""), icon: "link.icloud")
     
     var settingsDataSchedule = SettingTile(title:NSLocalizedString("Schedule PECS", comment: ""), icon: "list.bullet.clipboard")
     
@@ -25,26 +25,25 @@ struct SettingsView: View {
     @State private var showScannerStatusAlert = false
     @State private var scannerStatusAlertTitle = ""
     
+    @State private var showAlreadyLinkedView = false
+    
     var body: some View {
     
         NavigationStack {
             List {
                 
                 // 1- link
-                if cloudViewModel.childParentModel == nil {
-                    if cloudViewModel.isChild {
-                        NavigationLink(destination: ChildQRView()) {
-                            SettingsCellView(data: settingsDataLinkParent)
-                        }
-                    } else {
-                        Button {
-                            scanButtonPressed()
-                        } label: {
-                            SettingsCellView(data: settingsDataLinkChild)
-                        }
+                if cloudViewModel.isChild {
+                    NavigationLink(destination: cloudViewModel.childParentModel == nil ? AnyView(ChildQRView()) : AnyView(AlreadyLinkedView())) {
+                        SettingsCellView(data: settingsDataLinkParent)
                     }
                 } else {
-                    AlreadyLinkedView()
+                    Button {
+                        cloudViewModel.childParentModel == nil ?
+                        scanButtonPressed() : showAlreadyLinkedView.toggle()
+                    } label: {
+                        SettingsCellView(data: settingsDataLinkChild)
+                    }
                 }
 
                 // 2- Schedule
@@ -76,6 +75,9 @@ struct SettingsView: View {
                     isPresentedScan: $isPresentedScan,
                     addChild: addChild
                 )
+            })
+            .navigationDestination(isPresented: $showAlreadyLinkedView, destination: {
+                AlreadyLinkedView()
             })
             .alert(scannerStatusAlertTitle, isPresented: $showScannerStatusAlert) {
                 TextField("Enter your child id", text: $vm.qr)

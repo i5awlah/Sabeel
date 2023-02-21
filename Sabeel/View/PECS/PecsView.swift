@@ -11,14 +11,7 @@ struct PecsView: View {
     @EnvironmentObject var cloudViewModel : CloudViewModel
     @State var isEditing = false
     @State private var pecs: [MainPecs] = []
-    
-    init() {
-            let navBarAppearance = UINavigationBarAppearance()
 
-        navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.init(cloudViewModel.isChild ? .darkGreen : .darkBlue) as Any]
-
-                UINavigationBar.appearance().standardAppearance = navBarAppearance
-     }
     
     var body: some View {
         NavigationStack{
@@ -55,6 +48,12 @@ struct PecsView: View {
                 }
             }
             
+        }.onAppear(){
+            let navBarAppearance = UINavigationBarAppearance()
+
+        navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.init(cloudViewModel.isChild ? .darkGreen : .darkBlue) as Any]
+
+                UINavigationBar.appearance().standardAppearance = navBarAppearance
         }
     }
 }
