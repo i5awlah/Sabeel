@@ -219,7 +219,7 @@ struct AddPecsView: View {
                         }
                     }
                 )
-                .padding()
+                .padding(5)
                 .frame(maxWidth: .infinity)
                 .overlay(
                     RoundedRectangle(cornerRadius: 8)
@@ -229,7 +229,7 @@ struct AddPecsView: View {
                 .overlay(alignment: .topLeading) {
                     Text("Category")
                         .foregroundColor(Color.darkBlue)
-                        .padding(3)
+                        .padding(6)
                         .background(.white)
                         .offset(x: 16, y: -16)
                         
