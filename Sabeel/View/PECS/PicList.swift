@@ -34,20 +34,32 @@ struct PicList: View {
     }
 
         var body: some View {
-        ScrollView {
-            LazyVGrid(columns: coulmns, spacing: spacing) {
-                if (cloudViewModel.childParentModel != nil) {
-                    if cloudViewModel.isChild == false {
-                        AddCell()
-                    }
-                        if cloudViewModel.isChild {
-                            ForEach(cloudViewModel.homeContents.filter({ HomeContent in
-                                return HomeContent.isItTime && HomeContent.isShown
-                            }), id: \.id) { item in
-                                Button{
-                                    handleCellClicked(item: item)
-                                } label: {
-
+            ScrollViewReader { proxy in
+                ScrollView {
+                    LazyVGrid(columns: coulmns, spacing: spacing) {
+                        if (cloudViewModel.childParentModel != nil) {
+                            if cloudViewModel.isChild == false {
+                                AddCell()
+                            }
+                            if cloudViewModel.isChild {
+                                ForEach(cloudViewModel.homeContents.filter({ HomeContent in
+                                    return HomeContent.isItTime && HomeContent.isShown
+                                }), id: \.id) { item in
+                                    Button{
+                                        handleCellClicked(item: item)
+                                    } label: {
+                                        
+                                        PicCell(isEditing: $isEditing, homeContent: item)
+                                            .shimmering(
+                                                active: item.pecs.imageURL == nil
+                                            )
+                                    }
+                                }
+                            }
+                            
+                            else{
+                                ForEach(cloudViewModel.homeContents, id: \.id) { item in
+                                    
                                     PicCell(isEditing: $isEditing, homeContent: item)
                                         .shimmering(
                                             active: item.pecs.imageURL == nil
@@ -56,33 +68,29 @@ struct PicList: View {
                             }
                         }
                         
-                    else{
-                        ForEach(cloudViewModel.homeContents, id: \.id) { item in
-                            
-                            PicCell(isEditing: $isEditing, homeContent: item)
-                                .shimmering(
-                                    active: item.pecs.imageURL == nil
-                                )
+                        else {
+                            ForEach(pecs, id: \.id) { pecs in
+                                Button{
+                                    //  if cloudViewModel.isChild {
+                                    guard let url = Helper.shared.isEnglishLanguage() ? pecs.audioURL : pecs.arabicAudioURL else { return }
+                                    playPecsSound(url: url)
+                                    // }
+                                } label: {
+                                    PicCell(isEditing: $isEditing, pecs: pecs)
+                                    
+                                }
+                                
+                            }
                         }
-                    }
-                    }
-                
-                else {
-                    ForEach(pecs, id: \.id) { pecs in
-                        Button{
-                          //  if cloudViewModel.isChild {
-                            guard let url = Helper.shared.isEnglishLanguage() ? pecs.audioURL : pecs.arabicAudioURL else { return }
-                                playPecsSound(url: url)
-                           // }
-                        } label: {
-                            PicCell(isEditing: $isEditing, pecs: pecs)
-                
-                        }
-                        
+                    }.padding (.horizontal).id(0)
+                }
+                .onChange(of: cloudViewModel.scrollToTopPecs) { _ in
+                    if cloudViewModel.scrollToTopPecs {
+                        proxy.scrollTo(0, anchor: .top)
+                        cloudViewModel.scrollToTopPecs.toggle()
                     }
                 }
-            }.padding (.horizontal)
-        }
+            }
 //        .refreshable {
 //            cloudViewModel.fetchHomeContent()
 //        }

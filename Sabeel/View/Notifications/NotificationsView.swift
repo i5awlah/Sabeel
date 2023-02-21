@@ -22,11 +22,20 @@ struct NotificationsView: View {
                 if cloudViewModel.childRequests.isEmpty {
                     NoNotification()
                 } else {
-                    ScrollView {
-                        NotificationList(
-                            childRequests: cloudViewModel.childRequests
-                                .sorted(by: { $0.associatedRecord.creationDate ?? .now > $1.associatedRecord.creationDate ?? .now })
-                        )
+                    ScrollViewReader { proxy in
+                        ScrollView {
+                            NotificationList(
+                                childRequests: cloudViewModel.childRequests
+                                    .sorted(by: { $0.associatedRecord.creationDate ?? .now > $1.associatedRecord.creationDate ?? .now })
+                            )
+                        }
+                        .id(0)
+                        .onChange(of: cloudViewModel.scrollToTopNotification) { _ in
+                            if cloudViewModel.scrollToTopNotification {
+                                proxy.scrollTo(0, anchor: .top)
+                                cloudViewModel.scrollToTopNotification.toggle()
+                            }
+                        }
                     }
                 }
                 

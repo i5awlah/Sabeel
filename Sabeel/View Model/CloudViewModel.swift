@@ -18,6 +18,9 @@ class CloudViewModel: ObservableObject {
     @Published var homeContents: [HomeContent] = []
     @Published var childRequests: [ChildRequestModel] = []
     
+    @Published var scrollToTopPecs = false
+    @Published var scrollToTopNotification = false
+    
     var isChild: Bool {
         return currentUser is ChildModel
     }
