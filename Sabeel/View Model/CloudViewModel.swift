@@ -21,6 +21,8 @@ class CloudViewModel: ObservableObject {
     @Published var scrollToTopPecs = false
     @Published var scrollToTopNotification = false
     
+    // For PECS - without childParent
+    @Published var pecs = [MainPecs]()
     @Published var isLoading = false
     
     var isChild: Bool {
@@ -189,6 +191,15 @@ class CloudViewModel: ObservableObject {
         container.publicCloudDatabase.fetch(withQuery: query) { result in
             switch(result) {
             case .success((let result)):
+                // if No user
+                if result.matchResults.count == 0 {
+                    print("fetch pecs without home content")
+                    self.fetchSharedPecs { pecs in
+                        DispatchQueue.main.async {
+                            self.pecs = pecs
+                        }
+                    }
+                }
                 result.matchResults.compactMap { $0.1 }
                     .forEach {
                         switch $0 {
@@ -254,7 +265,9 @@ class CloudViewModel: ObservableObject {
     
     func fetchSharedPecs(completionHandler: @escaping ([MainPecs]) -> Void) {
         print("fetchPecs")
-        isLoading = true
+        DispatchQueue.main.async {
+            self.isLoading = true
+        }
         
         var allPecs: [MainPecs] = []
         let predicate = NSPredicate(value: true)

@@ -10,7 +10,6 @@ import SwiftUI
 struct PecsView: View {
     @EnvironmentObject var cloudViewModel : CloudViewModel
     @State var isEditing = false
-    @State private var pecs: [MainPecs] = []
 
     @State private var goToAppLock: Bool = false
     @State private var goToSettings: Bool = false
@@ -26,13 +25,7 @@ struct PecsView: View {
                         if cloudViewModel.isLoading {
                             ProgressView()
                         } else {
-                            PicList(isEditing: $isEditing, pecs: pecs)
-                        }
-                    }
-                    .onAppear{
-                        print("fetch pecs without home content")
-                        cloudViewModel.fetchSharedPecs { pecs in
-                            self.pecs = pecs
+                            PicList(isEditing: $isEditing, pecs: cloudViewModel.pecs)
                         }
                     }
                 }
