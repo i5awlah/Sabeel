@@ -35,17 +35,20 @@ struct ChildQRView: View {
                 }
             
             
-            
             VStack(spacing: 20) {
                 Text("Connect your special child using the scan in your app setting")
+                
                 VStack(spacing: 5) {
                     Text("or write it manually".localized)
                     Text("\(cloudViewModel.currentUser?.id ?? "")")
+                        .background(Color.lightGray)
                 }
                 .font(.customFont(size: 16))
             }
-                .font(.customFont(size: 20)).multilineTextAlignment(.center)
-                .padding(.horizontal, 50)
+            .font(.customFont(size: 20))
+            .foregroundColor(.darkGray)
+            .multilineTextAlignment(.center)
+            .padding(.horizontal,24)
         }.toolbar(.hidden,for: .tabBar)
     }
 }

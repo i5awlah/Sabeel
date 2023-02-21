@@ -19,11 +19,21 @@ struct AddChildView: View {
     
     var body: some View {
         VStack(spacing : 20){
-            Image("Scan")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 400,height: 400)
-     
+                Image("Scan")
+                    .resizable()
+                    .scaledToFit()
+                    .padding(.horizontal, 16)
+                
+                Text("QR Scan")
+                    .bold()
+                    .font(.customFont(size: 30))
+                    .foregroundColor(.darkBlue)
+                
+                Text("Connect your special child by scanning the QR code in their app settings")
+                    .font(.customFont(size: 20))
+                    .foregroundColor(.darkGray)
+                    .multilineTextAlignment(.center)
+            
             Button {
                 scanButtonPressed()
             } label: {
@@ -47,7 +57,11 @@ struct AddChildView: View {
                     addChild: addChild
                 )
             }
-        }.padding(.horizontal)
+            }  .padding(.horizontal, 24)
+            
+
+           
+    
         .alert(scannerStatusAlertTitle.localized, isPresented: $showScannerStatusAlert) {
             TextField("Enter your child id", text: $vm.qr)
             Button("Add", action: addChild)
