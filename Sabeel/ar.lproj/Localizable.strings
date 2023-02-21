@@ -73,6 +73,7 @@
 "Please provide access to the camera in settings" = "الرجاء إعطاء صلاحية الوصول للكاميرا من الإعدادات";
 "Requesting camera access" = "اطلب الوصول إلى الكاميرا";
 "Cancel" = "إلغاء";
+"Scan" = "مسح";
 
 //MARK: AlreadyLinked
 "Already connected" = "تم الربط";
