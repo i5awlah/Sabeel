@@ -50,6 +50,7 @@
 		906035C529A02A68002D4192 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 906035C729A02A68002D4192 /* Localizable.strings */; };
 		9085ABD729A497F300EF7157 /* SettingsCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085ABD629A497F300EF7157 /* SettingsCellView.swift */; };
 		90EE571229A5686A006BFAC5 /* NoLinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EE571129A5686A006BFAC5 /* NoLinkView.swift */; };
+		90EE571429A575ED006BFAC5 /* AddChildView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EE571329A575ED006BFAC5 /* AddChildView.swift */; };
 		ECA416AC29A3537C003A7F42 /* AppLockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA416AB29A3537C003A7F42 /* AppLockView.swift */; };
 /* End PBXBuildFile section */
 
@@ -99,6 +100,7 @@
 		906035C629A02A68002D4192 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.strings; sourceTree = "<group>"; };
 		9085ABD629A497F300EF7157 /* SettingsCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCellView.swift; sourceTree = "<group>"; };
 		90EE571129A5686A006BFAC5 /* NoLinkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoLinkView.swift; sourceTree = "<group>"; };
+		90EE571329A575ED006BFAC5 /* AddChildView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddChildView.swift; sourceTree = "<group>"; };
 		ECA416AB29A3537C003A7F42 /* AppLockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLockView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -160,6 +162,7 @@
 				900DDC2B2998D1BF005A471F /* ScanQRView.swift */,
 				900DDC2F2998EFB5005A471F /* ChildQRView.swift */,
 				1C67ECF529A47BC200D3AE7D /* AlreadyLinkedView.swift */,
+				90EE571329A575ED006BFAC5 /* AddChildView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -379,6 +382,7 @@
 				900DDC2C2998D1BF005A471F /* ScanQRView.swift in Sources */,
 				901182A729915EC50024ABC1 /* PecsViewModel.swift in Sources */,
 				90118270298D0EAA0024ABC1 /* SabeelApp.swift in Sources */,
+				90EE571429A575ED006BFAC5 /* AddChildView.swift in Sources */,
 				900DDC0D29939AE9005A471F /* NotificationList.swift in Sources */,
 				9011828E29915D140024ABC1 /* EditPecsView.swift in Sources */,
 				9011828929915CDC0024ABC1 /* PecsView.swift in Sources */,
