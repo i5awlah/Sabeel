@@ -13,16 +13,15 @@
 
 "Can’t connect to iCloud!" = "لا يمكن الاتصال بـ iCloud";
 "Please make sure that you're signed in with your apple ID in device settings." = "يرجى التأكد من تسجيل الدخول باستخدام معرف Apple الخاص بك في إعدادات الجهاز.";
-"Alway Connected" = "دائما علي تواصل";
-"Stay connected with your Special Autistic one in his own PECS way by just a TAP." = "ابق على اتصال مع الشخص المصاب بالتوحد بطريقة PECS الخاصة به فقط من خلال النقر";
+"Always Connected" = "دائما علي تواصل";
+"Stay connected with your Special Autistic one in his own PECS way by just a TAP." = "ابق على اتصال مع طفلك بطريقة PECS الخاصة به فقط من خلال النقر";
 "Get Notifications" = "احصل على الإشعارات";
 "Download the app on both devices to get notifications from your special autistic." = "قم بتنزيل التطبيق على كلا الجهازين لتحصل على إشعارات خاص من طفلك المميز.";
 "Customize PECS" = "خصص بطاقاتك";
-"Add custom PECS for your own Autistic along with text, and sound." ="أضف بيكس مخصصه لطفلك مع الاسم والصوت.";
-"Add custom PECS your own Autistic wants along with text, and sound." = "أضف أي صورة يريدها طفلك مع اسمها وصوتها";
-
+"Add any custom PECS for your own Autistic along with text, and sound." ="أضف بيكس مخصصه لطفلك مع الاسم والصوت.";
+"Schedule PECS" = "بطاقات مجدولة";
+"Schedule when to show and hide certain pictures to help you maintain your Autistic routine."= "حدد موعدًا لإظهار وإخفاء بطاقات معينة لمساعدتك في الحفاظ على روتين طفلك."
 "Settings" = "الإعدادات";
-
 "We hid and jammed everything you need under the settings." = "قد أخفينا كل ما تحتاجه في الإعدادات";
 
 
@@ -62,15 +61,15 @@
 "Settings" = "الإعدادات";
 "Link your Autistic child" = "الربط مع طفلك";
 "Link with your parent" = "الربط مع الأهل";
-"Schedule PECS" = "جدولة أوقات ظهور الصور";
-"Number of PECS per row:" = "عدد الصور في الصف الواحد:";
+"Schedule PECS" = "جدولة أوقات ظهور البطاقات";
+"Number of PECS per row:" = "عدد البطاقات في الصف الواحد:";
 
 //MARK: AlredyLinked
 "Already Linked" = "تم الربط";
 "This account already linked with another one" = "هذا الحساب تم ربطه مسبقًا بحساب آخر" ;
 
 //MARK: Schedule PECS
-"Category" = "فئات الصور";
+"Category" = "فئات البطاقات";
 "Select Option" = "اختر فئة";
 "Time" = "الوقت";
 "From" = "من";
