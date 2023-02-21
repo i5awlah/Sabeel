@@ -18,10 +18,28 @@ struct AppLockView: View {
     
     let correctPin: PinCode
     let buttons: [String] = [ "1","2","3","4","5","6","7","8","9","","0","X"]
+    let Pass: [String] = [ "One","Two","Three","Four","Five","Six","Seven","Eight","Nine","Zero"]
+    
+    let array = [ NSLocalizedString("1", comment: ""),
+                  NSLocalizedString("2", comment: ""),
+                  NSLocalizedString("3", comment: ""),
+                  NSLocalizedString("4", comment: ""),
+                  NSLocalizedString("5", comment: ""),
+                  NSLocalizedString("6", comment: ""),
+                  NSLocalizedString("7", comment: ""),
+                  NSLocalizedString("8", comment: ""),
+                  NSLocalizedString("9", comment: ""),
+                  NSLocalizedString("", comment: ""),
+                  NSLocalizedString("0", comment: ""),
+                  NSLocalizedString("X", comment: ""),
+    ]
     @State private var enteredPin: String = ""
     @State private var NextView: Bool = false
+    @State private var FirstTime: Bool = true
+    @State private var FirstTmime: Bool = false
     @Namespace private var animation
-    @StateObject var cloudViewModel = CloudViewModel()
+    var n = Int.random(in: 1000...9999)
+    //@StateObject var cloudViewModel = CloudViewModel()
     
     public init(
         pincode: PinCode) {
@@ -34,16 +52,28 @@ struct AppLockView: View {
                         VStack(spacing: 20) {
                             Text("Parent Only !").font(.customFont(size: 35).weight(.bold))
                             
-                            Text(" To access enter the code:").font(.customFont(size: 20).weight(.light))
+                            Text("To access enter the code below:").font(.customFont(size: 20).weight(.light))
                                 .padding()
                             
                             Text("Two - zero - two - three")
-                                .font(.customFont(size: 25))
-                                .foregroundColor(Color.darkGreen)
-                            
+                                                                    .font(.customFont(size: 25))
+                                                                    .foregroundColor(Color.darkGreen)
+//                            HStack(spacing: 20) {
+//                                ForEach(0..<3) { i in
+//
+//                                    Text(Pass.randomElement()!)
+//                                        .font(.customFont(size: 25))
+//                                        .foregroundColor(Color.darkGreen)
+//
+//                                }
+//                            }
+                           
                             HStack(spacing: 60) {
                                 ForEach(0..<correctPin.value.count) { i in
                                     ZStack {
+//                                        Text(Pass.randomElement()!)
+//                                            .font(.customFont(size: 25))
+//                                            .foregroundColor(Color.darkGreen)
                                         if !(i < enteredPin.count) {
                                             Rectangle()
                                                 .frame(width: 12, height: 2)
@@ -60,6 +90,7 @@ struct AppLockView: View {
                                         }
                                     }
                                 }
+                                
                             }
                             .frame(height: 30)
                             .padding(.vertical)
@@ -74,8 +105,12 @@ struct AppLockView: View {
                             
                         ], spacing: 10) {
                             ForEach(buttons, id: \.self) { button in
+                                
                                 Button {
+                                   
                                     withAnimation(.easeIn(duration: 0.1)) {
+                                        
+                                        
                                         if button == "X" {
                                             if !enteredPin.isEmpty {
                                                 enteredPin.removeLast()
@@ -97,6 +132,7 @@ struct AppLockView: View {
                                             if !(button == "") {
                                                 Text(button)
                                                     .font(.system(size: 25, weight: .semibold, design: .rounded)).foregroundColor(Color.darkBlue).overlay(Circle().frame(width: 60, height: 70).foregroundColor(Color.lightBlue).opacity(0.4))
+                                                //FirstTime = false
                                                 
                                             }
                                         }
@@ -118,15 +154,29 @@ struct AppLockView: View {
                         .padding(.bottom, 60)
                         
                     }
+                    
                     .opacity(correctPin.value == enteredPin ? 0 : 1)
                     .onChange(of: enteredPin, perform: onChange)
                     .fullScreenCover(isPresented: $NextView){
                                         SettingsView()
                                     }
+                    
                 }
+//                .onAppear(){
+//                                                HStack(spacing: 20) {
+//                                                    ForEach(0..<3) { i in
+//
+//                                                        Text(Pass.randomElement()!)
+//                                                            .font(.customFont(size: 25))
+//                                                            .foregroundColor(Color.darkGreen)
+//
+//                                                    }
+//                                                }
+//                }
                 .background(Color(.white).ignoresSafeArea())
+        
                 
-            }
+    }
         
     
 
@@ -134,6 +184,8 @@ struct AppLockView: View {
        
         if enteredPin.count == correctPin.value.count {
             if enteredPin == correctPin.value {
+               
+                //FirstTime = false
                 NextView = true
                 print("Success")
             } else {
@@ -142,6 +194,7 @@ struct AppLockView: View {
             DispatchQueue.main.asyncAfter(deadline: .now()+0.2) {
                 withAnimation(.easeIn(duration: 0.15)) {
                     enteredPin = ""
+                    
                 }
             }
             
@@ -151,6 +204,20 @@ struct AppLockView: View {
         UIImpactFeedbackGenerator(style: style).impactOccurred()
     }
     
+//    func Test() {
+//
+//
+//                Text(Pass.randomElement()!)
+//                    .font(.customFont(size: 25))
+//                    .foregroundColor(Color.darkGreen)
+//    }
+    
+    func randomString(length: Int) -> String {
+      let letters = "0123456789"
+      return String((0..<length).map{ _ in letters.randomElement()! })
+    }
+
+    
 }
 
 struct AppLockView_Previews: PreviewProvider {
@@ -158,5 +225,6 @@ struct AppLockView_Previews: PreviewProvider {
         AppLockView(
             pincode: .init("2023")
         )
+        .environmentObject(CloudViewModel())
     }
 }

@@ -33,7 +33,9 @@ struct PecsView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     if cloudViewModel.isChild{
                         NavigationLink {
-                            SettingsView()
+                            AppLockView(
+                                pincode: .init("2023")
+                            )
                         } label: {
                             Image(systemName: "gear")
                                 .foregroundColor(.darkGreen)
