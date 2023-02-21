@@ -62,6 +62,10 @@
 "Schedule PECS" = "جدولة أوقات ظهور الصور";
 "Number of PECS per row:" = "عدد الصور في الصف الواحد:";
 
+//MARK: AlredyLinked
+"Already Linked" = "تم الربط";
+"This account already linked with another one" = "هذا الحساب تم ربطه مسبقًا بحساب آخر" ;
+
 //MARK: Schedule PECS
 "Category" = "فئات الصور";
 "Select Option" = "اختر فئة";

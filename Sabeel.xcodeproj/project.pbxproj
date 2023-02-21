@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1C67ECF629A47BC200D3AE7D /* AlreadyLinkedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C67ECF529A47BC200D3AE7D /* AlreadyLinkedView.swift */; };
 		5D4B3573299CDFE70089A3F9 /* Shimmer in Frameworks */ = {isa = PBXBuildFile; productRef = 5D4B3572299CDFE70089A3F9 /* Shimmer */; };
 		5D4B3575299E2E830089A3F9 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B3574299E2E830089A3F9 /* TabBar.swift */; };
 		5DB4383D299AA712004F2A53 /* SplashScreenLight.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 5DB4383C299AA712004F2A53 /* SplashScreenLight.mp4 */; };
@@ -52,6 +53,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1C67ECF529A47BC200D3AE7D /* AlreadyLinkedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlreadyLinkedView.swift; sourceTree = "<group>"; };
 		5D4B3574299E2E830089A3F9 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		5DB4383C299AA712004F2A53 /* SplashScreenLight.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = SplashScreenLight.mp4; sourceTree = "<group>"; };
 		5DC1C23229A01DB400FB6BD1 /* NoNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoNotification.swift; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 				ECA416AB29A3537C003A7F42 /* AppLockView.swift */,
 				900DDC2B2998D1BF005A471F /* ScanQRView.swift */,
 				900DDC2F2998EFB5005A471F /* ChildQRView.swift */,
+				1C67ECF529A47BC200D3AE7D /* AlreadyLinkedView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -383,6 +386,7 @@
 				9011829829915DBA0024ABC1 /* PicCell.swift in Sources */,
 				901182A529915E9D0024ABC1 /* PecsModel.swift in Sources */,
 				9011828C29915D060024ABC1 /* AddPecsView.swift in Sources */,
+				1C67ECF629A47BC200D3AE7D /* AlreadyLinkedView.swift in Sources */,
 				9011829F29915E0A0024ABC1 /* NotificationsView.swift in Sources */,
 				ECA416AC29A3537C003A7F42 /* AppLockView.swift in Sources */,
 				900DDC182994F771005A471F /* CloudViewModel.swift in Sources */,
