@@ -23,10 +23,16 @@ struct HomeContent: Equatable {
     var associatedRecord: CKRecord
     var pecs: PecsModel
     var isItTime: Bool {
-        let CurrentTime: Date = Date()
+        let CurrentDate: Date = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm:ss"
+        var CurrentTime = dateFormatter.string(from: CurrentDate)
+  
         if self.startTime != nil && self.endTime != nil {
-            if CurrentTime > self.startTime! && CurrentTime < self.endTime! {
-                
+            var StartTime = dateFormatter.string(from: self.startTime!)
+            var EndTime = dateFormatter.string(from: self.endTime!)
+            
+            if CurrentTime > StartTime && CurrentTime < EndTime {
                 return true
             } else {
                 return false
