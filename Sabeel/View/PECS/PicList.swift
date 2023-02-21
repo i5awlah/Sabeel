@@ -86,7 +86,9 @@ struct PicList: View {
                 }
                 .onChange(of: cloudViewModel.scrollToTopPecs) { _ in
                     if cloudViewModel.scrollToTopPecs {
-                        proxy.scrollTo(0, anchor: .top)
+                        withAnimation(.spring()) {
+                            proxy.scrollTo(0, anchor: .top)
+                        }
                         cloudViewModel.scrollToTopPecs.toggle()
                     }
                 }

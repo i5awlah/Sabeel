@@ -32,7 +32,9 @@ struct NotificationsView: View {
                         .id(0)
                         .onChange(of: cloudViewModel.scrollToTopNotification) { _ in
                             if cloudViewModel.scrollToTopNotification {
-                                proxy.scrollTo(0, anchor: .top)
+                                withAnimation(.spring()) {
+                                    proxy.scrollTo(0, anchor: .top)
+                                }
                                 cloudViewModel.scrollToTopNotification.toggle()
                             }
                         }
