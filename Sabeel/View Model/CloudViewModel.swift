@@ -467,28 +467,17 @@ class CloudViewModel: ObservableObject {
     }
     
     // Update Hide
-    func updateHidePECS(homeContent: HomeContent, isHidden: Bool, index: Int){
-        
+    func updateHidePECS(homeContent: HomeContent, completionHandler: @escaping (Bool) -> Void){
         let record = homeContent.associatedRecord
-                if isHidden {
-                    record["isShown"] = 1
-                } else {
-                    record["isShown"] = 0
-                }
+        record["isShown"] = !homeContent.isShown
         
         //saveRecord
         container.publicCloudDatabase.save(record) { returnedRecord, returnedError in
             if let returnedError {
                 debugPrint("ERROR: Failed to update home content: \(returnedError.localizedDescription)")
-            } else if returnedRecord != nil {
+            } else {
                 debugPrint("\(homeContent.pecs.name) has been successfully updated.")
-                DispatchQueue.main.async {
-                    //change the record it self to the new value
-                    guard let returnedRecord else { return }
-                    let newHome = HomeContent(record: returnedRecord, pecs: homeContent.pecs)
-                    guard let newHome else { return }
-                    self.homeContents[index] = newHome
-                }
+                completionHandler(true)
             }
         }
        
@@ -519,7 +508,7 @@ class CloudViewModel: ObservableObject {
                 print(error.localizedDescription)
             }
         }
-        container.add(operation)
+        container.publicCloudDatabase.add(operation)
 
         //fetch the record again or modify it in the homeContents
 

@@ -16,13 +16,11 @@ struct ScanQRView: View {
     var body: some View {
         ZStack {
             mainView
-            closeButton
         }
         .onAppear{
             vm.recognizedItems = []
         }
-        .navigationTitle("Scan")
-        .toolbar(.hidden)
+        .toolbar(.hidden, for: .tabBar)
         
     }
 }
@@ -32,7 +30,6 @@ extension ScanQRView {
         DataScannerView(
             recognizedItems: $vm.recognizedItems,
             recognizedDataType: vm.recognizedDataType)
-        .background { Color.gray.opacity(0.3) }
         .ignoresSafeArea()
         .onAppear{
             vm.recognizedItems = []
@@ -41,23 +38,6 @@ extension ScanQRView {
         .onChange(of: vm.recognizedText) { _ in handleRecognizedText() }
     }
     
-    private var closeButton: some View {
-        Button {
-            withAnimation(.spring()) {
-                isPresentedScan.toggle()
-            }
-        } label: {
-            Image(systemName: "chevron.backward")
-                .font(.title)
-                .foregroundColor(.accentColor)
-                .padding(10)
-                .background(Color.white.opacity(0.4))
-                .clipShape(Circle())
-                .shadow(radius: 2)
-                .padding(.leading)
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-    }
 }
 
 extension ScanQRView {

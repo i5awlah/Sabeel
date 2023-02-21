@@ -2,7 +2,7 @@
 //  PecsView.swift
 //  Sabeel
 //
-//  Created by Khawlah on 06/02/2023.
+//  Created by hoton on 06/02/2023.
 //
 
 import SwiftUI
@@ -10,8 +10,8 @@ import SwiftUI
 struct PecsView: View {
     @EnvironmentObject var cloudViewModel : CloudViewModel
     @State var isEditing = false
-    
     @State private var pecs: [MainPecs] = []
+
     
     var body: some View {
         NavigationStack{
@@ -29,7 +29,6 @@ struct PecsView: View {
                 }
             }
             .navigationTitle("PECS")
-            .foregroundColor(cloudViewModel.isChild ? .darkGreen : .darkBlue )
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     if cloudViewModel.isChild{
@@ -39,8 +38,7 @@ struct PecsView: View {
                             Image(systemName: "gear")
                                 .foregroundColor(.darkGreen)
                         }
-                    }
-                    else{
+                    } else {
                         if (cloudViewModel.childParentModel != nil) {
                             Button{ isEditing.toggle() }label: {
                                 Text( isEditing ? "Done" : "Edit")}
@@ -50,6 +48,12 @@ struct PecsView: View {
                 }
             }
             
+        }.onAppear(){
+            let navBarAppearance = UINavigationBarAppearance()
+
+        navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.init(cloudViewModel.isChild ? .darkGreen : .darkBlue) as Any]
+
+                UINavigationBar.appearance().standardAppearance = navBarAppearance
         }
     }
 }

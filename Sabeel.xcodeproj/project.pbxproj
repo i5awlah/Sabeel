@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1C67ECF629A47BC200D3AE7D /* AlreadyLinkedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C67ECF529A47BC200D3AE7D /* AlreadyLinkedView.swift */; };
 		5D4B3573299CDFE70089A3F9 /* Shimmer in Frameworks */ = {isa = PBXBuildFile; productRef = 5D4B3572299CDFE70089A3F9 /* Shimmer */; };
 		5D4B3575299E2E830089A3F9 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B3574299E2E830089A3F9 /* TabBar.swift */; };
 		5DB4383D299AA712004F2A53 /* SplashScreenLight.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 5DB4383C299AA712004F2A53 /* SplashScreenLight.mp4 */; };
@@ -27,7 +28,6 @@
 		900DDC282998CA3C005A471F /* DataScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900DDC272998CA3C005A471F /* DataScannerView.swift */; };
 		900DDC2A2998CA88005A471F /* ScanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900DDC292998CA88005A471F /* ScanViewModel.swift */; };
 		900DDC2C2998D1BF005A471F /* ScanQRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900DDC2B2998D1BF005A471F /* ScanQRView.swift */; };
-		900DDC2E2998EE0E005A471F /* AddChildView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900DDC2D2998EE0E005A471F /* AddChildView.swift */; };
 		900DDC302998EFB5005A471F /* ChildQRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900DDC2F2998EFB5005A471F /* ChildQRView.swift */; };
 		900DDC36299D0765005A471F /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900DDC35299D0765005A471F /* NotificationManager.swift */; };
 		90118270298D0EAA0024ABC1 /* SabeelApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9011826F298D0EAA0024ABC1 /* SabeelApp.swift */; };
@@ -48,10 +48,12 @@
 		901182AC29916C3C0024ABC1 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901182AB29916C3C0024ABC1 /* Extensions.swift */; };
 		906035C229A026CE002D4192 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906035C129A026CE002D4192 /* Helper.swift */; };
 		906035C529A02A68002D4192 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 906035C729A02A68002D4192 /* Localizable.strings */; };
+		9085ABD729A497F300EF7157 /* SettingsCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085ABD629A497F300EF7157 /* SettingsCellView.swift */; };
 		ECA416AC29A3537C003A7F42 /* AppLockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA416AB29A3537C003A7F42 /* AppLockView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1C67ECF529A47BC200D3AE7D /* AlreadyLinkedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlreadyLinkedView.swift; sourceTree = "<group>"; };
 		5D4B3574299E2E830089A3F9 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		5DB4383C299AA712004F2A53 /* SplashScreenLight.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = SplashScreenLight.mp4; sourceTree = "<group>"; };
 		5DC1C23229A01DB400FB6BD1 /* NoNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoNotification.swift; sourceTree = "<group>"; };
@@ -73,7 +75,6 @@
 		900DDC272998CA3C005A471F /* DataScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataScannerView.swift; sourceTree = "<group>"; };
 		900DDC292998CA88005A471F /* ScanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanViewModel.swift; sourceTree = "<group>"; };
 		900DDC2B2998D1BF005A471F /* ScanQRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanQRView.swift; sourceTree = "<group>"; };
-		900DDC2D2998EE0E005A471F /* AddChildView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddChildView.swift; sourceTree = "<group>"; };
 		900DDC2F2998EFB5005A471F /* ChildQRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildQRView.swift; sourceTree = "<group>"; };
 		900DDC35299D0765005A471F /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		9011826C298D0EAA0024ABC1 /* Sabeel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sabeel.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -95,6 +96,7 @@
 		901182AB29916C3C0024ABC1 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		906035C129A026CE002D4192 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		906035C629A02A68002D4192 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.strings; sourceTree = "<group>"; };
+		9085ABD629A497F300EF7157 /* SettingsCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCellView.swift; sourceTree = "<group>"; };
 		ECA416AB29A3537C003A7F42 /* AppLockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLockView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -149,12 +151,13 @@
 			isa = PBXGroup;
 			children = (
 				9011829C29915DF50024ABC1 /* SettingsView.swift */,
+				9085ABD629A497F300EF7157 /* SettingsCellView.swift */,
 				900DDC0929939AA6005A471F /* SchedulePecsView.swift */,
 				900DDC272998CA3C005A471F /* DataScannerView.swift */,
 				ECA416AB29A3537C003A7F42 /* AppLockView.swift */,
 				900DDC2B2998D1BF005A471F /* ScanQRView.swift */,
-				900DDC2D2998EE0E005A471F /* AddChildView.swift */,
 				900DDC2F2998EFB5005A471F /* ChildQRView.swift */,
+				1C67ECF529A47BC200D3AE7D /* AlreadyLinkedView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -381,9 +384,9 @@
 				9011829D29915DF50024ABC1 /* SettingsView.swift in Sources */,
 				901182AC29916C3C0024ABC1 /* Extensions.swift in Sources */,
 				9011829829915DBA0024ABC1 /* PicCell.swift in Sources */,
-				900DDC2E2998EE0E005A471F /* AddChildView.swift in Sources */,
 				901182A529915E9D0024ABC1 /* PecsModel.swift in Sources */,
 				9011828C29915D060024ABC1 /* AddPecsView.swift in Sources */,
+				1C67ECF629A47BC200D3AE7D /* AlreadyLinkedView.swift in Sources */,
 				9011829F29915E0A0024ABC1 /* NotificationsView.swift in Sources */,
 				ECA416AC29A3537C003A7F42 /* AppLockView.swift in Sources */,
 				900DDC182994F771005A471F /* CloudViewModel.swift in Sources */,
@@ -391,6 +394,7 @@
 				900DDC0A29939AA6005A471F /* SchedulePecsView.swift in Sources */,
 				900DDC302998EFB5005A471F /* ChildQRView.swift in Sources */,
 				900DDC162994E782005A471F /* SingleOnboardingView.swift in Sources */,
+				9085ABD729A497F300EF7157 /* SettingsCellView.swift in Sources */,
 				9011828429915C910024ABC1 /* OnboardingView.swift in Sources */,
 				900DDC0F29939AF2005A471F /* NotificationCell.swift in Sources */,
 				906035C229A026CE002D4192 /* Helper.swift in Sources */,
@@ -542,6 +546,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Sabeel/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "The app needs camera access to scan QR for your child";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "This app requires access to the Microphone to upload your child sound";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app requires access to the photo library to upload your personal child PECS";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -576,6 +582,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Sabeel/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "The app needs camera access to scan QR for your child";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "This app requires access to the Microphone to upload your child sound";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app requires access to the photo library to upload your personal child PECS";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

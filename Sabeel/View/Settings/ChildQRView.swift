@@ -25,7 +25,7 @@ struct ChildQRView: View {
                 Text("Or you can write it manually: \n \(id)")
                     .multilineTextAlignment(.center)
             }
-        }
+        }.toolbar(.hidden,for: .tabBar)
     }
 }
 

@@ -42,11 +42,12 @@ struct PicList: View {
                     }
                         if cloudViewModel.isChild {
                             ForEach(cloudViewModel.homeContents.filter({ HomeContent in
-                                return HomeContent.isItTime || HomeContent.isShown
+                                return HomeContent.isItTime && HomeContent.isShown
                             }), id: \.id) { item in
                                 Button{
                                     handleCellClicked(item: item)
                                 } label: {
+
                                     PicCell(isEditing: $isEditing, homeContent: item)
                                         .shimmering(
                                             active: item.pecs.imageURL == nil
@@ -57,7 +58,6 @@ struct PicList: View {
                         
                     else{
                         ForEach(cloudViewModel.homeContents, id: \.id) { item in
-                         //   let index = cloudViewModel.homeContents.firstIndex(of: item)
                             
                             PicCell(isEditing: $isEditing, homeContent: item)
                                 .shimmering(
@@ -83,9 +83,9 @@ struct PicList: View {
                 }
             }.padding (.horizontal)
         }
-        .refreshable {
-            cloudViewModel.fetchHomeContent()
-        }
+//        .refreshable {
+//            cloudViewModel.fetchHomeContent()
+//        }
        
         }
 

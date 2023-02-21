@@ -11,12 +11,13 @@ import CloudKit
 
 struct PicCell: View {
    
-  
+    @State var isShownPecs = true
+    @State var isAssigned = false
+    
     @Binding var isEditing : Bool
     @State var deleteConfirm = false
     let homeContent: HomeContent?
     let pecs: PecsModel
-    //let index : Int
     @EnvironmentObject var cloudViewModel : CloudViewModel
     
     init(isEditing: Binding<Bool>, homeContent: HomeContent) {
@@ -25,11 +26,13 @@ struct PicCell: View {
         self.pecs = homeContent.pecs
     }
     
+    
     init(isEditing: Binding<Bool>, pecs: PecsModel) {
         self.pecs = pecs
         self.homeContent = nil
         _isEditing = isEditing
     }
+    
     
     var body: some View {
         GeometryReader { geo in
@@ -60,11 +63,13 @@ struct PicCell: View {
                             
                         } else {
                             Button{
-//                                cloudViewModel.updateHidePECS(homeContent: homeContent!, isHidden: homeContent?.isShown ?? true, index: index)
-                                
+                                guard let homeContent else { return }
+                                cloudViewModel.updateHidePECS(homeContent: homeContent) { isUpdated in
+                                    isShownPecs.toggle()
+                                }
                             }
                         label: {
-                            Image(systemName: homeContent?.isShown ?? true ? "eye" : "eye.slash")
+                            Image(systemName: isShownPecs ? "eye" : "eye.slash")
                                 .resizable()
                                 .frame(width: 20,height: 15)
                                 .padding(5)
@@ -85,10 +90,10 @@ struct PicCell: View {
                          .frame(width: imageWidth ,height: 80)
                     
                 } placeholder: {
-                    Image(systemName: "photo")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: imageWidth, height: 80)
+                    Image(systemName: "text.below.photo")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: imageWidth, height: 60)
                 }
      
                 Text(getPicName())
@@ -104,9 +109,16 @@ struct PicCell: View {
         }
         .frame (height: 170)
         .overlay(
-            homeContent?.isShown ?? true ? Rectangle().foregroundColor(.gray).opacity(0.5)
+            cloudViewModel.isChild == false && isShownPecs == false ? Rectangle().foregroundColor(.gray).opacity(0.5)
                 .cornerRadius(10) : nil
             )
+        .onAppear{
+            if !isAssigned {
+                isShownPecs = homeContent?.isShown ?? true
+                isAssigned = true
+            }
+            
+        }
             
         
     }
@@ -145,9 +157,10 @@ struct AddCell: View {
         }
         }
         .frame (height: 170)
+   
         .overlay(
-            RoundedRectangle(cornerRadius: 10)
-                .stroke(Color.darkBlue, style: StrokeStyle(lineWidth: 1, dash: [13, 5]))
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(Color.darkBlue, style: StrokeStyle(lineWidth: 1, dash: [13, 5]))
         )
         
     }
