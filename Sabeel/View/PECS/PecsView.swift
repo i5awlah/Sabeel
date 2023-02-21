@@ -40,11 +40,14 @@ struct PecsView: View {
                                 goToAppLock.toggle()
                             }
                     } else {
-                        if (cloudViewModel.childParentModel != nil) {
-                            Button{ isEditing.toggle() }label: {
-                                Text( isEditing ? "Done" : "Edit")}
-                            .foregroundColor(.darkBlue)
+                        
+                        Button {
+                            cloudViewModel.childParentModel != nil ? isEditing.toggle() : cloudViewModel.showNoLinkView.toggle()
+                        } label: {
+                            Text( isEditing ? "Done" : "Edit")
                         }
+                        .foregroundColor(.darkBlue)
+                        
                     }
                 }
             }
