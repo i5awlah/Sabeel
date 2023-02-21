@@ -51,7 +51,7 @@ struct AppLockView: View {
                 ZStack(alignment: .top) {
                     VStack {
                         VStack(spacing: 20) {
-                            Text("Parent Only !").font(.customFont(size: 35).weight(.bold))
+                            Text("Parent Only!").font(.customFont(size: 35).weight(.bold))
                             
                             Text("To access enter the code below:").font(.customFont(size: 20).weight(.light))
                                 .padding()

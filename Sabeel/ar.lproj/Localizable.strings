@@ -7,7 +7,7 @@
 */
 
 //MARK: Onboarding
-"Get Started" = "ابدء";
+"Get Started" = "ابدأ";
 "skip" = "تخطي";
 
 
@@ -65,6 +65,7 @@
 "Schedule PECS" = "جدولة أوقات ظهور البطاقات";
 "Number of PECS per row:" = "عدد البطاقات في الصف الواحد:";
 "Link your child using the scan in your app setting" = "قم بربط طفلك من خلال مسح الرمز باستخدام إعدادات تطبيقك";
+"or write it manually" = "أو قم بكتابته يدويًا";
 
 "Enter your child id" = "أدخل الـID الخاص بطفلك";
 "Your device doesn't have a camera" = "لا توجد كاميرا في جهازك";
@@ -102,7 +103,7 @@
 "Tools" = "أدوات";
 
 //MARK: AppLock
-"Parent Only !" = "الوالدين فقط !";
+"Parent Only!" = "للوالدين فقط!";
 "To access enter the code below:" = "للوصول ادخل الرمز المكتوب بالأسفل";
 "Two - zero - two - three" = "اثنين - صفر - اثنين - ثلاثة";
 "1" = "١";
