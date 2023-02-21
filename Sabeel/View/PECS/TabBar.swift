@@ -36,6 +36,9 @@ struct TabBar: View {
                     .tag(2)
             }
         }
+        .popover(isPresented: $cloudViewModel.showNoLinkView, content: {
+            NoLinkView()
+        })
 
     }
     func myFunction(item: Int) {

@@ -20,6 +20,7 @@ class CloudViewModel: ObservableObject {
     
     @Published var scrollToTopPecs = false
     @Published var scrollToTopNotification = false
+    @Published var showNoLinkView = false
     
     // For PECS - without childParent
     @Published var pecs = [MainPecs]()

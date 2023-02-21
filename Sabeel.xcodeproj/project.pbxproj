@@ -49,6 +49,7 @@
 		906035C229A026CE002D4192 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906035C129A026CE002D4192 /* Helper.swift */; };
 		906035C529A02A68002D4192 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 906035C729A02A68002D4192 /* Localizable.strings */; };
 		9085ABD729A497F300EF7157 /* SettingsCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085ABD629A497F300EF7157 /* SettingsCellView.swift */; };
+		90EE571229A5686A006BFAC5 /* NoLinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EE571129A5686A006BFAC5 /* NoLinkView.swift */; };
 		ECA416AC29A3537C003A7F42 /* AppLockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA416AB29A3537C003A7F42 /* AppLockView.swift */; };
 /* End PBXBuildFile section */
 
@@ -97,6 +98,7 @@
 		906035C129A026CE002D4192 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		906035C629A02A68002D4192 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.strings; sourceTree = "<group>"; };
 		9085ABD629A497F300EF7157 /* SettingsCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCellView.swift; sourceTree = "<group>"; };
+		90EE571129A5686A006BFAC5 /* NoLinkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoLinkView.swift; sourceTree = "<group>"; };
 		ECA416AB29A3537C003A7F42 /* AppLockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLockView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -256,6 +258,7 @@
 				9011828329915C910024ABC1 /* OnboardingView.swift */,
 				900DDC152994E782005A471F /* SingleOnboardingView.swift */,
 				9011828529915CAB0024ABC1 /* ChooseUserView.swift */,
+				90EE571129A5686A006BFAC5 /* NoLinkView.swift */,
 			);
 			path = Start;
 			sourceTree = "<group>";
@@ -400,6 +403,7 @@
 				906035C229A026CE002D4192 /* Helper.swift in Sources */,
 				900866FC29A2BC3200C5E26E /* CaptionTextFieldStyle.swift in Sources */,
 				5D4B3575299E2E830089A3F9 /* TabBar.swift in Sources */,
+				90EE571229A5686A006BFAC5 /* NoLinkView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -46,9 +46,16 @@ struct SettingsView: View {
                 }
 
                 // 2- Schedule
-                if (cloudViewModel.childParentModel != nil) && !cloudViewModel.isChild{
-                    NavigationLink(destination: SchedulePecsView()) {
+                if !cloudViewModel.isChild {
+                    if (cloudViewModel.childParentModel != nil) {
+                        NavigationLink(destination: SchedulePecsView()) {
+                            SettingsCellView(data: settingsDataSchedule)
+                        }
+                    } else {
                         SettingsCellView(data: settingsDataSchedule)
+                            .onTapGesture {
+                                cloudViewModel.showNoLinkView.toggle()
+                            }
                     }
                 }
                 
@@ -91,6 +98,7 @@ struct SettingsView: View {
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
         SettingsView()
+            .environmentObject(CloudViewModel())
     }
 }
 

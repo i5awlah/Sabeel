@@ -41,7 +41,7 @@ struct PicCell: View {
             VStack(spacing: 10){
                 HStack{
                     Spacer()
-                    if cloudViewModel.isChild == false, (cloudViewModel.childParentModel != nil) {
+                    if cloudViewModel.isChild == false {
                         if isEditing
                         {
                             Button{
@@ -63,9 +63,13 @@ struct PicCell: View {
                             
                         } else {
                             Button{
-                                guard let homeContent else { return }
-                                cloudViewModel.updateHidePECS(homeContent: homeContent) { isUpdated in
-                                    isShownPecs.toggle()
+                                if cloudViewModel.childParentModel != nil {
+                                    guard let homeContent else { return }
+                                    cloudViewModel.updateHidePECS(homeContent: homeContent) { isUpdated in
+                                        isShownPecs.toggle()
+                                    }
+                                } else {
+                                    cloudViewModel.showNoLinkView.toggle()
                                 }
                             }
                         label: {
@@ -139,9 +143,7 @@ struct AddCell: View {
         GeometryReader { geo in
             let TextSize = min(geo.size.width * 0.5, 16)
             let imageWidth: CGFloat = min (30, geo.size.width * 0.6 )
-            NavigationLink{
-                AddPecsView()
-            }label:{
+            
             VStack{
                 Image(systemName: "plus")
                     .resizable()
@@ -154,13 +156,13 @@ struct AddCell: View {
                 .background(.white)
                 .cornerRadius(10)
                 .foregroundColor(.darkBlue)
-        }
+            
         }
         .frame (height: 170)
-   
+        
         .overlay(
-                RoundedRectangle(cornerRadius: 10)
-                    .stroke(Color.darkBlue, style: StrokeStyle(lineWidth: 1, dash: [13, 5]))
+            RoundedRectangle(cornerRadius: 10)
+                .stroke(Color.darkBlue, style: StrokeStyle(lineWidth: 1, dash: [13, 5]))
         )
         
     }

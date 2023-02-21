@@ -14,6 +14,8 @@ struct PicList: View {
     @Binding var isEditing : Bool
     let pecs: [MainPecs]
     
+    @State private var showAddPecsView = false
+    
     @EnvironmentObject var cloudViewModel : CloudViewModel
     
     @State var audioPlayer: AVAudioPlayer!
@@ -37,10 +39,13 @@ struct PicList: View {
             ScrollViewReader { proxy in
                 ScrollView {
                     LazyVGrid(columns: coulmns, spacing: spacing) {
+                        if cloudViewModel.isChild == false {
+                            AddCell()
+                                .onTapGesture {
+                                    cloudViewModel.childParentModel != nil ? showAddPecsView.toggle() : cloudViewModel.showNoLinkView.toggle()
+                                }
+                        }
                         if (cloudViewModel.childParentModel != nil) {
-                            if cloudViewModel.isChild == false {
-                                AddCell()
-                            }
                             if cloudViewModel.isChild {
                                 ForEach(cloudViewModel.homeContents.filter({ HomeContent in
                                     return HomeContent.isItTime && HomeContent.isShown
@@ -92,6 +97,9 @@ struct PicList: View {
                         cloudViewModel.scrollToTopPecs.toggle()
                     }
                 }
+            }
+            .navigationDestination(isPresented: $showAddPecsView) {
+                AddPecsView()
             }
 //        .refreshable {
 //            cloudViewModel.fetchHomeContent()
