@@ -75,6 +75,7 @@ class CloudViewModel: ObservableObject {
                 debugPrint("ERROR: Failed to save new \(recordName): \(error.localizedDescription)")
             } else if let record {
                 debugPrint("Added \(recordName) successfully: \(record.description)")
+                self.fetchChildParent()
                 DispatchQueue.main.async {
                     self.currentUser = user
                     print("currentUser: \(self.currentUser?.id ?? "NA")")
