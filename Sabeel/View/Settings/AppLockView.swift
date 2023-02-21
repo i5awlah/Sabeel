@@ -34,17 +34,18 @@ struct AppLockView: View {
                   NSLocalizedString("X", comment: ""),
     ]
     @State private var enteredPin: String = ""
-    @State private var NextView: Bool = false
+    @Binding private var goToSettings: Bool
     @State private var FirstTime: Bool = true
     @State private var FirstTmime: Bool = false
     @Namespace private var animation
     var n = Int.random(in: 1000...9999)
     //@StateObject var cloudViewModel = CloudViewModel()
     
-    public init(
-        pincode: PinCode) {
-            self.correctPin = pincode
-        }
+    
+    init(goToSettings: Binding<Bool>, pincode: PinCode) {
+        _goToSettings = goToSettings
+        self.correctPin = pincode
+    }
     var body: some View {
        
                 ZStack(alignment: .top) {
@@ -157,9 +158,10 @@ struct AppLockView: View {
                     
                     .opacity(correctPin.value == enteredPin ? 0 : 1)
                     .onChange(of: enteredPin, perform: onChange)
-                    .fullScreenCover(isPresented: $NextView){
-                                        SettingsView()
-                                    }
+                    .navigationDestination(isPresented: $goToSettings) {
+                        SettingsView()
+                    }
+
                     
                 }
 //                .onAppear(){
@@ -186,7 +188,7 @@ struct AppLockView: View {
             if enteredPin == correctPin.value {
                
                 //FirstTime = false
-                NextView = true
+                goToSettings = true
                 print("Success")
             } else {
                 print("Failed")
@@ -223,7 +225,7 @@ struct AppLockView: View {
 struct AppLockView_Previews: PreviewProvider {
     static var previews: some View {
         AppLockView(
-            pincode: .init("2023")
+            goToSettings: .constant(false), pincode: .init("2023")
         )
         .environmentObject(CloudViewModel())
     }
