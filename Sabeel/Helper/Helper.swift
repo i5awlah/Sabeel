@@ -22,7 +22,7 @@ final class Helper {
     func convertUIImageToCKAsset(image: UIImage) async throws -> CKAsset? {
         guard
             let imageURL = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first?.appendingPathComponent("\(UUID().uuidString).png"),
-            let data = image.jpegData(compressionQuality: 1.0) else { return nil}
+            let data = image.pngData() else { return nil}
         
         do {
             try data.write(to: imageURL)
