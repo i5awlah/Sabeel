@@ -90,10 +90,10 @@ struct PicCell: View {
                          .frame(width: imageWidth ,height: 80)
                     
                 } placeholder: {
-                    Image(systemName: "photo")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: imageWidth, height: 80)
+                    Image(systemName: "text.below.photo")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: imageWidth, height: 60)
                 }
      
                 Text(getPicName())
