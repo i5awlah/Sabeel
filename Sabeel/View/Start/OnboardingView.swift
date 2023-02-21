@@ -13,7 +13,7 @@ struct OnboardingView: View {
     @State var selectedOnboardingType: OnboardingType = .alwayConnected
     
     var body: some View {
-        ZStack {
+        ZStack(alignment: .bottom) {
             
             TabView(selection: $selectedOnboardingType) {
                 
@@ -32,6 +32,8 @@ struct OnboardingView: View {
             
             if selectedOnboardingType != .settings {
                 skipButton
+            } else {
+                getStartedButton
             }
         }
         .onAppear {
@@ -63,6 +65,24 @@ extension OnboardingView {
         .frame(maxWidth: .infinity, alignment: .trailing)
         .frame(maxHeight: .infinity, alignment: .top)
         .foregroundColor(.secondary)
+    }
+    var getStartedButton: some View {
+        Button {
+            withAnimation(.spring()) {
+                isUserOnboarded = true
+            }
+        } label: {
+            RoundedRectangle(cornerRadius: 8)
+                .fill(Color.buttonBlue)
+                .frame(height: 48)
+                .overlay(content: {
+                    Text("Get Started")
+                        .font(.customFont(size: 20))
+                        .fontWeight(.semibold)
+                        .foregroundColor(.white)
+                })
+        }
+        .padding(.horizontal, 24)
     }
 }
 

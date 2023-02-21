@@ -14,20 +14,17 @@ struct SingleOnboardingView: View {
     let image: String
     let title: String
     let description: String
-    let isLastOnboarding: Bool
     
     init(onboarding: OnboardingType) {
         self.image = onboarding.image
         self.title = onboarding.title
         self.description = onboarding.description
-        self.isLastOnboarding = onboarding == .settings
     }
     
     init(image: String, title: String, description: String) {
         self.image = image
         self.title = title
         self.description = description
-        self.isLastOnboarding = false
     }
     
     var body: some View {
@@ -46,28 +43,10 @@ struct SingleOnboardingView: View {
                 .font(.customFont(size: 20))
                 .foregroundColor(.darkGray)
                 .multilineTextAlignment(.center)
-            
-            if isLastOnboarding {
-                Button {
-                    withAnimation(.spring()) {
-                        isUserOnboarded = true
-                    }
-                } label: {
-                    RoundedRectangle(cornerRadius: 8)
-                        .fill(Color.buttonBlue)
-                        .frame(height: 48)
-                        .overlay(content: {
-                            Text("Get Started")
-                                .font(.customFont(size: 20))
-                                .fontWeight(.semibold)
-                                .foregroundColor(.white)
-                        })
-                }
-                .padding(.horizontal, 24)
-            }
-            
+                .frame(height: 90, alignment: .top)
         }
         .padding(.horizontal, 24)
+        .frame(height: UIScreen.main.bounds.height * 0.55, alignment: .bottom)
     }
 }
 
