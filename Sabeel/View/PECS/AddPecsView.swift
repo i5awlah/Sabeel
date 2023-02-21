@@ -214,7 +214,7 @@ struct AddPecsView: View {
                     label: Text(""),
                     content: {
                         ForEach(Category.allCases, id: \.self) { category in
-                            Text(category.rawValue)
+                            Text(category.rawValue.localized)
                                 .tag(category)
                         }
                     }
@@ -244,7 +244,7 @@ struct AddPecsView: View {
                         .foregroundColor(checkRequiredField() ? Color.buttonBlue : Color.gray)
                         .frame(height: 56)
                         .overlay {
-                            Text("Save")
+                            Text("Add")
                                 .font(.system(size: 18))
                                 .fontWeight(.semibold)
                                 .foregroundColor(.white)
