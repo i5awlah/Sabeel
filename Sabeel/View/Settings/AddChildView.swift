@@ -18,10 +18,28 @@ struct AddChildView: View {
     @State private var scannerStatusAlertTitle = ""
     
     var body: some View {
-        ZStack {
-            Button("scan") {
+        VStack(spacing : 20){
+            Image("Scan")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 400,height: 400)
+     
+            Button {
                 scanButtonPressed()
+            } label: {
+               
+                        RoundedRectangle(cornerRadius: 8)
+                            .fill(Color.buttonBlue)
+                            .frame(height: 48)
+                            .overlay(content: {
+                                Text("scan")
+                                    .font(.customFont(size: 20))
+                                    .fontWeight(.semibold)
+                                    .foregroundColor(.white)
+                            })
             }
+
+          
             
             if isPresentedScan {
                 ScanQRView(
@@ -29,7 +47,7 @@ struct AddChildView: View {
                     addChild: addChild
                 )
             }
-        }
+        }.padding(.horizontal)
         .alert(scannerStatusAlertTitle.localized, isPresented: $showScannerStatusAlert) {
             TextField("Enter your child id", text: $vm.qr)
             Button("Add", action: addChild)
