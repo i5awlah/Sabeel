@@ -66,6 +66,12 @@
 "Number of PECS per row:" = "عدد البطاقات في الصف الواحد:";
 "Link your child using the scan in your app setting" = "قم بربط طفلك من خلال مسح الرمز باستخدام إعدادات تطبيقك";
 
+"Enter your child id" = "أدخل الـID الخاص بطفلك";
+"Your device doesn't have a camera" = "لا توجد كاميرا في جهازك";
+"Your device doesn't have support for scanning barcode with this app" = "جهازك ليس به دعم لمسح الرمز الشريطي";
+"Please provide access to the camera in settings" = "الرجاء إعطاء صلاحية الوصول للكاميرا من الإعدادات";
+"Requesting camera access" = "اطلب الوصول إلى الكاميرا";
+"Cancel" = "إلغاء";
 
 //MARK: AlredyLinked
 "Already Linked" = "تم الربط";

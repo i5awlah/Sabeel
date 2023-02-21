@@ -38,12 +38,11 @@ struct SettingsView: View {
                         SettingsCellView(data: settingsDataLinkParent)
                     }
                 } else {
-                    Button {
-                        cloudViewModel.childParentModel == nil ?
-                        scanButtonPressed() : showAlreadyLinkedView.toggle()
-                    } label: {
-                        SettingsCellView(data: settingsDataLinkChild)
-                    }
+                    SettingsCellView(data: settingsDataLinkChild)
+                        .onTapGesture {
+                            cloudViewModel.childParentModel == nil ?
+                            scanButtonPressed() : showAlreadyLinkedView.toggle()
+                        }
                 }
 
                 // 2- Schedule
@@ -79,12 +78,10 @@ struct SettingsView: View {
             .navigationDestination(isPresented: $showAlreadyLinkedView, destination: {
                 AlreadyLinkedView()
             })
-            .alert(scannerStatusAlertTitle, isPresented: $showScannerStatusAlert) {
+            .alert(scannerStatusAlertTitle.localized, isPresented: $showScannerStatusAlert) {
                 TextField("Enter your child id", text: $vm.qr)
                 Button("Add", action: addChild)
                 Button("Cancel", role: .cancel) { }
-            } message: {
-                Text("Or Enter your child id manually.")
             }
         }
         .environmentObject(vm)
