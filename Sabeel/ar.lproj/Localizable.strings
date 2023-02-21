@@ -1,4 +1,4 @@
-/* 
+/*
   Localizable.strings
   Sabeel
 
@@ -7,20 +7,23 @@
 */
 
 //MARK: Onboarding
-"Get Started" = "البدء";
+"Get Started" = "ابدء";
 "skip" = "تخطي";
 
 
 "Can’t connect to iCloud!" = "لا يمكن الاتصال بـ iCloud";
-"Please make sure that your apple ID is existing in your device settings." = "يرجى التأكد من أن معرف Apple الخاص بك موجود في إعدادات جهازك";
-"Alway Connected" = "دومًا على اتصال";
-"Stay connected with your Special Autistic one in his own PECS way by just a TAP ." = "ابق على اتصال مع الشخص المصاب بالتوحد بطريقة PECS الخاصة به فقط من خلال النقر";
-"Get Notification" = "احصل على الإشعارات";
-"Download the app on both devices to get you special autistic notification." = "قم بتنزيل التطبيق على كلا الجهازين لتحصل على إشعار خاص من طفلك.";
+"Please make sure that you're signed in with your apple ID in device settings." = "يرجى التأكد من تسجيل الدخول باستخدام معرف Apple الخاص بك في إعدادات الجهاز.";
+"Alway Connected" = "دائما علي تواصل";
+"Stay connected with your Special Autistic one in his own PECS way by just a TAP." = "ابق على اتصال مع الشخص المصاب بالتوحد بطريقة PECS الخاصة به فقط من خلال النقر";
+"Get Notifications" = "احصل على الإشعارات";
+"Download the app on both devices to get notifications from your special autistic." = "قم بتنزيل التطبيق على كلا الجهازين لتحصل على إشعارات خاص من طفلك المميز.";
 "Customize PECS" = "خصص بطاقاتك";
-"Add any pictures that your child want with text, and sound ." = "أضف أي صورة يريدها طفلك مع اسمها وصوتها";
+"Add custom PECS for your own Autistic along with text, and sound." ="أضف بيكس مخصصه لطفلك مع الاسم والصوت.";
+"Add custom PECS your own Autistic wants along with text, and sound." = "أضف أي صورة يريدها طفلك مع اسمها وصوتها";
+
 "Settings" = "الإعدادات";
-"we hid and jammed everything you need under the settings." = "قد أخفينا كل ما تحتاجه في الإعدادات";
+
+"We hid and jammed everything you need under the settings." = "قد أخفينا كل ما تحتاجه في الإعدادات";
 
 
 //MARK: TabBar
