@@ -103,9 +103,9 @@ struct SchedulePecsView: View {
                 } label: {
                     
                     Text("Schedule It").padding(.vertical, 12).font(Font.customFont(size: 20))
-                }
+                }.disabled(optioncategory == "" || fromTime >= toTime)
                 .frame(maxWidth: .infinity) .foregroundColor(.white)
-                .background(Color.buttonBlue)      .cornerRadius(10).padding(.all,20)
+                .background(optioncategory != "" && fromTime < toTime ? Color.buttonBlue : Color.gray)      .cornerRadius(10).padding(.all,20)
                 
                 
             
