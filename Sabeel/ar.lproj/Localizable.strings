@@ -13,12 +13,12 @@
 
 "Can’t connect to iCloud!" = "لا يمكن الاتصال بـ iCloud";
 "Please make sure that you're signed in with your apple ID in device settings." = "يرجى التأكد من تسجيل الدخول باستخدام معرف Apple الخاص بك في إعدادات الجهاز.";
-"Always Connected" = "دائما علي تواصل";
+"Always Connected" = "دائما على تواصل";
 "Stay connected with your Special child in his own PECS language by just a TAP." = "ابق على اتصال مع طفلك المميز بطريقة PECS الخاصة به فقط من خلال نقرة.";
 "Get Notifications" = "احصل على الإشعارات";
 "Download the app on both devices to get notifications from your special child." = "قم بتنزيل التطبيق على كلا الجهازين لتحصل على إشعارات خاصة من طفلك المميز.";
 "Customize PECS" = "خصص بطاقاتك";
-"Add any custom PECS your own special child needs along with text, and sound." ="يمكنك اضافة اي بطاقة مخصصه لطفلك المميز مع الاسم والصوت.";
+"Add any custom PECS your own special child needs along with text, and sound." ="يمكنك إضافة أي بطاقة مخصصة لطفلك المميز مع الاسم والصوت.";
 "Schedule PECS" = "بطاقات مجدولة";
 "Schedule when to show and hide certain PECS to help you maintain your child routine."= "حدد موعدًا لإظهار وإخفاء الـPECS لمساعدتك في الحفاظ على روتين طفلك.";
 "Settings" = "الإعدادات";
@@ -34,21 +34,21 @@
 "Done" = "تم";
 "Edit" = "تحرير";
 "Add PECS" = "إضافة بطاقة";
-"Are you sure you want to delete %@?" = "هل انت متاكد من رغبتك في حذف %@؟" ;
+"Are you sure you want to delete %@?" = "هل أنت متأكد من رغبتك في حذف %@؟" ;
 "Delete" = "حذف";
 
 
 //MARK: Add PECS
-"Enter the name of image" = "ادخل اسم الصورة";
+"Enter the name of image" = "أدخل اسم الصورة";
 "Name" = "الاسم" ;
 "Audio" = "الصوت";
-"Click the mic icon to start recording" = "اضغط على ايقونة الميكرفون لبدء التسجيل";
+"Click the mic icon to start recording" = "اضغط على أيقونة الميكروفون لبدء التسجيل";
 "Save" = "حفظ";
 "Add" = "إضافة";
 "Error" = "خطأ";
 "Enable Access to photo library from sittings" = "السماح بالوصول للصور من الإعدادات ";
-"Enable Access to microphone from sittings" = "السماح بالوصول للميكرفون من الإعدادات ";
-"Add New PECS" = "اضافة بطاقة جديدة";
+"Enable Access to microphone from sittings" = "السماح بالوصول للميكروفون من الإعدادات ";
+"Add New PECS" = "إضافة بطاقة جديدة";
 
 //MARK: Notifications
 "New" = "الجديدة";
@@ -95,7 +95,7 @@
 //MARK: child link
 "Scan" = "مسح";
 "QR Scan" = "مسح الرمز السريع QR";
-"Connect your special child by scanning the QR code in their app settings" = "اقترن بطفلك المميز من خلال مسح الرمز السريع من إعدادات التطبيق الخاصه به.";
+"Connect your special child by scanning the QR code in their app settings" = "اقترن بطفلك المميز من خلال مسح الرمز السريع من إعدادات التطبيق الخاصة به.";
 
 //MARK: Categories
 "Food" = "طعام";
@@ -112,7 +112,7 @@
 
 //MARK: AppLock
 "Parent Only!" = "للوالدين فقط!";
-"To access enter the code below:" = "للوصول ادخل الرمز المكتوب بالأسفل";
+"To access enter the code below:" = "للوصول أدخل الرمز المكتوب بالأسفل";
 "Two - zero - two - three" = "اثنين - صفر - اثنين - ثلاثة";
 "1" = "١";
 "2" = "٢";
