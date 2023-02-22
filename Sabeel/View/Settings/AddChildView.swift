@@ -42,7 +42,7 @@ struct AddChildView: View {
                             .fill(Color.buttonBlue)
                             .frame(height: 48)
                             .overlay(content: {
-                                Text("scan")
+                                Text("Scan")
                                     .font(.customFont(size: 20))
                                     .fontWeight(.semibold)
                                     .foregroundColor(.white)

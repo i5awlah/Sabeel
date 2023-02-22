@@ -14,13 +14,13 @@
 "Can’t connect to iCloud!" = "لا يمكن الاتصال بـ iCloud";
 "Please make sure that you're signed in with your apple ID in device settings." = "يرجى التأكد من تسجيل الدخول باستخدام معرف Apple الخاص بك في إعدادات الجهاز.";
 "Always Connected" = "دائما علي تواصل";
-"Stay connected with your Special child in his own PECS language by just a TAP." = "ابق على اتصال مع طفلك بطريقة PECS الخاصة به فقط من خلال نقرة.";
+"Stay connected with your Special child in his own PECS language by just a TAP." = "ابق على اتصال مع طفلك المميز بطريقة PECS الخاصة به فقط من خلال نقرة.";
 "Get Notifications" = "احصل على الإشعارات";
 "Download the app on both devices to get notifications from your special child." = "قم بتنزيل التطبيق على كلا الجهازين لتحصل على إشعارات خاصة من طفلك المميز.";
 "Customize PECS" = "خصص بطاقاتك";
-"Add any custom PECS your own child needs along with text, and sound." ="يمكنك اضافة اي بطاقة مخصصه لطفلك مع الاسم والصوت.";
+"Add any custom PECS your own special child needs along with text, and sound." ="يمكنك اضافة اي بطاقة مخصصه لطفلك المميز مع الاسم والصوت.";
 "Schedule PECS" = "بطاقات مجدولة";
-"Schedule when to show and hide certain PECS to help you maintain your child routine."= "حدد موعدًا لإظهار وإخفاء PECS معينة لمساعدتك في الحفاظ على روتين طفلك.";
+"Schedule when to show and hide certain PECS to help you maintain your child routine."= "حدد موعدًا لإظهار وإخفاء الـPECS لمساعدتك في الحفاظ على روتين طفلك.";
 "Settings" = "الإعدادات";
 "We hid and jammed everything you need under the settings." = "قد أخفينا كل ما تحتاجه في الإعدادات";
 
@@ -50,30 +50,28 @@
 "Enable Access to microphone from sittings" = "السماح بالوصول للميكرفون من الإعدادات ";
 "Add New PECS" = "اضافة بطاقة جديدة";
 
-
 //MARK: Notifications
 "New" = "الجديدة";
 "Previous" = "السابقة";
-"Your child want %@ " = "طفلك يريد %@" ;
-"Your child want **%@** " = "طفلك يريد **%@**" ;
+"Your special child want %@ " = "طفلك المميز يريد %@" ;
+"Your special child want **%@** " = "طفلك المميز يريد **%@**" ;
 "No Notifications yet!" = "لا توجد إشعارات حتى الآن";
 
 //MARK: Settings
 "Settings" = "الإعدادات";
 "Connect your special child" = "اقترن بحساب طفلك المميز";
 "Connect with your parent" = "اقترن بحساب أحد والديك";
-"Schedule PECS" = "جدولة أوقات ظهور البطاقات";
+//"Schedule PECS" = "جدولة أوقات ظهور البطاقات";
 "Number of PECS per row:" = "عدد البطاقات في الصف الواحد:";
-"Connect your special child using the scan in your app setting" = "قم بربط طفلك المميز من خلال مسح الرمز باستخدام إعدادات تطبيقك";
+"Connect your special child using the scan in your app setting" = "اقترن بطفلك المميز من خلال مسح الرمز السريع من إعدادات تطبيقك";
 "or write it manually" = "أو قم بكتابته يدويًا";
 
-"Enter your child id" = "أدخل الـID الخاص بطفلك";
+"Enter your special child id" = "أدخل الـID الخاص بطفلك المميز";
 "Your device doesn't have a camera" = "لا توجد كاميرا في جهازك";
 "Your device doesn't have support for scanning barcode with this app" = "جهازك ليس به دعم لمسح الرمز الشريطي";
 "Please provide access to the camera in settings" = "الرجاء إعطاء صلاحية الوصول للكاميرا من الإعدادات";
 "Requesting camera access" = "اطلب الوصول إلى الكاميرا";
 "Cancel" = "إلغاء";
-"Scan" = "مسح";
 
 //MARK: AlreadyLinked
 "Already connected" = "تم الربط";
@@ -87,8 +85,14 @@
 "To" = "إلى";
 "Schedule It" = "جدولة";
 
+//MARK: No Link
+"Connect with your special child" = "اقترن بحساب طفلك المميز";
+"To access this feature you have to connect with your special child app" = "لتفعيل هذه الخاصيه الرجاء الاقتران بتطبيق طفلك المميز";
 
-
+//MARK: child link
+"Scan" = "مسح";
+"QR Scan" = "مسح الرمز السريع QR";
+"Connect your special child by scanning the QR code in their app settings" = "اقترن بطفلك المميز من خلال مسح الرمز السريع من إعدادات التطبيق الخاصه به.";
 
 //MARK: Categories
 "Food" = "طعام";

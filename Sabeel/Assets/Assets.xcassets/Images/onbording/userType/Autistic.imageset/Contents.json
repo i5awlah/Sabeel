@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "EnglishChild.png",
+      "filename" : "Autistic2.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
@@ -14,7 +14,7 @@
       "scale" : "3x"
     },
     {
-      "filename" : "ArabicChild.png",
+      "filename" : "Autistic.png",
       "idiom" : "universal",
       "locale" : "ar",
       "scale" : "1x"

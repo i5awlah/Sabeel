@@ -132,7 +132,7 @@ enum OnboardingType: CaseIterable {
         case .getNotification:
             return "Download the app on both devices to get notifications from your special child."
         case .customizePECS:
-            return "Add any custom PECS your own child needs along with text, and sound."
+            return "Add any custom PECS your own special child needs along with text, and sound."
         case .settings:
             return "Schedule when to show and hide certain PECS to help you maintain your child routine."
         }
