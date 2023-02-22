@@ -18,7 +18,8 @@ struct AddChildView: View {
     @State private var scannerStatusAlertTitle = ""
     
     var body: some View {
-        VStack(spacing : 20){
+        ZStack {
+            VStack(spacing : 20){
                 Image("Scan")
                     .resizable()
                     .scaledToFit()
@@ -33,23 +34,22 @@ struct AddChildView: View {
                     .font(.customFont(size: 20))
                     .foregroundColor(.darkGray)
                     .multilineTextAlignment(.center)
-            
-            Button {
-                scanButtonPressed()
-            } label: {
-               
-                        RoundedRectangle(cornerRadius: 8)
-                            .fill(Color.buttonBlue)
-                            .frame(height: 48)
-                            .overlay(content: {
-                                Text("Scan")
-                                    .font(.customFont(size: 20))
-                                    .fontWeight(.semibold)
-                                    .foregroundColor(.white)
-                            })
-            }
-
-          
+                
+                Button {
+                    scanButtonPressed()
+                } label: {
+                    
+                    RoundedRectangle(cornerRadius: 8)
+                        .fill(Color.buttonBlue)
+                        .frame(height: 48)
+                        .overlay(content: {
+                            Text("Scan")
+                                .font(.customFont(size: 20))
+                                .fontWeight(.semibold)
+                                .foregroundColor(.white)
+                        })
+                }
+            }  .padding(.horizontal, 24)
             
             if isPresentedScan {
                 ScanQRView(
@@ -57,8 +57,8 @@ struct AddChildView: View {
                     addChild: addChild
                 )
             }
-            }  .padding(.horizontal, 24)
             
+        }
 
            
     
