@@ -68,6 +68,7 @@ struct AddChildView: View {
             Button("Cancel", role: .cancel) { }
         }
         .environmentObject(vm)
+        .toolbar(.hidden,for: .tabBar)
     }
 }
 
