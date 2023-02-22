@@ -84,6 +84,9 @@
 "From" = "من";
 "To" = "إلى";
 "Schedule It" = "جدولة";
+"Scheduled Previously" = "الأقسام المجدولة مسبقًا";
+"From Time:" = "من الساعة:";
+"To Time:" = "إلى الساعة:";
 
 //MARK: No Link
 "Connect with your special child" = "اقترن بحساب طفلك المميز";

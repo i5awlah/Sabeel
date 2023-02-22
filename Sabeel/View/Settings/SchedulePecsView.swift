@@ -17,17 +17,17 @@ struct SchedulePecsView: View {
    
 
     static let options: [DropdownOption] = [
-        DropdownOption(key: uniqueKey, value: NSLocalizedString("Food", comment: "")),
-        DropdownOption(key: uniqueKey, value:  NSLocalizedString("Drink", comment: "")),
-        DropdownOption(key: uniqueKey, value: NSLocalizedString("Utensils", comment: "")),
-        DropdownOption(key: uniqueKey, value: NSLocalizedString("Clothes", comment: "")),
-        DropdownOption(key: uniqueKey, value: NSLocalizedString("Bathroom", comment: "")),
-        DropdownOption(key: uniqueKey, value: NSLocalizedString("Activities", comment: "")),
-        DropdownOption(key: uniqueKey, value: NSLocalizedString("Feelings", comment: "")),
-        DropdownOption(key: uniqueKey, value: NSLocalizedString("Family", comment: "")),
-        DropdownOption(key: uniqueKey, value: NSLocalizedString("People", comment: "")),
-        DropdownOption(key: uniqueKey, value: NSLocalizedString("Places", comment: "")),
-        DropdownOption(key: uniqueKey, value: NSLocalizedString("Tools", comment: ""))
+        DropdownOption(key: uniqueKey, value: "Food"),
+        DropdownOption(key: uniqueKey, value:  "Drink"),
+        DropdownOption(key: uniqueKey, value: "Utensils"),
+        DropdownOption(key: uniqueKey, value: "Clothes"),
+        DropdownOption(key: uniqueKey, value: "Bathroom"),
+        DropdownOption(key: uniqueKey, value: "Activities"),
+        DropdownOption(key: uniqueKey, value:"Feelings"),
+        DropdownOption(key: uniqueKey, value: "Family"),
+        DropdownOption(key: uniqueKey, value: "People"),
+        DropdownOption(key: uniqueKey, value: "Places"),
+        DropdownOption(key: uniqueKey, value: "Tools")
     ]
     @State private var fromTime = Date.now
     @State private var toTime = Date.now
@@ -117,7 +117,7 @@ struct SchedulePecsView: View {
                 Button{
                     if(output1.isEmpty){
                         let decoded  = userDefaults.data(forKey: "sec")
-                        if(decoded == nil){
+                        if(decoded != nil){
                             let decodedTeams = NSKeyedUnarchiver.unarchiveObject(with: decoded!) as! [sech1]
                             print("OUTPUT2 \(decodedTeams[0].category)")
                             
@@ -142,9 +142,11 @@ struct SchedulePecsView: View {
                         
                         ScedhuleRowRowView(record: output1[index], index: index, function:{
                             output1.remove(at: index)
-                            
-                            let encodedData: Data = NSKeyedArchiver.archivedData(withRootObject: output1)
-                            userDefaults.set(encodedData, forKey: "sec")
+                            if(output1.count == 0){
+                                UserDefaults.standard.removeObject(forKey: "sec")
+                            }else{
+                                let encodedData: Data = NSKeyedArchiver.archivedData(withRootObject: output1)
+                                userDefaults.set(encodedData, forKey: "sec")}
                             
                         })
                         
@@ -200,7 +202,7 @@ struct DropdownSelector: View {
               
                   }
         label: {
-            Text(selectedOption == nil ? placeholder : selectedOption!.value).font(Font.customFont(size: 14))
+            Text(selectedOption == nil ? placeholder : NSLocalizedString(selectedOption!.value, comment: "")).font(Font.customFont(size: 14))
     
                 .foregroundColor(selectedOption == nil ? Color.gray: Color.black)
             Spacer()
@@ -249,7 +251,7 @@ struct Dropdown: View {
                 }
             }
         }
-        .frame(minHeight: CGFloat(options.count) * 30, maxHeight: 200)
+      
         .padding(.vertical, 5)
         .background(Color.white)
         .cornerRadius(5)
@@ -326,18 +328,23 @@ struct ScedhuleRowRowView : View {
         self.index = index
         self.function = function
     }
-    
+    let preferredLanguage = NSLocale.preferredLanguages[0]
     var body: some View {
         HStack{
             Text("\(index+1)").frame(width: 35, height: 35).background(Color.darkGray).foregroundColor(.white).cornerRadius(5)
             Spacer().frame(width: 16)
             VStack(alignment: .leading, spacing: 2) {
             
-                Text("\(record.category)")
+                Text("\(NSLocalizedString(record.category, comment: ""))")
                     .font(.customFont(size: 18)).frame(maxWidth: .infinity, alignment: .leading)
-                
-                Text("From Time: \(record.fromTime) To Time: \(record.toTime)")
-                    .font(.customFont(size: 12)).frame(maxWidth: .infinity, alignment: .leading).foregroundColor(Color.darkGray)
+                if preferredLanguage == "ar" {
+                    Text("\(record.toTime) \(NSLocalizedString("To Time:", comment: "")) \(record.fromTime) \(NSLocalizedString("From Time:", comment: ""))   ")
+                        .font(.customFont(size: 12)).frame(maxWidth: .infinity, alignment: .leading).foregroundColor(Color.darkGray)
+                }else{
+                    Text("\(NSLocalizedString("From Time:", comment: "")) \(record.fromTime) \(NSLocalizedString("To Time:", comment: "")) \(record.toTime)")
+                        .font(.customFont(size: 12)).frame(maxWidth: .infinity, alignment: .leading).foregroundColor(Color.darkGray)
+                }
+             
                 
             }
             
