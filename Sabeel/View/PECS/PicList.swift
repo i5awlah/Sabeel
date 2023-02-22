@@ -19,6 +19,7 @@ struct PicList: View {
     @EnvironmentObject var cloudViewModel : CloudViewModel
     
     @State var audioPlayer: AVAudioPlayer!
+    @Environment(\.scenePhase) private var scenePhase
     
     var coulmns: [GridItem] {
         Array(repeating: GridItem(.flexible(),spacing: spacing), count: number0fColumns)
@@ -58,6 +59,12 @@ struct PicList: View {
                                             .shimmering(
                                                 active: item.pecs.imageURL == nil
                                             )
+                                    }
+                                }
+                                // refresh (in Child who has a link with his parent) every time the app opens
+                                .onChange(of: scenePhase) { phase in
+                                    if phase == .active {
+                                        cloudViewModel.fetchHomeContent()
                                     }
                                 }
                             }
