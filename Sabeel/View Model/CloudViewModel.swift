@@ -79,6 +79,12 @@ class CloudViewModel: ObservableObject {
                 DispatchQueue.main.async {
                     self.currentUser = user
                     print("currentUser: \(self.currentUser?.id ?? "NA")")
+                    print("fetch pecs without home content")
+                    self.fetchSharedPecs { pecs in
+                        DispatchQueue.main.async {
+                            self.pecs = pecs
+                        }
+                    }
                 }
             }
         }
