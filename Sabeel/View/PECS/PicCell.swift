@@ -153,7 +153,7 @@ struct AddCell: View {
                     .font(.customFont(size: TextSize))
             } .padding(15)
                 .frame (width: geo.size.width, height: geo.size.height)
-                .background(.white)
+                .background(Color.White)
                 .cornerRadius(10)
                 .foregroundColor(.darkBlue)
             

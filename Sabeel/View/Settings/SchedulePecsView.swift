@@ -66,7 +66,7 @@ struct SchedulePecsView: View {
                 }
                                 .frame(maxWidth: .infinity)
                                
-                                .background(.white)
+                                .background(Color.White)
                                 .cornerRadius(10)
                                 .padding(EdgeInsets(.init(top: 20, leading: 20, bottom: 8, trailing: 20)))
                               
@@ -76,7 +76,7 @@ struct SchedulePecsView: View {
                     DatePicker("From", selection: $fromTime, displayedComponents: .hourAndMinute).padding(.horizontal,20).listRowSeparator(.hidden)
                     DatePicker("To", selection: $toTime, displayedComponents: .hourAndMinute).padding(EdgeInsets(.init(top: 0, leading: 20, bottom: 20, trailing: 20)))} .frame(maxWidth: .infinity)
                     .font(Font.customFont(size: 16))
-                    .background(.white)
+                    .background(Color.White)
                     .cornerRadius(10).padding(EdgeInsets(.init(top: 20, leading: 20, bottom: 0, trailing: 20)))
                   
                 
@@ -221,7 +221,7 @@ struct DropdownSelector: View {
                 )
               
                 .background(
-                    RoundedRectangle(cornerRadius: 5).fill(Color.white)
+                    RoundedRectangle(cornerRadius: 5).fill(Color.White)
                 )
   
      }
