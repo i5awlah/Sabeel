@@ -44,7 +44,7 @@ struct AlreadyLinkedView: View {
                 
             } label: {
                 RoundedRectangle(cornerRadius: 8)
-                    .fill(Color.buttonBlue)
+                    .fill(Color.customRed)
                     .frame(height: 48)
                     .overlay(content: {
                         Text("Disconnect")

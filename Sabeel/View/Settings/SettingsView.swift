@@ -15,8 +15,9 @@ struct SettingsView: View {
     
     var settingsDataSchedule = SettingTile(title:NSLocalizedString("Schedule PECS", comment: ""), icon: "list.bullet.clipboard")
     
+    var settingsDataUserType = SettingTile(title:NSLocalizedString("Change user type", comment: ""), icon: "puzzlepiece.fill")
+    
     @AppStorage("number0fColumns") var gridRows = 2
-    @State var DeleteAccount = false
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var cloudViewModel: CloudViewModel
     
@@ -39,6 +40,14 @@ struct SettingsView: View {
                             SettingsCellView(data: settingsDataLinkChild)
                         }
                     }
+                    // 4- change user type
+                    if cloudViewModel.childParentModel == nil {
+                        Button{
+                            cloudViewModel.deleteUser()
+                        }label: {
+                            SettingsCellView(data: settingsDataUserType)
+                        }.foregroundColor(colorScheme == .dark ?  .white : .black)
+                    }
                     
                     // 2- Schedule
                     if !cloudViewModel.isChild {
@@ -59,7 +68,7 @@ struct SettingsView: View {
                         Image(systemName:"photo.on.rectangle").frame(width: 35, height: 30).background(Color("buttonBlue")).foregroundColor(.white).cornerRadius(5)
                         Text("Number of PECS per row:").font(Font.customFont(size: 16))
                         Spacer()
-                        
+                
                         
                         Picker("", selection: $gridRows) {
                             ForEach(1...5, id: \.self) { number in
@@ -70,63 +79,11 @@ struct SettingsView: View {
                         
                     }.padding(EdgeInsets(.init(top: 8, leading: 0, bottom: 8, trailing: 0)))
                     
-                    // 4- Delete account
-                    
-                    
+               
                 }
                 .navigationTitle("Settings")
                 
-                if cloudViewModel.childParentModel == nil {
-                    
-                    
-                    Button {
-                        self.DeleteAccount = true
-                        
-                        
-                    } label: {
-                        if colorScheme == .dark {
-                            RoundedRectangle(cornerRadius: 8)
-                                .fill(Color.Dark)
-                                .frame(height: 48)
-                                .overlay(content: {
-                                    Text("Delete Account")
-                                        .font(.customFont(size: 20))
-                                        .fontWeight(.semibold)
-                                        .foregroundColor(.red)
-                                })
-                                .padding(.bottom,120)
-                        } else {
-                            RoundedRectangle(cornerRadius: 8)
-                                .fill(.white)
-                                .frame(height: 48)
-                                .overlay(content: {
-                                    Text("Delete Account")
-                                        .font(.customFont(size: 20))
-                                        .fontWeight(.semibold)
-                                        .foregroundColor(.red)
-                                })
-                                .padding(.bottom,120)
-                        }
-                        
-                            
-                    }
-                    .padding(.horizontal, 24)
-                    .alert(isPresented:$DeleteAccount) {
-                                Alert(
-                                    title: Text("Delete Account"),
-                                    message: Text("Are you sure to deletethis account ?"),
-                                    primaryButton: .destructive(Text("Yes")) {
-                                        cloudViewModel.deleteUser()
-                                    },
-                                    secondaryButton: .cancel()
-                                )
-                            }
-                    /*
-                     here add a cell to delete account with this action:
-                     cloudViewModel.deleteUser()
-                     But before do this action show an alert to confirm
-                     */
-                }
+            
             }
 
         }
