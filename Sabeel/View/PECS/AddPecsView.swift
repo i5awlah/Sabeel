@@ -56,6 +56,7 @@ struct AddPecsView: View {
     
     var body: some View {
         NavigationStack {
+            ScrollView{
             VStack(spacing: 24) {
                 // image uploading
                 
@@ -232,15 +233,15 @@ struct AddPecsView: View {
                         .padding(6)
                         .background(Color.White)
                         .offset(x: 16, y: -16)
-                        
+                    
                 }
-               
+                
                 
                 Button {
                     addPecs()
                 } label: {
                     RoundedRectangle(cornerRadius: 8)
-                        //.fill(Color.buttonBlue)
+                    //.fill(Color.buttonBlue)
                         .foregroundColor(checkRequiredField() ? Color.buttonBlue : Color.gray)
                         .frame(height: 56)
                         .overlay {
@@ -254,6 +255,7 @@ struct AddPecsView: View {
                 
                 
             }
+        }
             .padding(.horizontal, 24)
             .sheet(isPresented: $isPickerShowing) {
                 ImagePickerView(sourceType: .photoLibrary) { image in
