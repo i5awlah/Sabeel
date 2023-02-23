@@ -17,6 +17,7 @@ extension Color {
     static let lightGreen = Color("lightGreen")
     static let darkGreen = Color("darkGreen")
     static let Green = Color("Green")
+    static let White = Color("white")
 }
 
 extension Date {

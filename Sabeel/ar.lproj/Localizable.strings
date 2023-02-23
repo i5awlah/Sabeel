@@ -53,8 +53,8 @@
 //MARK: Notifications
 "New" = "الجديدة";
 "Previous" = "السابقة";
-"Your special child want %@ " = "طفلك المميز يريد %@" ;
-"Your special child want **%@** " = "طفلك المميز يريد **%@**" ;
+"Your special child wants %@ " = "طفلك المميز يريد %@" ;
+"Your special child wants **%@** " = "طفلك المميز يريد **%@**" ;
 "No Notifications yet!" = "لا توجد إشعارات حتى الآن";
 
 //MARK: Settings
