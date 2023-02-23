@@ -67,6 +67,16 @@ struct SettingsView: View {
                                 .labelsHidden()
 
                 }.padding(EdgeInsets(.init(top: 8, leading: 0, bottom: 8, trailing: 0)))
+                
+                // 4- Delete account
+                if cloudViewModel.childParentModel == nil {
+                    /*
+                     here add a cell to delete account with this action:
+                     cloudViewModel.deleteUser()
+                     But before do this action show an alert to confirm
+                     */
+                }
+                
             }
             .navigationTitle("Settings")
 

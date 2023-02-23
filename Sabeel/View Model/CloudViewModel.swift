@@ -90,6 +90,23 @@ class CloudViewModel: ObservableObject {
         }
     }
     
+    // delete user from his record (for switch between parent and child)
+    func deleteUser() {
+        if childParentModel == nil {
+            guard let currentUser else { return }
+            container.publicCloudDatabase.delete(withRecordID: currentUser.associatedRecord.recordID) { returnedRecord, returnedError in
+                if returnedRecord != nil {
+                    DispatchQueue.main.async {
+                        print("User deleted successfully")
+                        self.currentUser = nil
+                    }
+                } else if let error = returnedError {
+                    print(error.localizedDescription)
+                }
+            }
+        }
+    }
+    
     // fetch current user info
     private func fetchUser() {
         Task {
@@ -232,6 +249,27 @@ class CloudViewModel: ObservableObject {
                 
             case .failure(let error):
                 print("error: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    // delete relationship between child and parent
+    func deleteChildParent() {
+        guard let childParentModel = childParentModel else { return }
+        container.publicCloudDatabase.delete(withRecordID: childParentModel.associatedRecord.recordID) { returnedRecord, returnedError in
+            if returnedRecord != nil {
+                DispatchQueue.main.async {
+                    print("Relationship deleted successfully")
+                    self.childParentModel = nil
+                    print("fetch pecs without home content")
+                    self.fetchSharedPecs { pecs in
+                        DispatchQueue.main.async {
+                            self.pecs = pecs
+                        }
+                    }
+                }
+            } else if let error = returnedError {
+                print(error.localizedDescription)
             }
         }
     }

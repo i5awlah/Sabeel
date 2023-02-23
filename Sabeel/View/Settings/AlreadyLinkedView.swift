@@ -34,6 +34,12 @@ struct AlreadyLinkedView: View {
                 .foregroundColor(.darkGray)
                 .multilineTextAlignment(.center)
             
+            /*
+             here add button to delete relationship with this action:
+            cloudViewModel.deleteChildParent()
+             But before do this action show an alert to confirm and make it clear that all custom PECS added by the parent will be deleted
+             */
+            
      
             
         }.background(Color.White)
