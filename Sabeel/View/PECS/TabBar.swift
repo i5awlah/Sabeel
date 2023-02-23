@@ -36,7 +36,7 @@ struct TabBar: View {
                     .tag(2)
             }
         }
-        .popover(isPresented: $cloudViewModel.showNoLinkView, content: {
+        .sheet(isPresented: $cloudViewModel.showNoLinkView, content: {
             NoLinkView()
         })
 
