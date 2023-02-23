@@ -9,22 +9,29 @@ import SwiftUI
 
 
 struct AlreadyLinkedView: View {
-
+    @Environment(\.colorScheme) var colorScheme
     var body: some View {
         VStack(spacing:20) {
-            Image("linked")
-                .resizable()
-                .scaledToFit()
+            if colorScheme == .dark {
+                Image("linkeddark")
+                    .resizable()
+                    .scaledToFit()
                 .padding(.horizontal, 16) .padding(.vertical, 32)
+                
+            } else {
+                Image("linked")
+                    .resizable()
+                    .scaledToFit()
+                .padding(.horizontal, 16) .padding(.vertical, 32) }
             
             Text("Already connected")
                 .bold()
                 .font(.customFont(size: 30))
-                .foregroundColor(.darkBlue)
+                .foregroundColor(colorScheme == .dark ? .darkBlue : .darkBlue)
             
             Text("This account is already connected with another one")
                 .font(.customFont(size: 20))
-                .foregroundColor(.darkGray)
+                .foregroundColor(colorScheme == .dark ? .white : .darkGray)
                 .multilineTextAlignment(.center)
             
      

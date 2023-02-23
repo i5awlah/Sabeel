@@ -34,7 +34,7 @@ struct PecsView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     if cloudViewModel.isChild{
-                        Image(systemName: "gear")
+                        Image(systemName: "gear").resizable().frame(width:35, height:35)
                             .foregroundColor(.darkGreen)
                             .onTapGesture {
                                 goToAppLock.toggle()
