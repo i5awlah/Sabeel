@@ -38,7 +38,7 @@ struct AppLockView: View {
     @State private var FirstTime: Bool = true
     @State private var FirstTmime: Bool = false
     @Namespace private var animation
-    var n = Int.random(in: 1000...9999)
+    @Environment(\.colorScheme) var colorScheme
     //@StateObject var cloudViewModel = CloudViewModel()
     
     
@@ -58,7 +58,7 @@ struct AppLockView: View {
                             
                             Text("Two - zero - two - three")
                                                                     .font(.customFont(size: 25))
-                                                                    .foregroundColor(Color.darkGreen)
+                                                                    .foregroundColor(colorScheme == .dark ? .darkGreen1 : .darkGreen)
 //                            HStack(spacing: 20) {
 //                                ForEach(0..<3) { i in
 //
@@ -175,7 +175,7 @@ struct AppLockView: View {
 //                                                    }
 //                                                }
 //                }
-                .background(Color(.white).ignoresSafeArea())
+                .background(Color.White)
         
                 
     }

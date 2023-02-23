@@ -69,6 +69,7 @@ struct AddChildView: View {
         }
         .environmentObject(vm)
         .toolbar(.hidden,for: .tabBar)
+        .background(Color.White)
     }
 }
 

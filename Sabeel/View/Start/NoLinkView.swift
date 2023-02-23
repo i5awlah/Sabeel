@@ -19,13 +19,14 @@ struct NoLinkView: View {
             Text("Connect with your special child").multilineTextAlignment(.center)
                 .bold()
                 .font(.customFont(size: 30))
-                .foregroundColor(colorScheme == .dark ? .darkBlue : .darkBlue)
+                .foregroundColor(.darkBlue)
             
             Text("To access this feature you have to connect with your special child app")
                 .font(.customFont(size: 20))
-                .foregroundColor(colorScheme == .dark ? .white : .darkGray)
+                .foregroundColor(.darkGray)
                 .multilineTextAlignment(.center)
         }  .padding(.horizontal, 24)
+            .background(Color.White)
     }
 }
 struct NoLinkView_Previews: PreviewProvider {

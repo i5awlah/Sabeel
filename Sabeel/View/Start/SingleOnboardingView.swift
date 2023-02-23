@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SingleOnboardingView: View {
-    @Environment(\.colorScheme) var colorScheme
+    
     @AppStorage("isUserOnboarded") var isUserOnboarded: Bool = false
     
     let image: String
@@ -37,16 +37,17 @@ struct SingleOnboardingView: View {
             Text(title.localized)
                 .bold()
                 .font(.customFont(size: 30))
-                .foregroundColor(colorScheme == .dark ? .darkBlue : .darkBlue)
+                .foregroundColor(.darkBlue)
             
             Text(description.localized)
                 .font(.customFont(size: 20))
-                .foregroundColor(colorScheme == .dark ? .white : .darkGray)
+                .foregroundColor(.darkGray)
                 .multilineTextAlignment(.center)
                 .frame(height: 90, alignment: .top)
         }
         .padding(.horizontal, 24)
         .frame(height: UIScreen.main.bounds.height * 0.55, alignment: .bottom)
+        .background(Color.White)
     }
 }
 

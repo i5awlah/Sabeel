@@ -27,16 +27,16 @@ struct AlreadyLinkedView: View {
             Text("Already connected")
                 .bold()
                 .font(.customFont(size: 30))
-                .foregroundColor(colorScheme == .dark ? .darkBlue : .darkBlue)
+                .foregroundColor(.darkBlue)
             
             Text("This account is already connected with another one")
                 .font(.customFont(size: 20))
-                .foregroundColor(colorScheme == .dark ? .white : .darkGray)
+                .foregroundColor(.darkGray)
                 .multilineTextAlignment(.center)
             
      
             
-        }
+        }.background(Color.White)
         .padding(.horizontal, 24)
     }
 }

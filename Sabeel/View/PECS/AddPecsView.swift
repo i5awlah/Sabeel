@@ -111,7 +111,7 @@ struct AddPecsView: View {
                         Text("Name")
                             .foregroundColor(Color.darkBlue)
                             .padding(5)
-                            .background(.white)
+                            .background(Color.White)
                             .offset(x: 16, y: -16)
                     }
                 
@@ -125,7 +125,7 @@ struct AddPecsView: View {
                             Text("Audio")
                                 .foregroundColor(Color.darkBlue)
                                 .padding(5)
-                                .background(.white)
+                                .background(Color.White)
                                 .offset(x: 16, y: -16)
                         }
                         .overlay(alignment: .leading) {
@@ -230,7 +230,7 @@ struct AddPecsView: View {
                     Text("Category")
                         .foregroundColor(Color.darkBlue)
                         .padding(6)
-                        .background(.white)
+                        .background(Color.White)
                         .offset(x: 16, y: -16)
                         
                 }
@@ -260,10 +260,10 @@ struct AddPecsView: View {
                     self.image = image }
             }
             .alert(isPresented: $imageAlert, content: {
-                Alert(title: Text("Error"), message: Text("Enable Access to photo library from sittings"))
+                Alert(title: Text("Error"), message: Text("Enable Access to photo library from Settings"))
             })
             .alert(isPresented: $voiceAlert, content: {
-                Alert(title: Text("Error"), message: Text("Enable Access to microphone from sittings"))
+                Alert(title: Text("Error"), message: Text("Enable Access to microphone from Settings"))
             })
             .navigationBarTitle("Add New PECS")
         }.toolbar(.hidden,for: .tabBar)

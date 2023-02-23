@@ -10,7 +10,7 @@ import SwiftUI
 struct ChildQRView: View {
     
     @EnvironmentObject var cloudViewModel: CloudViewModel
-    
+    @Environment(\.colorScheme) var colorScheme
     var body: some View {
         VStack(spacing:20){
             
@@ -49,10 +49,11 @@ struct ChildQRView: View {
                 .font(.customFont(size: 16))
             }
             .font(.customFont(size: 20))
-            .foregroundColor(.darkGray)
+            .foregroundColor(colorScheme == .dark ? .white : .darkGray)
             .multilineTextAlignment(.center)
             .padding(.horizontal,24)
         }.toolbar(.hidden,for: .tabBar)
+            .background(Color.White)
     }
 }
 
