@@ -64,6 +64,9 @@ struct PicList: View {
                                 // refresh (in Child who has a link with his parent) every time the app opens
                                 .onChange(of: scenePhase) { phase in
                                     if phase == .active {
+                                        DispatchQueue.main.async {
+                                            cloudViewModel.homeContents.removeAll()
+                                        }
                                         cloudViewModel.fetchHomeContent()
                                     }
                                 }

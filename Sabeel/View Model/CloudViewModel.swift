@@ -487,10 +487,12 @@ class CloudViewModel: ObservableObject {
     private func getPecsForHomes(count: Int) {
         Task {
             for i in 0..<count {
-                let homeContentWithPecs = await self.getPecsHomeFromHome(homeContent: self.homeContents[i])
                 if self.homeContents.indices.contains(i) {
-                    DispatchQueue.main.async {
-                        self.homeContents[i] = homeContentWithPecs
+                    let homeContentWithPecs = await self.getPecsHomeFromHome(homeContent: self.homeContents[i])
+                    if self.homeContents.indices.contains(i) {
+                        DispatchQueue.main.async {
+                            self.homeContents[i] = homeContentWithPecs
+                        }
                     }
                 }
             }
