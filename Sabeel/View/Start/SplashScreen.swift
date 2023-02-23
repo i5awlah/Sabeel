@@ -13,8 +13,9 @@ struct SplashScreen: View {
     @StateObject var cloudViewModel = CloudViewModel()
     @AppStorage("isUserOnboarded") var isUserOnboarded: Bool = false
     @State var isEnded : Bool = false
-    
+    @Environment(\.colorScheme) var colorScheme
     let Video = AVPlayer(url: Bundle.main.url(forResource: "SplashScreenLight", withExtension: "mp4")!)
+    
     
     var body: some View {
         Group {
@@ -38,18 +39,32 @@ struct SplashScreen: View {
                 }
             } else {
                 GeometryReader{ geo in
-                    VideoPlayer(player:Video)
-                        .disabled(true)
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: geo.size.width, height: geo.size.height)
-                        .edgesIgnoringSafeArea(.all)
-                        .onAppear {
-                            Video.play()
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 2){
-                                Video.pause()
-                                isEnded = true
+                  
+                        VideoPlayer(player:Video)
+                            .disabled(true)
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: geo.size.width, height: geo.size.height)
+                            .edgesIgnoringSafeArea(.all)
+                            .onAppear {
+                                Video.play()
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 2){
+                                    Video.pause()
+                                    isEnded = true
+                                }
+                            
+                    }
+                        VideoPlayer(player:Video)
+                            .disabled(true)
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: geo.size.width, height: geo.size.height)
+                            .edgesIgnoringSafeArea(.all)
+                            .onAppear {
+                                Video.play()
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 2){
+                                    Video.pause()
+                                    isEnded = true
+                                }
                             }
-                        }
                 }
             }
         }
