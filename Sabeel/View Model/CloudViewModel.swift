@@ -407,58 +407,13 @@ class CloudViewModel: ObservableObject {
         }
     }
 
-    internal func queryRecords(query: CKQuery, completionHandler: @escaping (_ results: [HomeContent]) -> Bool, errorHandler:((_ error: NSError) -> Void)? = nil) {
-            let operation = CKQueryOperation(query: query)
-
-            var results = [HomeContent]()
-            operation.recordFetchedBlock = { record in
-                guard let homeContent = HomeContent(record: record) else { return }
-                print("- Append")
-                results.append(homeContent)
-            }
-
-            operation.queryCompletionBlock = { cursor, error in
-                    if completionHandler(results) {
-                        if cursor != nil {
-                            print("- cursor")
-                            self.queryRecords(cursor: cursor!, continueWithResults: results, completionHandler: completionHandler, errorHandler: errorHandler)
-                        }
-                    }
-            }
-            operation.resultsLimit = 10
-            addOperation(operation: operation)
-        }
-
-    private func queryRecords(cursor: CKQueryOperation.Cursor, continueWithResults:[HomeContent], completionHandler: @escaping (_ results: [HomeContent]) -> Bool, errorHandler:((_ error: NSError) -> Void)? = nil) {
-            var results = continueWithResults
-            let operation = CKQueryOperation(cursor: cursor)
-            operation.recordFetchedBlock = { record in
-                guard let homeContent = HomeContent(record: record) else { return }
-                print("Append")
-                results.append(homeContent)
-            }
-
-            operation.queryCompletionBlock = { cursor, error in
-                    if completionHandler(results) {
-                        if cursor != nil {
-                            print("Cursor")
-                            self.queryRecords(cursor: cursor!, continueWithResults: results, completionHandler: completionHandler, errorHandler: errorHandler)
-                        } else {
-                            print("No Cursor: \(results.count)")
-                            self.getPecsForHomes(count: results.count)
-                        }
-                    }
-            }
-            operation.resultsLimit = 10
-            addOperation(operation: operation)
-        }
-    
-    func addOperation(operation: CKDatabaseOperation) {
-        container.publicCloudDatabase.add(operation)
-    }
-    
     // fetch all home content with pecs and child requests
     func fetchHomeContent() {
+        
+        DispatchQueue.main.async {
+            self.homeContents.removeAll()
+            self.childRequests.removeAll()
+        }
         
         guard let childParentModel else { return }
         let childParentRef = CKRecord.Reference(recordID: childParentModel.associatedRecord.recordID, action: .deleteSelf)
@@ -467,60 +422,73 @@ class CloudViewModel: ObservableObject {
         
         let query = CKQuery(recordType: HomeContent.recordTypeKey, predicate: predicate)
         query.sortDescriptors = [NSSortDescriptor(key: HomeContent.keys.category, ascending: true)]
-
-        queryRecords(query: query) { results in
-            print("Result: \(results.count)")
-            if results.count == 0 {
-                print("No Home content..")
-                self.takePecsAndAppendInHomeContent()
-            } else {
-                DispatchQueue.main.async {
-                    self.homeContents = results
-                }
+        
+        let operation = CKQueryOperation(query: query)
+        operation.resultsLimit = 200
+        operation.qualityOfService = .userInteractive
+        
+        var counter = 0
+        operation.recordMatchedBlock = { recordID, result in
+            switch result {
+            case .success(let record):
+                print("increase counter: \(counter)")
+                counter += 1
+                guard let home = HomeContent(record: record) else { return }
+                self.getPecsHomeFromHome(homeContent: home)
+            case .failure(let error):
+                print(error.localizedDescription)
             }
-            return true
         }
-    }
-    
-
-    
-    private func getPecsForHomes(count: Int) {
-        Task {
-            for i in 0..<count {
-                if self.homeContents.indices.contains(i) {
-                    let homeContentWithPecs = await self.getPecsHomeFromHome(homeContent: self.homeContents[i])
-                    if self.homeContents.indices.contains(i) {
-                        DispatchQueue.main.async {
-                            self.homeContents[i] = homeContentWithPecs
-                        }
+        
+        operation.queryResultBlock = { result in
+            switch result {
+            case .success(_):
+                DispatchQueue.main.async {
+                    print("counter: \(counter)")
+                    if counter == 0 {
+                        print("No Home content..")
+                        self.takePecsAndAppendInHomeContent()
                     }
                 }
-            }
-            // here: finish load all home with pecs -> fetch req
-            if !self.isChild {
-                DispatchQueue.main.async {
-                    self.childRequests.removeAll()
-                }
-                self.homeContents.forEach({ self.fetchChildRequests(homeContent: $0) })
+            case .failure(let error):
+                print(error.localizedDescription)
             }
         }
+        
+        container.publicCloudDatabase.add(operation)
     }
     
-    private func getPecsHomeFromHome(homeContent: HomeContent) async -> HomeContent {
-            let customPecsRef = homeContent.associatedRecord.value(forKey: HomeContent.keys.customPecsRef) as? CKRecord.Reference
-            let pecsRef = homeContent.associatedRecord.value(forKey: HomeContent.keys.pecsRef) as? CKRecord.Reference
-            var pecsRecordName = ""
-            var isCustom = false
-            if let customPecsRef {
-                pecsRecordName = customPecsRef.recordID.recordName
-                isCustom = true
-            } else if let pecsRef {
-                pecsRecordName = pecsRef.recordID.recordName
-                isCustom = false
-            }
-            let pic = await fetchOnePecs(pecsRecordName: pecsRecordName, isCustom: isCustom)
-            return HomeContent(record: homeContent.associatedRecord, pecs: pic)
-            ?? homeContent
+    private func getPecsHomeFromHome(homeContent: HomeContent) {
+
+        let customPecsRef = homeContent.associatedRecord.value(forKey: HomeContent.keys.customPecsRef) as? CKRecord.Reference
+        let pecsRef = homeContent.associatedRecord.value(forKey: HomeContent.keys.pecsRef) as? CKRecord.Reference
+        var pecsRecordID: CKRecord.ID = CKRecord.ID(recordName: "na")
+        var isCustom = false
+        if let customPecsRef {
+            pecsRecordID = customPecsRef.recordID
+            isCustom = true
+        } else if let pecsRef {
+            pecsRecordID = pecsRef.recordID
+            isCustom = false
+        }
+        
+        let operation = CKFetchRecordsOperation(recordIDs: [pecsRecordID])
+        operation.qualityOfService = .userInteractive
+
+        operation.fetchRecordsCompletionBlock = { (records, error) in
+            records?.forEach({ id, record in
+                guard let pecs = isCustom ? PecsModel(record: record) : MainPecs(record: record) else { return }
+                print("fetch \(isCustom ? "custom" : "main") Pecs \(pecs.name)")
+                DispatchQueue.main.async {
+                    self.homeContents.append(HomeContent(record: homeContent.associatedRecord, pecs: pecs) ?? homeContent)
+                }
+                print("Append")
+                self.fetchChildRequests(homeContent: HomeContent(record: homeContent.associatedRecord, pecs: pecs) ?? homeContent)
+            })
+        }
+        
+        let database = self.container.publicCloudDatabase
+        database.add(operation)
     }
     
     func deleteHomeContent(homeContent: HomeContent) {
