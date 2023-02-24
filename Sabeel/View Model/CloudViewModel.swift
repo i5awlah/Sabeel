@@ -292,7 +292,7 @@ class CloudViewModel: ObservableObject {
         }
     }
     
-    func addPecs(pecs: PecsModel) {
+    func addPecs(pecs: PecsModel, startTime: Date? = nil, endTime: Date? = nil) {
         let record = CKRecord(recordType: "CustomPecs")
         record.setValuesForKeys(pecs.toDictionary())
 
@@ -302,9 +302,13 @@ class CloudViewModel: ObservableObject {
             } else if let record {
                 debugPrint("PECS has been successfully saveded: \(record.description)")
                 guard let pec = PecsModel(record: record) else { return }
-                self.addHomeContent(pec: pec, isCustom: true) { homeContent in
+                //Check the category does not have time
+                
+                self.addHomeContent(pec: pec, isCustom: true, startTime: startTime, endTime: endTime) { homeContent in
                      DispatchQueue.main.async {
-                         self.homeContents.insert(homeContent, at: 0)
+                         if homeContent.isItTime {
+                             self.homeContents.insert(homeContent, at: 0)
+                         }
                      }
                 }
             }
@@ -362,7 +366,7 @@ class CloudViewModel: ObservableObject {
         }
     }
     
-    
+
     //MARK: home content
     // For example, all pec is in table -> add its id (call juse ONE TIME for user)
     private func takePecsAndAppendInHomeContent() {

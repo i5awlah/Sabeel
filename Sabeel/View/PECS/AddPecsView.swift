@@ -51,7 +51,9 @@ struct AddPecsView: View {
     @State var isPhotoPermission = false
     @State var countDownTimer = 0.0
     @State var timerRunning = true
-
+    @State private var output1: [sech1] = []
+    var userDefaults = UserDefaults.standard
+    
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var body: some View {
@@ -371,8 +373,31 @@ struct AddPecsView: View {
                 name: pecsName,
                 category: selectedCategory.rawValue
             )
+            let decoded = UserDefaults.standard.data(forKey:"sec")
             
-            cloudViewModel.addPecs(pecs: pecs)
+            if(decoded != nil){
+                let decodedTeams = NSKeyedUnarchiver.unarchiveObject(with: decoded!) as! [sech1]
+                
+                
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "HH:mm"
+                
+                var startTime : Date?
+                var endTime : Date?
+                
+                for d in decodedTeams {
+                    if d.category == selectedCategory.rawValue {
+                        
+                        startTime = dateFormatter.date(from: d.fromTime)
+                        endTime = dateFormatter.date(from: d.toTime)
+                        print("startTime: \(startTime)")
+                    }
+                }
+                cloudViewModel.addPecs(pecs: pecs, startTime: startTime, endTime: endTime)
+            }
+            else{
+                cloudViewModel.addPecs(pecs: pecs)
+            }
             dismiss()
         }
     }
