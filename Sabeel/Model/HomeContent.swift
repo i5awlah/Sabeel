@@ -55,14 +55,14 @@ struct HomeContent: Equatable {
         endTime: "endTime"
     )
     
-    init(childParentRef: CKRecord.Reference, customPecsRef: CKRecord.Reference? = nil, pecsRef: CKRecord.Reference? = nil, pecs: PecsModel) {
+    init(childParentRef: CKRecord.Reference, customPecsRef: CKRecord.Reference? = nil, pecsRef: CKRecord.Reference? = nil, pecs: PecsModel, startTime: Date? = nil, endTime: Date? = nil) {
         self.id = UUID().uuidString
         self.childParentRef = childParentRef
         self.customPecsRef = customPecsRef
         self.pecsRef = pecsRef
         self.isShown = true
-        self.startTime = nil
-        self.endTime = nil
+        self.startTime = startTime
+        self.endTime = endTime
         self.associatedRecord = CKRecord(recordType: HomeContent.recordTypeKey)
         self.pecs = pecs
         self.category = pecs.category

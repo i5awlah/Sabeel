@@ -377,7 +377,7 @@ class CloudViewModel: ObservableObject {
         }
     }
     
-    private func addHomeContent(pec: PecsModel, isCustom: Bool, completionHandler: @escaping (HomeContent) -> Void) {
+    private func addHomeContent(pec: PecsModel, isCustom: Bool, startTime: Date? = nil, endTime: Date? = nil, completionHandler: @escaping (HomeContent) -> Void) {
         guard let childParentModel = self.childParentModel else { return }
         let childParentRef = CKRecord.Reference(recordID: childParentModel.associatedRecord.recordID, action: .deleteSelf)
         
@@ -385,7 +385,7 @@ class CloudViewModel: ObservableObject {
         let customPecsRef = CKRecord.Reference(recordID: pec.associatedRecord.recordID, action: .deleteSelf)
         
         let homeContent = HomeContent(childParentRef: childParentRef, customPecsRef: nil, pecsRef: pecsRef, pecs: pec)
-        let homeContentWithCustom = HomeContent(childParentRef: childParentRef, customPecsRef: customPecsRef, pecsRef: nil, pecs: pec)
+        let homeContentWithCustom = HomeContent(childParentRef: childParentRef, customPecsRef: customPecsRef, pecsRef: nil, pecs: pec, startTime: startTime, endTime: endTime)
         
         if isCustom {
             self.saveHomeContent(homeContent: homeContentWithCustom, completionHandler: completionHandler)
@@ -481,6 +481,7 @@ class CloudViewModel: ObservableObject {
                     print("Result: \(results.count)")
                     if results.count == 0 {
                         print("No Home content..")
+                        self.isLoadingHome = false
                         self.takePecsAndAppendInHomeContent()
                     } else {
                         DispatchQueue.main.async {
