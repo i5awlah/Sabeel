@@ -77,8 +77,8 @@
 //MARK: AlreadyLinked
 "Already connected" = "تم الربط";
 "This account is already connected with another one" = "هذا الحساب تم ربطه مسبقًا بحساب آخر" ;
-"Disconnect" = "إلغاء الأرتباط";
-"disconnect your account with your special child will also delete all custom PECS added by the parent ." = "إلغاء ارتباط حسابك مع طفلك سيؤدي أيضاً إلي حذف جميع البطاقات المخصصة التي تمت إضافتها من قبل أحد الوالدين .";
+"Disconnect" = "إلغاء الارتباط";
+"disconnect your account with your special child will also delete all custom PECS added by the parent ." = "إلغاء ارتباط حسابك مع طفلك سيؤدي أيضًا إلى حذف جميع البطاقات المخصصة التي تمت إضافتها من قبل أحد الوالدين.";
 "Confirm" = "تأكيد";
 
 //MARK: Schedule PECS
