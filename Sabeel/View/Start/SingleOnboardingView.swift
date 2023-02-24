@@ -47,7 +47,7 @@ struct SingleOnboardingView: View {
         }
         .padding(.horizontal, 24)
         .frame(height: UIScreen.main.bounds.height * 0.55, alignment: .bottom)
-        .background(Color.White)
+        .background(Color.White2)
     }
 }
 

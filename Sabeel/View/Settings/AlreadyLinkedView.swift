@@ -81,7 +81,7 @@ struct AlreadyLinkedView: View {
             
      
             
-        }.background(Color.White)
+        }.background(Color.White2)
         .padding(.horizontal, 24)
         .toolbar(.hidden, for: .tabBar)
     }

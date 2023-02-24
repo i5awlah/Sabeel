@@ -26,7 +26,7 @@ struct NoLinkView: View {
                 .foregroundColor(.darkGray)
                 .multilineTextAlignment(.center)
         }  .padding(.horizontal, 24)
-            .background(Color.White)
+            .background(Color.White2)
     }
 }
 struct NoLinkView_Previews: PreviewProvider {

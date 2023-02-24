@@ -53,7 +53,7 @@ struct ChildQRView: View {
             .multilineTextAlignment(.center)
             .padding(.horizontal,24)
         }.toolbar(.hidden,for: .tabBar)
-            .background(Color.White)
+            .background(Color.White2)
     }
 }
 
