@@ -128,3 +128,7 @@
 "8" = "٨";
 "9" = "٩";
 "0" = "٠";
+
+//Mark: Modifiers
+"Changes may take time to reflect on your child's device" = "التغيرات قد تستغرق بعض الوقت لتنعكس على جهاز طفلك المميز ";
+"Don't show again" = "لا تظهرها مرة أخرى";
