@@ -1,8 +1,9 @@
 {
   "data" : [
     {
-      "filename" : "splashScreen - dark.MP4",
-      "idiom" : "universal"
+      "filename" : "SplashScreenDark.mp4",
+      "idiom" : "universal",
+      "universal-type-identifier" : "public.mpeg-4"
     }
   ],
   "info" : {
