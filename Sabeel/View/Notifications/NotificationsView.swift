@@ -46,6 +46,13 @@ struct NotificationsView: View {
             .onAppear{
                 UIApplication.shared.applicationIconBadgeNumber = 0
             }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    if cloudViewModel.isLoadingHome {
+                        ProgressView()
+                    }
+                }
+            }
             .navigationTitle("Notifications")
         }
     }

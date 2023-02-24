@@ -33,6 +33,11 @@ struct PecsView: View {
             .navigationTitle("PECS")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
+                    if cloudViewModel.isLoadingHome {
+                        ProgressView()
+                    }
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
                     if cloudViewModel.isChild{
                         Image(systemName: "gear").resizable().frame(width:35, height:35)
                             .foregroundColor(.darkGreen)
