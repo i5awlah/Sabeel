@@ -38,8 +38,9 @@ struct PecsView: View {
                     }
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    if cloudViewModel.isChild{
-                        Image(systemName: "gear").resizable().frame(width:35, height:35)
+                    if cloudViewModel.isChild {
+                        Image(systemName: "gear").resizable()
+                            .frame(width: UIDevice.isIPad ? 40 : 30 , height: UIDevice.isIPad ? 40 : 30)
                             .foregroundColor(.darkGreen)
                             .onTapGesture {
                                 goToAppLock.toggle()
