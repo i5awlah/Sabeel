@@ -12,7 +12,7 @@ struct SchedulePecsView: View {
         UUID().uuidString
     }
 
-
+    @EnvironmentObject var cloudViewModel: CloudViewModel
     @AppStorage("schedule1") var scheduleCategories: Data = Data()
    
 
@@ -32,6 +32,7 @@ struct SchedulePecsView: View {
     @State private var fromTime = Date.now
     @State private var toTime = Date.now
     @State private var optioncategory = ""
+    @State private var isUpdateSch = false
 
     @State private var output1: [sech1] = []
     @State private var showPreviousSec = false
@@ -98,12 +99,21 @@ struct SchedulePecsView: View {
                     let encodedData: Data = NSKeyedArchiver.archivedData(withRootObject: output1)
                     userDefaults.set(encodedData, forKey: "sec")
 
+                    cloudViewModel.updateSchedulePECS(category: optioncategory , startTime: fromTime, endTime: toTime){ isUpdated in
+                        isUpdateSch.toggle()
+                    }
                     
                     
                 } label: {
                     
                     Text("Schedule It").padding(.vertical, 12).font(Font.customFont(size: 20))
-                }.disabled(optioncategory == "" || fromTime >= toTime)
+                }
+                .alert(isPresented: $isUpdateSch,
+                                       content: {
+                                   Alert(title: Text("Schedule added successfully "))
+                               })
+                
+                .disabled(optioncategory == "" || fromTime >= toTime)
                 .frame(maxWidth: .infinity) .foregroundColor(.white)
                 .background(optioncategory != "" && fromTime < toTime ? Color.buttonBlue : Color.gray)      .cornerRadius(10).padding(.all,20)
                 

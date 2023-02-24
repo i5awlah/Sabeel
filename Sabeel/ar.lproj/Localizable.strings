@@ -56,7 +56,7 @@
 "Your special child wants %@ " = "طفلك المميز يريد %@" ;
 "Your special child wants **%@** " = "طفلك المميز يريد **%@**" ;
 "No Notifications yet!" = "لا توجد إشعارات حتى الآن";
-
+"Yesterday" = "أمس";
 //MARK: Settings
 "Settings" = "الإعدادات";
 "Connect your special child" = "اقترن بحساب طفلك المميز";

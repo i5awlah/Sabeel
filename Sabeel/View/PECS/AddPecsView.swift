@@ -112,7 +112,7 @@ struct AddPecsView: View {
                         Text("Name")
                             .foregroundColor(Color.darkBlue)
                             .padding(5)
-                            .background(Color.White)
+                            .background(Color.White2)
                             .offset(x: 16, y: -16)
                     }
                 
@@ -126,7 +126,7 @@ struct AddPecsView: View {
                             Text("Audio")
                                 .foregroundColor(Color.darkBlue)
                                 .padding(5)
-                                .background(Color.White)
+                                .background(Color.White2)
                                 .offset(x: 16, y: -16)
                         }
                         .overlay(alignment: .leading) {
@@ -231,7 +231,7 @@ struct AddPecsView: View {
                     Text("Category")
                         .foregroundColor(Color.darkBlue)
                         .padding(6)
-                        .background(Color.White)
+                        .background(Color.White2)
                         .offset(x: 16, y: -16)
                     
                 }

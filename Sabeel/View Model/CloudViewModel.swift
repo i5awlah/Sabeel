@@ -523,35 +523,36 @@ class CloudViewModel: ObservableObject {
     }
     
     // Update schedule
-    func updateSchedulePECS(category: String, startTime: Date, endTime: Date ){
+        func updateSchedulePECS(category: String, startTime: Date, endTime: Date, completionHandler: @escaping (Bool) -> Void ){
 
-       //fetch all the records from homeContent based on the category the user picked
-        var filteredHomeContent = homeContents.filter({ $0.category.contains(category) })
+           //fetch all the records from homeContent based on the category the user picked
+            var filteredHomeContent = homeContents.filter({ $0.category.contains(category) })
 
-        var updateRecords:[CKRecord] = []
+            var updateRecords:[CKRecord] = []
 
-        for homeContent in filteredHomeContent {
-            let record = homeContent.associatedRecord
+            for homeContent in filteredHomeContent {
+                let record = homeContent.associatedRecord
 
-            record[HomeContent.keys.startTime] = startTime
-            record[HomeContent.keys.endTime] = endTime
+                record[HomeContent.keys.startTime] = startTime
+                record[HomeContent.keys.endTime] = endTime
 
-            updateRecords.append(record)
+                updateRecords.append(record)
 
-        }
-
-        let operation = CKModifyRecordsOperation.init(recordsToSave: updateRecords, recordIDsToDelete: nil)
-
-        operation.modifyRecordsCompletionBlock = { _, _, error in
-            if let error = error{
-                print(error.localizedDescription)
             }
+
+            let operation = CKModifyRecordsOperation.init(recordsToSave: updateRecords, recordIDsToDelete: nil)
+
+            operation.modifyRecordsCompletionBlock = { _, _, error in
+                if let error = error{
+                    print(error.localizedDescription)
+                }
+                else {
+                    completionHandler(true)
+                }
+            }
+            container.publicCloudDatabase.add(operation)
+
         }
-        container.publicCloudDatabase.add(operation)
-
-        //fetch the record again or modify it in the homeContents
-
-    }
 
     
     //MARK: Child Request
