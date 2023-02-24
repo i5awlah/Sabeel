@@ -13,24 +13,26 @@ struct PicCell: View {
    
     @State var isShownPecs = true
     @State var isAssigned = false
-    
+    @Binding var isToast : Bool
     @Binding var isEditing : Bool
     @State var deleteConfirm = false
     let homeContent: HomeContent?
     let pecs: PecsModel
     @EnvironmentObject var cloudViewModel : CloudViewModel
     
-    init(isEditing: Binding<Bool>, homeContent: HomeContent) {
+    init(isEditing: Binding<Bool>,isToast: Binding<Bool>, homeContent: HomeContent) {
         _isEditing = isEditing
+        _isToast = isToast
         self.homeContent = homeContent
         self.pecs = homeContent.pecs
     }
     
     
-    init(isEditing: Binding<Bool>, pecs: PecsModel) {
+    init(isEditing: Binding<Bool>,isToast:Binding<Bool>, pecs: PecsModel) {
         self.pecs = pecs
         self.homeContent = nil
         _isEditing = isEditing
+        _isToast = isToast
     }
     
     
@@ -58,6 +60,7 @@ struct PicCell: View {
                                 Button("Delete", role: .destructive) {
                                     guard let homeContent else { return }
                                     cloudViewModel.deleteHomeContent(homeContent: homeContent)
+                                    self.isToast = true
                                 }
                             }
                             
@@ -67,6 +70,7 @@ struct PicCell: View {
                                     guard let homeContent else { return }
                                     cloudViewModel.updateHidePECS(homeContent: homeContent) { isUpdated in
                                         isShownPecs.toggle()
+                                        self.isToast = true
                                     }
                                 } else {
                                     cloudViewModel.showNoLinkView.toggle()
@@ -171,7 +175,7 @@ struct AddCell: View {
 
 struct PicCell_Previews: PreviewProvider {
     static var previews: some View {
-        PicCell(isEditing: .constant(false), pecs: PecsModel(imageURL: nil, audioURL: nil, name: "", category: ""))
+        PicCell(isEditing: .constant(false), isToast: Binding<Bool>.constant(false), pecs: PecsModel(imageURL: nil, audioURL: nil, name: "", category: ""))
         AddCell()
     }
 }

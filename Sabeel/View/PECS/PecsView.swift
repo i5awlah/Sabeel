@@ -10,7 +10,7 @@ import SwiftUI
 struct PecsView: View {
     @EnvironmentObject var cloudViewModel : CloudViewModel
     @State var isEditing = false
-
+    @State var isToast :Bool = false
     @State private var goToAppLock: Bool = false
     @State private var goToSettings: Bool = false
 
@@ -19,13 +19,13 @@ struct PecsView: View {
         NavigationStack{
             VStack{
                 if (cloudViewModel.childParentModel != nil) {
-                    PicList(isEditing: $isEditing)
+                    PicList(isEditing: $isEditing, isToast: $isToast)
                 } else {
                     Group {
                         if cloudViewModel.isLoading {
                             ProgressView()
                         } else {
-                            PicList(isEditing: $isEditing, pecs: cloudViewModel.pecs)
+                            PicList(isEditing: $isEditing, isToast: $isToast, pecs: cloudViewModel.pecs)
                         }
                     }
                 }
@@ -70,6 +70,7 @@ struct PecsView: View {
 
                 UINavigationBar.appearance().standardAppearance = navBarAppearance
         }
+        .toast(isShowing: $isToast)
     }
 }
 

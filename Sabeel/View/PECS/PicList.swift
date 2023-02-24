@@ -15,7 +15,7 @@ struct PicList: View {
     let pecs: [MainPecs]
     
     @State private var showAddPecsView = false
-    
+    @Binding var isToast : Bool
     @EnvironmentObject var cloudViewModel : CloudViewModel
     
     @State var audioPlayer: AVAudioPlayer!
@@ -26,13 +26,15 @@ struct PicList: View {
         
     }
     
-    init(isEditing: Binding<Bool>) {
+    init(isEditing: Binding<Bool> , isToast:Binding<Bool>) {
         _isEditing = isEditing
+        _isToast = isToast
         self.pecs = []
     }
     
-    init(isEditing: Binding<Bool>, pecs: [MainPecs]) {
+    init(isEditing: Binding<Bool>, isToast:Binding<Bool>, pecs: [MainPecs]) {
         self.pecs = pecs
+        _isToast = isToast
         _isEditing = isEditing
     }
 
@@ -55,7 +57,7 @@ struct PicList: View {
                                         handleCellClicked(item: item)
                                     } label: {
                                         
-                                        PicCell(isEditing: $isEditing, homeContent: item)
+                                        PicCell(isEditing: $isEditing, isToast: $isToast, homeContent: item)
                                             .shimmering(
                                                 active: item.pecs.imageURL == nil
                                             )
@@ -75,7 +77,7 @@ struct PicList: View {
                             else{
                                 ForEach(cloudViewModel.homeContents, id: \.id) { item in
                                     
-                                    PicCell(isEditing: $isEditing, homeContent: item)
+                                    PicCell(isEditing: $isEditing, isToast: $isToast, homeContent: item)
                                         .shimmering(
                                             active: item.pecs.imageURL == nil
                                         )
@@ -91,7 +93,7 @@ struct PicList: View {
                                     playPecsSound(url: url)
                                     // }
                                 } label: {
-                                    PicCell(isEditing: $isEditing, pecs: pecs)
+                                    PicCell(isEditing: $isEditing, isToast: $isToast, pecs: pecs)
                                     
                                 }
                                 
@@ -109,7 +111,7 @@ struct PicList: View {
                 }
             }
             .navigationDestination(isPresented: $showAddPecsView) {
-                AddPecsView()
+                AddPecsView(isToast: $isToast)
             }
 //        .refreshable {
 //            cloudViewModel.fetchHomeContent()
@@ -125,7 +127,7 @@ struct PicList: View {
 
 struct PicList_Previews: PreviewProvider {
     static var previews: some View {
-        PicList(isEditing: Binding<Bool>.constant(false))
+        PicList(isEditing: Binding<Bool>.constant(false), isToast: Binding<Bool>.constant(false))
             .environmentObject(CloudViewModel())
     }
 }

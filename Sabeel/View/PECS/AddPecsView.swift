@@ -51,6 +51,7 @@ struct AddPecsView: View {
     @State var isPhotoPermission = false
     @State var countDownTimer = 0.0
     @State var timerRunning = true
+    @Binding var isToast : Bool
 
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
@@ -239,6 +240,7 @@ struct AddPecsView: View {
                 
                 Button {
                     addPecs()
+                    self.isToast = true
                 } label: {
                     RoundedRectangle(cornerRadius: 8)
                     //.fill(Color.buttonBlue)
@@ -269,6 +271,7 @@ struct AddPecsView: View {
             })
             .navigationBarTitle("Add New PECS")
         }.toolbar(.hidden,for: .tabBar)
+      
     }
     
     func startAndStopRecord() {
@@ -389,7 +392,7 @@ struct AddPecsView: View {
 
 struct AddPecsView_Previews: PreviewProvider {
     static var previews: some View {
-        AddPecsView()
+        AddPecsView(isToast: Binding<Bool>.constant(false))
             .environmentObject(CloudViewModel())
     }
 }

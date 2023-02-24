@@ -10,6 +10,7 @@
 		1C67ECF629A47BC200D3AE7D /* AlreadyLinkedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C67ECF529A47BC200D3AE7D /* AlreadyLinkedView.swift */; };
 		5D4B3573299CDFE70089A3F9 /* Shimmer in Frameworks */ = {isa = PBXBuildFile; productRef = 5D4B3572299CDFE70089A3F9 /* Shimmer */; };
 		5D4B3575299E2E830089A3F9 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B3574299E2E830089A3F9 /* TabBar.swift */; };
+		5D96AA5129A90A8B00444ED6 /* Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D96AA5029A90A8B00444ED6 /* Modifiers.swift */; };
 		5DB4383D299AA712004F2A53 /* SplashScreenLight.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 5DB4383C299AA712004F2A53 /* SplashScreenLight.mp4 */; };
 		5DC1C23329A01DB400FB6BD1 /* NoNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC1C23229A01DB400FB6BD1 /* NoNotification.swift */; };
 		5DFA3FBD29A2367100A7B44B /* Tajawal-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5DFA3FBC29A2367100A7B44B /* Tajawal-Regular.ttf */; };
@@ -58,6 +59,7 @@
 /* Begin PBXFileReference section */
 		1C67ECF529A47BC200D3AE7D /* AlreadyLinkedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlreadyLinkedView.swift; sourceTree = "<group>"; };
 		5D4B3574299E2E830089A3F9 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
+		5D96AA5029A90A8B00444ED6 /* Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modifiers.swift; sourceTree = "<group>"; };
 		5DB4383C299AA712004F2A53 /* SplashScreenLight.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = SplashScreenLight.mp4; sourceTree = "<group>"; };
 		5DC1C23229A01DB400FB6BD1 /* NoNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoNotification.swift; sourceTree = "<group>"; };
 		5DFA3FBC29A2367100A7B44B /* Tajawal-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Tajawal-Regular.ttf"; sourceTree = "<group>"; };
@@ -288,6 +290,7 @@
 				906035C129A026CE002D4192 /* Helper.swift */,
 				901182AB29916C3C0024ABC1 /* Extensions.swift */,
 				900DDC35299D0765005A471F /* NotificationManager.swift */,
+				5D96AA5029A90A8B00444ED6 /* Modifiers.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -377,6 +380,7 @@
 				900866F929A2BB5B00C5E26E /* ImagePickerView.swift in Sources */,
 				9008670029A3483B00C5E26E /* HomeContent.swift in Sources */,
 				900DDC22299658AE005A471F /* UserModel.swift in Sources */,
+				5D96AA5129A90A8B00444ED6 /* Modifiers.swift in Sources */,
 				9011829629915DAF0024ABC1 /* PicList.swift in Sources */,
 				900DDC282998CA3C005A471F /* DataScannerView.swift in Sources */,
 				5DC1C23329A01DB400FB6BD1 /* NoNotification.swift in Sources */,

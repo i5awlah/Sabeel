@@ -15,7 +15,6 @@ struct SettingsView: View {
     
     var settingsDataSchedule = SettingTile(title:NSLocalizedString("Schedule PECS", comment: ""), icon: "list.bullet.clipboard")
     
-    var settingsDataUserType = SettingTile(title:NSLocalizedString("Change user type", comment: ""), icon: "puzzlepiece.fill")
     
     @AppStorage("number0fColumns") var gridRows = 2
     @Environment(\.colorScheme) var colorScheme
@@ -45,7 +44,13 @@ struct SettingsView: View {
                         Button{
                             cloudViewModel.deleteUser()
                         }label: {
-                            SettingsCellView(data: settingsDataUserType)
+                            HStack{
+                                Image("switchUser")
+                                    .resizable().frame(width: 35, height: 30).background(Color("buttonBlue")).foregroundColor(.white).cornerRadius(5)
+                                Text("Change user type").font(Font.customFont(size: 16))
+                                
+                            }.padding(EdgeInsets(.init(top: 8, leading: 0, bottom: 8, trailing: 0)))
+                            
                         }.foregroundColor(colorScheme == .dark ?  .white : .black)
                     }
                     
