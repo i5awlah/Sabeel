@@ -15,6 +15,7 @@ struct SplashScreen: View {
     @State var isEnded : Bool = false
     @Environment(\.colorScheme) var colorScheme
     let Video = AVPlayer(url: Bundle.main.url(forResource: "SplashScreenLight", withExtension: "mp4")!)
+   let Video1 = AVPlayer(url: Bundle.main.url(forResource: "SplashScreenDark", withExtension: "mp4")!)
     
     
     var body: some View {
@@ -39,32 +40,40 @@ struct SplashScreen: View {
                 }
             } else {
                 GeometryReader{ geo in
-                  
-                        VideoPlayer(player:Video)
+                    if colorScheme == .dark {
+                        VideoPlayer(player:Video1)
                             .disabled(true)
                             .aspectRatio(contentMode: .fill)
                             .frame(width: geo.size.width, height: geo.size.height)
                             .edgesIgnoringSafeArea(.all)
+                            .background(.black)
                             .onAppear {
-                                Video.play()
+                                Video1.play()
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 2){
-                                    Video.pause()
-                                    isEnded = true
-                                }
-                            
-                    }
-                        VideoPlayer(player:Video)
-                            .disabled(true)
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: geo.size.width, height: geo.size.height)
-                            .edgesIgnoringSafeArea(.all)
-                            .onAppear {
-                                Video.play()
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 2){
-                                    Video.pause()
+                                    Video1.pause()
                                     isEnded = true
                                 }
                             }
+                    } else {
+                        VideoPlayer(player:Video)
+                            .disabled(true)
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: geo.size.width, height: geo.size.height)
+                            .edgesIgnoringSafeArea(.all)
+                            .background(.white)
+                            .onAppear {
+                                Video.play()
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 2){
+                                    Video.pause()
+                                    isEnded = true
+                                }
+                                
+                            }
+                        
+                    }
+                    
+                    
+                        
                 }
             }
         }
@@ -75,6 +84,7 @@ struct SplashScreen: View {
 struct SplashScreen_Previews: PreviewProvider {
     static var previews: some View {
         SplashScreen()
+        
             .environmentObject(CloudViewModel())
     }
 }
