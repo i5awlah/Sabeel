@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "EnglishParent.png",
+      "filename" : "Mom ipad.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
@@ -14,7 +14,7 @@
       "scale" : "3x"
     },
     {
-      "filename" : "ArabicParent.png",
+      "filename" : "Mom ipad Arabic.png",
       "idiom" : "universal",
       "locale" : "ar",
       "scale" : "1x"
