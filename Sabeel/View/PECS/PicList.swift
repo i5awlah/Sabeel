@@ -20,7 +20,8 @@ struct PicList: View {
     
     @State var audioPlayer: AVAudioPlayer!
     @Environment(\.scenePhase) private var scenePhase
-    
+    @Environment(\.colorScheme) var colorScheme
+
     var coulmns: [GridItem] {
         Array(repeating: GridItem(.flexible(),spacing: spacing), count: number0fColumns)
         
@@ -41,6 +42,14 @@ struct PicList: View {
         var body: some View {
             ScrollViewReader { proxy in
                 ScrollView {
+                    if cloudViewModel.isChild {
+                        Text(cloudViewModel.childParentModel == nil ? "Connect to your parent to notify them" : "Tap what you want to notify your parent")
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.leading)
+                            .offset(y: -8)
+                            .font(.footnote)
+                            .foregroundColor(colorScheme == .dark ? .white : .darkGray)
+                    }
                     LazyVGrid(columns: coulmns, spacing: spacing) {
                         if cloudViewModel.isChild == false {
                             AddCell()
