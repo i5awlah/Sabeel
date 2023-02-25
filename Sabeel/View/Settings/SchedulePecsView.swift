@@ -112,7 +112,7 @@ struct SchedulePecsView: View {
                                    Alert(title: Text("Schedule added successfully "))
                                })
                 
-                .disabled(optioncategory == "" || fromTime >= toTime)
+                .disabled(optioncategory == "" || fromTime >= toTime || !cloudViewModel.isLoadingHome)
                 .frame(maxWidth: .infinity) .foregroundColor(.white)
                 .background(optioncategory != "" && fromTime < toTime ? Color.buttonBlue : Color.gray)      .cornerRadius(10).padding(.all,20)
                 
