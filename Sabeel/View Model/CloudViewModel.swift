@@ -204,7 +204,7 @@ class CloudViewModel: ObservableObject {
         }
     }
 
-    private func fetchChildParent() {
+    func fetchChildParent() {
         
         guard let currentUser = currentUser else { return }
         

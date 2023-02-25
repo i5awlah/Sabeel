@@ -14,6 +14,8 @@ struct PecsView: View {
     @State private var goToAppLock: Bool = false
     @State private var goToSettings: Bool = false
 
+    @Environment(\.scenePhase) private var scenePhase
+
     
     var body: some View {
         NavigationStack{
@@ -26,6 +28,15 @@ struct PecsView: View {
                             ProgressView()
                         } else {
                             PicList(isEditing: $isEditing, isToast: $isToast, pecs: cloudViewModel.pecs)
+                        }
+                    }
+                }
+            }
+            .onChange(of: scenePhase) { phase in
+                if phase == .active {
+                    if cloudViewModel.childParentModel == nil {
+                        if cloudViewModel.isChild {
+                            cloudViewModel.fetchChildParent()
                         }
                     }
                 }
