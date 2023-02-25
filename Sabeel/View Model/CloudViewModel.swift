@@ -617,6 +617,38 @@ class CloudViewModel: ObservableObject {
             container.publicCloudDatabase.add(operation)
 
         }
+    
+    // delete Schedule
+    func deleteSchedulePECS(category: String){
+
+       //fetch all the records from homeContent based on the category the user picked
+        var filteredHomeContent = homeContents.filter({ $0.category.contains(category) })
+
+        var updateRecords:[CKRecord] = []
+
+        for homeContent in filteredHomeContent {
+            let record = homeContent.associatedRecord
+
+            record[HomeContent.keys.startTime] = nil
+            record[HomeContent.keys.endTime] = nil
+
+            updateRecords.append(record)
+
+        }
+
+        let operation = CKModifyRecordsOperation.init(recordsToSave: updateRecords, recordIDsToDelete: nil)
+
+        operation.modifyRecordsCompletionBlock = { _, _, error in
+            if let error = error{
+                print(error.localizedDescription)
+            }
+            else {
+                //completionHandler(true)
+            }
+        }
+        container.publicCloudDatabase.add(operation)
+
+    }
 
     
     //MARK: Child Request

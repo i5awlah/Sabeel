@@ -156,7 +156,7 @@ struct SchedulePecsView: View {
                             }else{
                                 let encodedData: Data = NSKeyedArchiver.archivedData(withRootObject: output1)
                                 userDefaults.set(encodedData, forKey: "sec")}
-                            
+                            cloudViewModel.deleteSchedulePECS(category: output1[index].category)
                         })
                         
                         
