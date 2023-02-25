@@ -112,9 +112,9 @@ struct SchedulePecsView: View {
                                    Alert(title: Text("Schedule added successfully "))
                                })
                 
-                .disabled(optioncategory == "" || fromTime >= toTime || !cloudViewModel.isLoadingHome)
+                .disabled(optioncategory == "" || fromTime >= toTime || cloudViewModel.isLoadingHome)
                 .frame(maxWidth: .infinity) .foregroundColor(.white)
-                .background(optioncategory != "" && fromTime < toTime ? Color.buttonBlue : Color.gray)      .cornerRadius(10).padding(.all,20)
+                .background(optioncategory != "" && fromTime < toTime && !cloudViewModel.isLoadingHome ? Color.buttonBlue : Color.gray)      .cornerRadius(10).padding(.all,20)
                 
                 
             
@@ -243,7 +243,8 @@ struct DropdownSelector: View {
         }
         .padding(.horizontal)
                 .cornerRadius(5)
-                .frame(width: .infinity, height: self.buttonHeight)
+                .frame(maxWidth: .infinity)
+                .frame(height: self.buttonHeight)
                 .overlay(
                 RoundedRectangle(cornerRadius: 5)
                 .stroke(Color.gray, lineWidth: 1)
