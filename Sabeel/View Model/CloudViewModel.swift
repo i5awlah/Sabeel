@@ -506,7 +506,9 @@ class CloudViewModel: ObservableObject {
             
             getPecsHomeFromHome(homeContent: homeContents[i]) { home, load in
                 DispatchQueue.main.async {
-                    self.homeContents[i] = home
+                    if self.homeContents.indices.contains(i) {
+                        self.homeContents[i] = home
+                    }
                     let count = self.homeContents.filter({ !$0.pecs.name.isEmpty}).count
                     print("Count: \(count) \(self.homeContents.count)")
                     if count == self.homeContents.count {
