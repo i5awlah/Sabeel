@@ -33,6 +33,8 @@
 //MARK: PECS
 "I want" = "أنا أريد";
 "I want ..." = "أنا أريد ...";
+"Connect to your parent to notify them" = "اقترن بأحد والديك لإيصال الإشعارات";
+"Tap what you want to notify your parent" = "اضغط على ما تريد إشعار والديك به";
 "Done" = "تم";
 "Edit" = "تحرير";
 "Add PECS" = "إضافة بطاقة";
