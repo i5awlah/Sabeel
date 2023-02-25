@@ -193,50 +193,56 @@ struct SchedulePecsView_Previews: PreviewProvider {
 
 struct DropdownSelector: View {
     @State private var shouldShowDropdown = false
-       @State private var selectedOption: DropdownOption? = nil
-       var placeholder: String
-       var options: [DropdownOption]
-       var onOptionSelected: ((_ option: DropdownOption) -> Void)?
-       private let buttonHeight: CGFloat = 45
-
+    @Environment(\.colorScheme) var colorScheme
+    @State private var selectedOption: DropdownOption? = nil
+    var placeholder: String
+    var options: [DropdownOption]
+    var onOptionSelected: ((_ option: DropdownOption) -> Void)?
+    private let buttonHeight: CGFloat = 45
+    
     var body: some View {
         HStack{
             Menu{
-             
+                
                 Dropdown(options: self.options, onOptionSelected: { option in
                     shouldShowDropdown = false
                     selectedOption = option
                     self.onOptionSelected?(option)
                 })
-
-              
-                  }
+                
+                
+            }
         label: {
-            Text(selectedOption == nil ? placeholder : NSLocalizedString(selectedOption!.value, comment: "")).font(Font.customFont(size: 14))
-    
-                .foregroundColor(selectedOption == nil ? Color.gray: Color.black)
-            Spacer()
             
-            Image(systemName: self.shouldShowDropdown ? "arrowtriangle.up.fill" : "arrowtriangle.down.fill")
-                .resizable()
-                .frame(width: 9, height: 5)
-                .font(Font.system(size: 9, weight: .medium))
-                .foregroundColor(Color.black)
-                          }   .padding(.horizontal)
-                .cornerRadius(5)
-                .frame(width: .infinity, height: self.buttonHeight)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 5)
-                        .stroke(Color.gray, lineWidth: 1)
-                )
-              
-                .background(
-                    RoundedRectangle(cornerRadius: 5).fill(Color.White)
-                )
-  
-     }
-       }
-   }
+            if colorScheme == .dark {
+                Text(selectedOption == nil ? placeholder : NSLocalizedString(selectedOption!.value, comment: "")).font(Font.customFont(size: 14))
+                
+                    .foregroundColor(selectedOption == nil ? Color.gray: .white)
+                Spacer()
+                
+                Image(systemName: self.shouldShowDropdown ? "arrowtriangle.up.fill" : "arrowtriangle.down.fill")
+                    .resizable()
+                    .frame(width: 9, height: 5)
+                    .font(Font.system(size: 9, weight: .medium))
+                    .foregroundColor(self.colorScheme == .dark  ? .white : .black)
+                //.foregroundColor(Color.black)
+            } else {
+                Text(selectedOption == nil ? placeholder : NSLocalizedString(selectedOption!.value, comment: "")).font(Font.customFont(size: 14))
+                
+                    .foregroundColor(selectedOption == nil ? Color.gray: Color.black)
+                Spacer()
+                
+                Image(systemName: self.shouldShowDropdown ? "arrowtriangle.up.fill" : "arrowtriangle.down.fill")
+                    .resizable()
+                    .frame(width: 9, height: 5)
+                    .font(Font.system(size: 9, weight: .medium))
+                    .foregroundColor(self.colorScheme == .dark  ? .white : .black)
+            }
+            
+        }
+        }
+    }
+}
 
 struct DropdownOption: Hashable {
     let key: String
