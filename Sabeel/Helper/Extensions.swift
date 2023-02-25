@@ -33,7 +33,7 @@ extension Date {
         }
         
         if Calendar.current.isDateInYesterday(self) {
-            return "Yesterday"
+            return "Yesterday".localized
         }
         
         let formatter = RelativeDateTimeFormatter()
