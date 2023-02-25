@@ -41,7 +41,7 @@ struct PecsView: View {
                     }
                 }
             }
-            .navigationTitle(cloudViewModel.isChild ? "I want" : "PECS")
+            .navigationTitle(cloudViewModel.isChild ? "I want ..." : "PECS")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     if cloudViewModel.isLoadingHome {
