@@ -485,8 +485,12 @@ class CloudViewModel: ObservableObject {
                     print("Result: \(results.count)")
                     if results.count == 0 {
                         print("No Home content..")
-                        self.isLoadingHome = false
-                        self.takePecsAndAppendInHomeContent()
+                        DispatchQueue.main.async {
+                            self.isLoadingHome = false
+                        }
+                        if !self.isChild {
+                            self.takePecsAndAppendInHomeContent()
+                        }
                     } else {
                         DispatchQueue.main.async {
                             self.homeContents = results
