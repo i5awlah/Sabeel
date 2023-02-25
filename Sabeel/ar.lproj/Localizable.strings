@@ -34,7 +34,7 @@
 "I want" = "أنا أريد";
 "I want ..." = "أنا أريد ...";
 "Connect to your parent to notify them" = "اقترن بأحد والديك لإيصال الإشعارات";
-"Tap what you want to notify your parent" = "اضغط على ما تريد إشعار والديك به";
+"Tap what you want to notify your parent" = "اضغط على ما تريد لإشعار والديك به";
 "Done" = "تم";
 "Edit" = "تحرير";
 "Add PECS" = "إضافة بطاقة";
@@ -87,6 +87,7 @@
 
 //MARK: Schedule PECS
 "Category" = "فئات البطاقات";
+"To maintain your special child's routine, schedule when to show a certain category only at the preferred time." = "للحفاظ على روتين طفلك الخاص، حدد موعدًا لعرض فئة معينة فقط في الوقت المفضل.";
 "Select Option" = "اختر فئة";
 "Time" = "الوقت";
 "From" = "من";
@@ -117,6 +118,7 @@
 "People" = "أشخاص";
 "Places" = "أماكن";
 "Tools" = "أدوات";
+
 
 //MARK: AppLock
 "Parent Only!" = "للوالدين فقط!";

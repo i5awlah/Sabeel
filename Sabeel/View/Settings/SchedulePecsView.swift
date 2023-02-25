@@ -17,17 +17,17 @@ struct SchedulePecsView: View {
    
 
     static let options: [DropdownOption] = [
-        DropdownOption(key: uniqueKey, value: "Food"),
-        DropdownOption(key: uniqueKey, value:  "Drink"),
-        DropdownOption(key: uniqueKey, value: "Utensils"),
-        DropdownOption(key: uniqueKey, value: "Clothes"),
-        DropdownOption(key: uniqueKey, value: "Bathroom"),
-        DropdownOption(key: uniqueKey, value: "Activities"),
-        DropdownOption(key: uniqueKey, value:"Feelings"),
-        DropdownOption(key: uniqueKey, value: "Family"),
-        DropdownOption(key: uniqueKey, value: "People"),
-        DropdownOption(key: uniqueKey, value: "Places"),
-        DropdownOption(key: uniqueKey, value: "Tools")
+        DropdownOption(key: uniqueKey, value: "Food".localized),
+        DropdownOption(key: uniqueKey, value: "Drink".localized),
+        DropdownOption(key: uniqueKey, value: "Utensils".localized),
+        DropdownOption(key: uniqueKey, value: "Clothes".localized),
+        DropdownOption(key: uniqueKey, value: "Bathroom".localized),
+        DropdownOption(key: uniqueKey, value: "Activities".localized),
+        DropdownOption(key: uniqueKey, value:"Feelings".localized),
+        DropdownOption(key: uniqueKey, value: "Family".localized),
+        DropdownOption(key: uniqueKey, value: "People".localized),
+        DropdownOption(key: uniqueKey, value: "Places".localized),
+        DropdownOption(key: uniqueKey, value: "Tools".localized)
     ]
     @State private var fromTime = Date.now
     @State private var toTime = Date.now
@@ -35,7 +35,7 @@ struct SchedulePecsView: View {
     @State private var isUpdateSch = false
 
     @State private var output1: [sech1] = []
-    @State private var showPreviousSec = false
+    @State private var showPreviousSec = true
     var userDefaults = UserDefaults.standard
 
     var body: some View {
@@ -44,12 +44,12 @@ struct SchedulePecsView: View {
         ZStack{
             Color.lightGray.ignoresSafeArea()
             VStack{
+                Text("To maintain your special child's routine, schedule when to show a certain category only at the preferred time.")
+                .font(.customFont(size: 16)).bold().frame( alignment: .leading).padding(.horizontal,15).foregroundColor(Color.darkGray)
                 
                 HStack{
                     Text("Category").padding().font(Font.customFont(size: 16))
                     
-           
-
                     Group {
                         DropdownSelector(
                             placeholder: NSLocalizedString(  "Select Option", comment: "")
@@ -70,7 +70,6 @@ struct SchedulePecsView: View {
                                 .background(Color.White)
                                 .cornerRadius(10)
                                 .padding(EdgeInsets(.init(top: 20, leading: 20, bottom: 8, trailing: 20)))
-                              
                               
                 VStack{
                     Text("Time").listRowSeparator(.hidden).padding(.top)   .frame(maxWidth: .infinity, alignment: .leading).padding(.leading)
@@ -183,7 +182,9 @@ struct SchedulePecsView: View {
 
 struct SchedulePecsView_Previews: PreviewProvider {
     static var previews: some View {
-        SchedulePecsView()
+        NavigationStack{
+            SchedulePecsView()
+        }
     }
 }
 
