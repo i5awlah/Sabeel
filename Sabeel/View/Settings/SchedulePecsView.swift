@@ -99,9 +99,9 @@ struct SchedulePecsView: View {
                     let encodedData: Data = NSKeyedArchiver.archivedData(withRootObject: output1)
                     userDefaults.set(encodedData, forKey: "sec")
 
-//                    cloudViewModel.updateSchedulePECS(category: optioncategory , startTime: fromTime, endTime: toTime){ isUpdated in
-//                        isUpdateSch.toggle()
-//                    }
+                    cloudViewModel.updateSchedulePECS(category: optioncategory , startTime: fromTime, endTime: toTime){ isUpdated in
+                        isUpdateSch.toggle()
+                    }
                     
                     
                 } label: {
