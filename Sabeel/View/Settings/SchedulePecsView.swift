@@ -241,6 +241,17 @@ struct DropdownSelector: View {
             }
             
         }
+        .padding(.horizontal)
+        .cornerRadius(5)
+        .frame(width: .infinity, height: self.buttonHeight)
+        .overlay(
+        RoundedRectangle(cornerRadius: 5)
+        .stroke(Color.gray, lineWidth: 1)
+        )
+
+                    .background(
+                        RoundedRectangle(cornerRadius: 5).fill(Color.white)
+                    )
         }
     }
 }
