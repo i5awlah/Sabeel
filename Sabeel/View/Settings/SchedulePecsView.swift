@@ -112,9 +112,9 @@ struct SchedulePecsView: View {
                                    Alert(title: Text("Schedule added successfully "))
                                })
                 
-                .disabled(optioncategory == "" || fromTime >= toTime)
+                .disabled(optioncategory == "" || fromTime >= toTime || cloudViewModel.isLoadingHome)
                 .frame(maxWidth: .infinity) .foregroundColor(.white)
-                .background(optioncategory != "" && fromTime < toTime ? Color.buttonBlue : Color.gray)      .cornerRadius(10).padding(.all,20)
+                .background(optioncategory != "" && fromTime < toTime && !cloudViewModel.isLoadingHome ? Color.buttonBlue : Color.gray)      .cornerRadius(10).padding(.all,20)
                 
                 
             
@@ -156,7 +156,7 @@ struct SchedulePecsView: View {
                             }else{
                                 let encodedData: Data = NSKeyedArchiver.archivedData(withRootObject: output1)
                                 userDefaults.set(encodedData, forKey: "sec")}
-                            
+                            cloudViewModel.deleteSchedulePECS(category: output1[index].category)
                         })
                         
                         

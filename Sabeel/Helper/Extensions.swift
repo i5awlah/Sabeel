@@ -14,7 +14,7 @@ extension Color {
     static let lightBlue = Color("lightBlue")
     static let lightGray = Color("lightGray")
     static let buttonBlue = Color("buttonBlue")
-    static let lightGreen = Color("LightGreen")
+    static let lightGreen = Color("lightGreen")
     static let darkGreen = Color("darkGreen")
     static let darkGreen1 = Color("darkGreen 1")
     static let Green = Color("Green")
@@ -33,7 +33,7 @@ extension Date {
         }
         
         if Calendar.current.isDateInYesterday(self) {
-            return "Yesterday"
+            return "Yesterday".localized
         }
         
         let formatter = RelativeDateTimeFormatter()
