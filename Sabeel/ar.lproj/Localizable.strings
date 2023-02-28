@@ -13,6 +13,7 @@
 
 "Can’t connect to iCloud!" = "لا يمكن الاتصال بـ iCloud";
 "Please make sure that you're signed in with your apple ID in device settings." = "يرجى التأكد من تسجيل الدخول باستخدام معرف Apple الخاص بك في إعدادات الجهاز.";
+"Please make sure that you're signed in with your apple ID and enabled iCloud Drive in device settings" = "يرجى التأكد من تسجيل الدخول باستخدام معرف Apple الخاص بك وتمكين iCloud Drive في إعدادات الجهاز.";
 "Always Connected" = "دائما على تواصل";
 "Stay connected with your Special child in his own PECS language by just a TAP." = "ابق على اتصال مع طفلك المميز بطريقة PECS الخاصة به فقط من خلال نقرة.";
 "Get Notifications" = "احصل على الإشعارات";
