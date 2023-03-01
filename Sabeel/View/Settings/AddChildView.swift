@@ -34,7 +34,7 @@ struct AddChildView: View {
                             .font(.customFont(size: 30))
                             .foregroundColor(.darkBlue)
                         
-                        Text("Connect your special child by scanning the QR code in their app settings")
+                        Text("Connect your child by scanning the QR code in their app settings")
                             .font(.customFont(size: 20))
                             .foregroundColor(.darkGray)
                             .multilineTextAlignment(.center)

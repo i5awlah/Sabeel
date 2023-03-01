@@ -44,7 +44,7 @@ struct SchedulePecsView: View {
         ZStack{
             Color.lightGray.ignoresSafeArea()
             VStack{
-                Text("To maintain your special child's routine, schedule when to show a certain category only at the preferred time.")
+                Text("To maintain your child's routine, schedule when to show a certain category only at the preferred time.")
                 .font(.customFont(size: 16)).bold().frame( alignment: .leading).padding(.horizontal,15).foregroundColor(Color.darkGray)
                 
                 HStack{

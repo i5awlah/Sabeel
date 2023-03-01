@@ -15,11 +15,11 @@
 "Please make sure that you're signed in with your apple ID in device settings." = "يرجى التأكد من تسجيل الدخول باستخدام معرف Apple الخاص بك في إعدادات الجهاز.";
 "Please make sure that you're signed in with your apple ID and enabled iCloud Drive in device settings" = "يرجى التأكد من تسجيل الدخول باستخدام معرف Apple الخاص بك وتمكين iCloud Drive في إعدادات الجهاز.";
 "Always Connected" = "دائما على تواصل";
-"Stay connected with your Special child in his own PECS language by just a TAP." = "ابق على اتصال مع طفلك المميز بطريقة PECS الخاصة به فقط من خلال نقرة.";
+"Stay connected with your child in his own PECS language by just a TAP." = "ابق على اتصال مع طفلك بطريقة PECS الخاصة به فقط من خلال نقرة.";
 "Get Notifications" = "احصل على الإشعارات";
-"Download the app on both devices to get notifications from your special child." = "قم بتنزيل التطبيق على كلا الجهازين لتحصل على إشعارات خاصة من طفلك المميز.";
+"Download the app on both devices to get notifications from your child." = "قم بتنزيل التطبيق على كلا الجهازين لتحصل على إشعارات خاصة من طفلك.";
 "Customize PECS" = "خصص بطاقاتك";
-"Add any custom PECS your own special child needs along with text, and sound." ="يمكنك إضافة أي بطاقة مخصصة لطفلك المميز مع الاسم والصوت.";
+"Add any custom PECS your own child needs along with text, and sound." ="يمكنك إضافة أي بطاقة مخصصة لطفلك مع الاسم والصوت.";
 "Schedule PECS" = "بطاقات مجدولة";
 "Schedule when to show and hide certain PECS to help you maintain your child routine."= "حدد موعدًا لإظهار وإخفاء الـPECS لمساعدتك في الحفاظ على روتين طفلك.";
 "Settings" = "الإعدادات";
@@ -58,20 +58,20 @@
 //MARK: Notifications
 "New" = "الجديدة";
 "Previous" = "السابقة";
-"Your special child wants %@ " = "طفلك المميز يريد %@" ;
-"Your special child wants **%@** " = "طفلك المميز يريد **%@**" ;
+"Your child wants %@ " = "طفلك يريد %@" ;
+"Your child wants **%@** " = "طفلك يريد **%@**" ;
 "No Notifications yet!" = "لا توجد إشعارات حتى الآن";
 "Yesterday" = "أمس";
 //MARK: Settings
 "Settings" = "الإعدادات";
-"Connect your special child" = "اقترن بحساب طفلك المميز";
+"Connect your child" = "اقترن بحساب طفلك";
 "Connect with your parent" = "اقترن بحساب أحد والديك";
 //"Schedule PECS" = "جدولة أوقات ظهور البطاقات";
 "Number of PECS per row:" = "عدد البطاقات في الصف الواحد:";
-"Connect your special child using the scan in your app setting" = "اقترن بطفلك المميز من خلال مسح الرمز السريع من إعدادات تطبيقك";
+"Connect your child using the scan in your app setting" = "اقترن بطفلك من خلال مسح الرمز السريع من إعدادات تطبيقك";
 "or write it manually" = "أو قم بكتابته يدويًا";
 
-"Enter your special child id" = "أدخل الـID الخاص بطفلك المميز";
+"Enter your child id" = "أدخل الـID الخاص بطفلك";
 "Your device doesn't have a camera" = "لا توجد كاميرا في جهازك";
 "Your device doesn't have support for scanning barcode with this app" = "جهازك ليس به دعم لمسح الرمز الشريطي";
 "Please provide access to the camera in settings" = "الرجاء إعطاء صلاحية الوصول للكاميرا من الإعدادات";
@@ -83,12 +83,12 @@
 "Already connected" = "تم الربط";
 "This account is already connected with another one" = "هذا الحساب تم ربطه مسبقًا بحساب آخر" ;
 "Disconnect" = "إلغاء الارتباط";
-"disconnect your account with your special child will also delete all custom PECS added by the parent ." = "إلغاء ارتباط حسابك مع طفلك سيؤدي أيضًا إلى حذف جميع البطاقات المخصصة التي تمت إضافتها من قبل أحد الوالدين.";
+"disconnect your account with your child will also delete all custom PECS added by the parent ." = "إلغاء ارتباط حسابك مع طفلك سيؤدي أيضًا إلى حذف جميع البطاقات المخصصة التي تمت إضافتها من قبل أحد الوالدين.";
 "Confirm" = "تأكيد";
 
 //MARK: Schedule PECS
 "Category" = "فئات البطاقات";
-"To maintain your special child's routine, schedule when to show a certain category only at the preferred time." = "للحفاظ على روتين طفلك الخاص، حدد موعدًا لعرض فئة معينة فقط في الوقت المفضل.";
+"To maintain your child's routine, schedule when to show a certain category only at the preferred time." = "للحفاظ على روتين طفلك الخاص، حدد موعدًا لعرض فئة معينة فقط في الوقت المفضل.";
 "Select Option" = "اختر فئة";
 "Time" = "الوقت";
 "From" = "من";
@@ -100,13 +100,13 @@
 "Schedule added successfully " = "تم إضافة الجدولة بنجاح";
 
 //MARK: No Link
-"Connect with your special child" = "اقترن بحساب طفلك المميز";
-"To access this feature you have to connect with your special child app" = "لتفعيل هذه الخاصية الرجاء الاقتران بتطبيق طفلك المميز";
+"Connect with your child" = "اقترن بحساب طفلك";
+"To access this feature you have to connect with your child app" = "لتفعيل هذه الخاصية الرجاء الاقتران بتطبيق طفلك";
 
 //MARK: child link
 "Scan" = "مسح";
 "QR Scan" = "مسح الرمز السريع QR";
-"Connect your special child by scanning the QR code in their app settings" = "اقترن بطفلك المميز من خلال مسح الرمز السريع من إعدادات التطبيق الخاصة به.";
+"Connect your child by scanning the QR code in their app settings" = "اقترن بطفلك من خلال مسح الرمز السريع من إعدادات التطبيق الخاصة به.";
 
 //MARK: Categories
 "Food" = "طعام";
@@ -138,5 +138,5 @@
 "0" = "٠";
 
 //Mark: Modifiers
-"Changes may take time to reflect on your child's device" = "التغيرات قد تستغرق بعض الوقت لتنعكس على جهاز طفلك المميز ";
+"Changes may take time to reflect on your child's device" = "التغيرات قد تستغرق بعض الوقت لتنعكس على جهاز طفلك ";
 "Don't show again" = "لا تظهرها مرة أخرى";

@@ -58,7 +58,7 @@ struct AlreadyLinkedView: View {
             .alert(isPresented:$disconnectAlret) {
                         Alert(
                             title: Text("Disconnect"),
-                            message: Text("disconnect your account with your special child will also delete all custom PECS added by the parent ."),
+                            message: Text("disconnect your account with your child will also delete all custom PECS added by the parent."),
                             primaryButton: .destructive(Text("Confirm")) {
                                 cloudViewModel.deleteChildParent()
                             },

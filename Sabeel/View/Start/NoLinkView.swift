@@ -16,12 +16,12 @@ struct NoLinkView: View {
                 .scaledToFit()
                 .padding(.horizontal, 16)
             
-            Text("Connect with your special child").multilineTextAlignment(.center)
+            Text("Connect with your child").multilineTextAlignment(.center)
                 .bold()
                 .font(.customFont(size: 30))
                 .foregroundColor(.darkBlue)
             
-            Text("To access this feature you have to connect with your special child app")
+            Text("To access this feature you have to connect with your child app")
                 .font(.customFont(size: 20))
                 .foregroundColor(.darkGray)
                 .multilineTextAlignment(.center)

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SettingsView: View {
     
-    var settingsDataLinkChild = SettingTile(title: NSLocalizedString("Connect your special child", comment: ""), icon: "link.icloud")
+    var settingsDataLinkChild = SettingTile(title: NSLocalizedString("Connect your child", comment: ""), icon: "link.icloud")
     
     var settingsDataLinkParent = SettingTile(title: NSLocalizedString("Connect with your parent", comment: ""), icon: "link.icloud")
     

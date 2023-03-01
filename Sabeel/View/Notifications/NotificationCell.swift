@@ -29,7 +29,7 @@ struct NotificationCell: View {
                     Text(ChildRequestVM.pecs.category.localized)
                         .foregroundColor(.darkBlue)
                         .font(.customFont(size: 14)).bold()
-                    Text("Your special child wants **\(Helper.shared.getPicName(pecs: ChildRequestVM.pecs))** ")
+                    Text("Your child wants **\(Helper.shared.getPicName(pecs: ChildRequestVM.pecs))** ")
                         .foregroundColor(.darkGray)
                         .font(.customFont(size: 14))
                 }
