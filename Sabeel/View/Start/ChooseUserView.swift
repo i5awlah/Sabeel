@@ -39,11 +39,7 @@ extension ChooseUserView {
         VStack {
             Spacer().frame(height: UIScreen.main.bounds.height * 0.19)
             Button {
-                Task {
-                    let id = await cloudViewModel.fetchiCloudUserRecordId()
-                    let child = ChildModel(id: id)
-                    cloudViewModel.addUser(user: child)
-                }
+                cloudViewModel.userType = ChildModel.recordTypeKey
             } label: {
                 Image("Autistic")
                     .resizable()
@@ -53,11 +49,7 @@ extension ChooseUserView {
 
             Spacer().frame(height: UIScreen.main.bounds.height * 0.11)
             Button {
-                Task {
-                    let id = await cloudViewModel.fetchiCloudUserRecordId()
-                    let parent = ParentModel(id: id)
-                    cloudViewModel.addUser(user: parent)
-                }
+                cloudViewModel.userType = ParentModel.recordTypeKey
             } label: {
                 Image("Parents")
                     .resizable()

@@ -21,12 +21,11 @@ struct SplashScreen: View {
     var body: some View {
         Group {
             if isEnded {
-                if cloudViewModel.iCloudAvailable {
                     if !isUserOnboarded {
                         OnboardingView()
                     } else {
-                        if (cloudViewModel.currentUser != nil) {
-                            if cloudViewModel.isChild {
+                        if (cloudViewModel.userType != nil) {
+                            if cloudViewModel.userType == ChildModel.recordTypeKey {
                                 PecsView()
                             } else {
                                 TabBar()
@@ -35,9 +34,7 @@ struct SplashScreen: View {
                             ChooseUserView()
                         }
                     }
-                } else {
-                    CloudNotAvailableView()
-                }
+                
             } else {
                 GeometryReader{ geo in
                     if colorScheme == .dark {

@@ -12,48 +12,63 @@ struct ChildQRView: View {
     @EnvironmentObject var cloudViewModel: CloudViewModel
     @Environment(\.colorScheme) var colorScheme
     var body: some View {
-        VStack(spacing:20){
-            
-            Image("QRBackground")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 300, height: 400)
-                .overlay(alignment: .bottom) {
-                    if let id = cloudViewModel.currentUser?.id {
-                        if let data = getQRCodeDate(text: id)
-                            , let image = UIImage(data: data)
-                            , let imageTransparent = makeTransparent(image: image)
-                            , let imageGreen = imageTransparent.withColor(UIColor(Color.darkGreen)) {
-                            
-                            Image(uiImage: imageGreen)
-                                .resizable()
-                                .frame(width: 200, height: 200)
-                                .offset(
-                                    x: Helper.shared.isEnglishLanguage() ? -12 : 12,
-                                    y: -10
-                                )
-                            
+        Group {
+            if cloudViewModel.currentUser == nil {
+                ProgressView()
+            } else {
+                VStack(spacing:20){
+                    
+                    Image("QRBackground")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 300, height: 400)
+                        .overlay(alignment: .bottom) {
+                            if let id = cloudViewModel.currentUser?.id {
+                                if let data = getQRCodeDate(text: id)
+                                    , let image = UIImage(data: data)
+                                    , let imageTransparent = makeTransparent(image: image)
+                                    , let imageGreen = imageTransparent.withColor(UIColor(Color.darkGreen)) {
+                                    
+                                    Image(uiImage: imageGreen)
+                                        .resizable()
+                                        .frame(width: 200, height: 200)
+                                        .offset(
+                                            x: Helper.shared.isEnglishLanguage() ? -12 : 12,
+                                            y: -10
+                                        )
+                                    
+                                }
+                            }
                         }
+                    
+                    
+                    VStack(spacing: 20) {
+                        Text("Connect your special child using the scan in your app setting")
+                        
+                        VStack(spacing: 5) {
+                            Text("or write it manually".localized)
+                            Text("\(cloudViewModel.currentUser?.id ?? "")")
+                                .background(Color.lightGray)
+                        }
+                        .font(.customFont(size: 16))
                     }
+                    .font(.customFont(size: 20))
+                    .foregroundColor(colorScheme == .dark ? .white : .darkGray)
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal,24)
                 }
-            
-            
-            VStack(spacing: 20) {
-                Text("Connect your special child using the scan in your app setting")
-                
-                VStack(spacing: 5) {
-                    Text("or write it manually".localized)
-                    Text("\(cloudViewModel.currentUser?.id ?? "")")
-                        .background(Color.lightGray)
-                }
-                .font(.customFont(size: 16))
             }
-            .font(.customFont(size: 20))
-            .foregroundColor(colorScheme == .dark ? .white : .darkGray)
-            .multilineTextAlignment(.center)
-            .padding(.horizontal,24)
-        }.toolbar(.hidden,for: .tabBar)
-            .background(Color.White2)
+        }
+        .toolbar(.hidden,for: .tabBar)
+        .background(Color.White2)
+        .onAppear {
+            if cloudViewModel.currentUser == nil {
+                cloudViewModel.fetchiCloudUserRecordId() { id in
+                    let child = ChildModel(id: id)
+                    cloudViewModel.addUser(user: child)
+                }
+            }
+        }
     }
 }
 

@@ -36,7 +36,9 @@ struct PecsView: View {
                 if phase == .active {
                     if cloudViewModel.childParentModel == nil {
                         if cloudViewModel.isChild {
-                            cloudViewModel.fetchChildParent()
+                            if let currentUser = cloudViewModel.currentUser {
+                                cloudViewModel.fetchChildParent(currentUser: currentUser, isChild: true)
+                            }
                         }
                     }
                 }

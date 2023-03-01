@@ -28,12 +28,12 @@ struct SettingsView: View {
                     
                     // 1- link
                     if cloudViewModel.isChild {
-                        NavigationLink(destination: cloudViewModel.childParentModel == nil ? AnyView(ChildQRView()) : AnyView(AlreadyLinkedView())) {
+                        NavigationLink(destination: !cloudViewModel.iCloudAvailable ? AnyView(CloudNotAvailableView()) : cloudViewModel.childParentModel == nil ? AnyView(ChildQRView()) : AnyView(AlreadyLinkedView())) {
                             SettingsCellView(data: settingsDataLinkParent)
                         }
                     } else {
                         NavigationLink {
-                            cloudViewModel.childParentModel == nil ?
+                            !cloudViewModel.iCloudAvailable ? AnyView(CloudNotAvailableView()) : cloudViewModel.childParentModel == nil ?
                             AnyView(AddChildView()) : AnyView(AlreadyLinkedView())
                         } label: {
                             SettingsCellView(data: settingsDataLinkChild)
@@ -42,6 +42,7 @@ struct SettingsView: View {
                     // 4- change user type
                     if cloudViewModel.childParentModel == nil {
                         Button{
+                            cloudViewModel.userType = nil
                             cloudViewModel.deleteUser()
                         }label: {
                             HStack{

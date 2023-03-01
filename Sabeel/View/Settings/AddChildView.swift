@@ -18,50 +18,65 @@ struct AddChildView: View {
     @State private var scannerStatusAlertTitle = ""
     
     var body: some View {
-        ZStack {
-            VStack(spacing : 20){
-                Image("Scan")
-                    .resizable()
-                    .scaledToFit()
-                    .padding(.horizontal, 16)
-                
-                Text("QR Scan")
-                    .bold()
-                    .font(.customFont(size: 30))
-                    .foregroundColor(.darkBlue)
-                
-                Text("Connect your special child by scanning the QR code in their app settings")
-                    .font(.customFont(size: 20))
-                    .foregroundColor(.darkGray)
-                    .multilineTextAlignment(.center)
-                
-                Button {
-                    scanButtonPressed()
-                } label: {
+        Group {
+            if cloudViewModel.currentUser == nil {
+                ProgressView()
+            } else {
+                ZStack {
+                    VStack(spacing : 20){
+                        Image("Scan")
+                            .resizable()
+                            .scaledToFit()
+                            .padding(.horizontal, 16)
+                        
+                        Text("QR Scan")
+                            .bold()
+                            .font(.customFont(size: 30))
+                            .foregroundColor(.darkBlue)
+                        
+                        Text("Connect your special child by scanning the QR code in their app settings")
+                            .font(.customFont(size: 20))
+                            .foregroundColor(.darkGray)
+                            .multilineTextAlignment(.center)
+                        
+                        Button {
+                            scanButtonPressed()
+                        } label: {
+                            
+                            RoundedRectangle(cornerRadius: 8)
+                                .fill(Color.buttonBlue)
+                                .frame(height: 48)
+                                .overlay(content: {
+                                    Text("Scan")
+                                        .font(.customFont(size: 20))
+                                        .fontWeight(.semibold)
+                                        .foregroundColor(.white)
+                                })
+                        }
+                    }  .padding(.horizontal, 24)
                     
-                    RoundedRectangle(cornerRadius: 8)
-                        .fill(Color.buttonBlue)
-                        .frame(height: 48)
-                        .overlay(content: {
-                            Text("Scan")
-                                .font(.customFont(size: 20))
-                                .fontWeight(.semibold)
-                                .foregroundColor(.white)
-                        })
+                    if isPresentedScan {
+                        ScanQRView(
+                            isPresentedScan: $isPresentedScan,
+                            addChild: addChild
+                        )
+                    }
+                    
                 }
-            }  .padding(.horizontal, 24)
-            
-            if isPresentedScan {
-                ScanQRView(
-                    isPresentedScan: $isPresentedScan,
-                    addChild: addChild
-                )
             }
-            
         }
-
-           
-    
+        .onAppear {
+            if cloudViewModel.currentUser == nil {
+                cloudViewModel.fetchiCloudUserRecordId() { id in
+                    cloudViewModel.getCurrentUser(isChild: false, currentUserID: id) { user in
+                        if user == nil {
+                            let parent = ParentModel(id: id)
+                            cloudViewModel.addUser(user: parent)
+                        }
+                    }
+                }
+            }
+        }
         .alert(scannerStatusAlertTitle.localized, isPresented: $showScannerStatusAlert) {
             TextField("Enter your child id", text: $vm.qr)
             Button("Add", action: addChild)

@@ -14,7 +14,7 @@ struct CloudNotAvailableView: View {
     
     let image = "connectiCloud"
     let title = "Can’t connect to iCloud!"
-    let description = "Please make sure that you're signed in with your apple ID in device settings."
+    let description = "Please make sure that you're signed in with your apple ID and enabled iCloud Drive in device settings"
     
     var body: some View {
         SingleOnboardingView(
@@ -22,9 +22,10 @@ struct CloudNotAvailableView: View {
             title: title,
             description: description
         )
+        .toolbar(.hidden, for: .tabBar)
         .onChange(of: scenePhase) { phase in
             if phase == .active {
-                cloudViewModel.getiCloudStatus()
+                cloudViewModel.checkiCloudAvailable()
             }
         }
     }

@@ -28,37 +28,72 @@ class CloudViewModel: ObservableObject {
     
     @Published var isLoadingHome = false
     
+    @Published var userType: String? = nil
+    
     var isChild: Bool {
-        return currentUser is ChildModel
+        return userType == ChildModel.recordTypeKey ? true : false
     }
     
     init() {
         self.container = CKContainer.default()
-        getiCloudStatus()
+        checkiCloudAvailable()
+        
+        if childParentModel == nil {
+            self.fetchSharedPecs { pecs in
+                DispatchQueue.main.async {
+                    self.pecs = pecs
+                }
+            }
+        }
     }
     
-    func getiCloudStatus() {
-        container.accountStatus { status, error in
-            if status == .available {
-                DispatchQueue.main.async {
-                    self.iCloudAvailable = true
-                    self.fetchUser()
+    func checkiCloudAvailable() {
+        let token = FileManager.default.ubiquityIdentityToken
+        if token == nil {
+            print("iCloud (Drive) is not available")
+            self.iCloudAvailable = false
+        } else {
+            print("iCloud (Drive) is available")
+            self.iCloudAvailable = true
+            self.fetchUser()
+        }
+    }
+    
+    // fetch current user info
+    private func fetchUser() {
+        fetchiCloudUserRecordId() { recordName in
+            let currentUserID = recordName
+            print("currentUserID: \(currentUserID)")
+            self.getCurrentUser(isChild: true, currentUserID: currentUserID) { user in
+                if let user {
+                    DispatchQueue.main.async {
+                        self.currentUser = user
+                        self.userType = ChildModel.recordTypeKey
+                        print("Child - currentUser: \(self.currentUser?.id ?? "NA")")
+                        self.fetchChildParent(currentUser: user, isChild: true)
+                    }
+                    
                 }
-            } else {
-                DispatchQueue.main.async {
-                    self.iCloudAvailable = false
+            }
+            self.getCurrentUser(isChild: false, currentUserID: currentUserID) { user in
+                if let user {
+                    DispatchQueue.main.async {
+                        self.currentUser = user
+                        self.userType = ParentModel.recordTypeKey
+                        print("Parent - currentUser: \(self.currentUser?.id ?? "NA")")
+                        self.fetchChildParent(currentUser: user, isChild: false)
+                    }
+                    
                 }
             }
         }
     }
     
     // get ID of user
-    func fetchiCloudUserRecordId() async -> String {
-        return await withCheckedContinuation { continuation in
-            container.fetchUserRecordID { recordID, error in
-                if let recordID = recordID {
-                    continuation.resume(returning: recordID.recordName)
-                }
+    func fetchiCloudUserRecordId(completionHandler: @escaping (String) -> Void) {
+        container.fetchUserRecordID { recordID, error in
+            if let recordID = recordID {
+                completionHandler(recordID.recordName)
             }
         }
     }
@@ -77,16 +112,9 @@ class CloudViewModel: ObservableObject {
                 debugPrint("ERROR: Failed to save new \(recordName): \(error.localizedDescription)")
             } else if let record {
                 debugPrint("Added \(recordName) successfully: \(record.description)")
-                self.fetchChildParent()
                 DispatchQueue.main.async {
                     self.currentUser = user
                     print("currentUser: \(self.currentUser?.id ?? "NA")")
-                    print("fetch pecs without home content")
-                    self.fetchSharedPecs { pecs in
-                        DispatchQueue.main.async {
-                            self.pecs = pecs
-                        }
-                    }
                 }
             }
         }
@@ -109,34 +137,21 @@ class CloudViewModel: ObservableObject {
         }
     }
     
-    // fetch current user info
-    private func fetchUser() {
-        Task {
-            await getCurrentUser(isChild: true)
-        }
-        Task {
-            await getCurrentUser(isChild: false)
-        }
-    }
-    
-    private func getCurrentUser(isChild: Bool) async {
-        let currentUserID = await fetchiCloudUserRecordId()
+    func getCurrentUser(isChild: Bool, currentUserID: String, completionHandler: @escaping (UserModel?) -> Void) {
         let predicate = NSPredicate(format: "\(UserModel.idKey) == %@", currentUserID)
         let query = CKQuery(recordType: isChild ? ChildModel.recordTypeKey : ParentModel.recordTypeKey, predicate: predicate)
         container.publicCloudDatabase.fetch(withQuery: query) { result in
             switch(result) {
             case .success((let result)):
+                if result.matchResults.count == 0 {
+                    completionHandler(nil)
+                }
                 result.matchResults.compactMap { $0.1 }
                     .forEach {
                         switch $0 {
                         case .success(let record):
                             let user = isChild ? ChildModel(record: record) : ParentModel(record: record)
-                            DispatchQueue.main.async {
-                                self.currentUser = user
-                                print("currentUser: \(self.currentUser?.id ?? "NA")")
-                                self.fetchChildParent()
-                                
-                            }
+                            completionHandler(user)
                         case .failure(let error):
                             print("Error: \(error.localizedDescription)")
                         }
@@ -204,11 +219,8 @@ class CloudViewModel: ObservableObject {
         }
     }
 
-    func fetchChildParent() {
+    func fetchChildParent(currentUser: UserModel, isChild: Bool) {
         
-        guard let currentUser = currentUser else { return }
-        
-        let isChild = currentUser is ChildModel ? true : false
         let fieldName = isChild ? ChildParentModel.keys.childRef : ChildParentModel.keys.parentRef
         
         let reference = CKRecord.Reference(recordID: currentUser.associatedRecord.recordID, action: .deleteSelf)
@@ -218,15 +230,6 @@ class CloudViewModel: ObservableObject {
         container.publicCloudDatabase.fetch(withQuery: query) { result in
             switch(result) {
             case .success((let result)):
-                // if No user
-                if result.matchResults.count == 0 {
-                    print("fetch pecs without home content")
-                    self.fetchSharedPecs { pecs in
-                        DispatchQueue.main.async {
-                            self.pecs = pecs
-                        }
-                    }
-                }
                 result.matchResults.compactMap { $0.1 }
                     .forEach {
                         switch $0 {
@@ -368,7 +371,7 @@ class CloudViewModel: ObservableObject {
     
 
     //MARK: home content
-    // For example, all pec is in table -> add its id (call juse ONE TIME for user)
+    // For example, all pec is in table -> add its id (call just ONE TIME for user)
     private func takePecsAndAppendInHomeContent() {
         fetchSharedPecs { pecs in
             pecs.forEach { pec in
@@ -590,7 +593,7 @@ class CloudViewModel: ObservableObject {
         func updateSchedulePECS(category: String, startTime: Date, endTime: Date, completionHandler: @escaping (Bool) -> Void ){
 
            //fetch all the records from homeContent based on the category the user picked
-            var filteredHomeContent = homeContents.filter({ $0.category.contains(category) })
+            let filteredHomeContent = homeContents.filter({ $0.category.contains(category) })
 
             var updateRecords:[CKRecord] = []
 
@@ -622,7 +625,7 @@ class CloudViewModel: ObservableObject {
     func deleteSchedulePECS(category: String){
 
        //fetch all the records from homeContent based on the category the user picked
-        var filteredHomeContent = homeContents.filter({ $0.category.contains(category) })
+        let filteredHomeContent = homeContents.filter({ $0.category.contains(category) })
 
         var updateRecords:[CKRecord] = []
 
@@ -689,8 +692,7 @@ class CloudViewModel: ObservableObject {
     
     //Mark: Save Record
     private func saveRecord(record: CKRecord){
-    let container = container
-    container.publicCloudDatabase.save(record) {[weak self] returnedRecord, returnedError in
+    container.publicCloudDatabase.save(record) { returnedRecord, returnedError in
 
         }
     }
